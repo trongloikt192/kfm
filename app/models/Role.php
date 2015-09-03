@@ -1,5 +1,9 @@
 <?php
 
-class Role extends \Eloquent {
-	protected $fillable = [];
+use Zizaco\Entrust\EntrustRole;
+
+class Role extends EntrustRole {
+
+	protected $table = 'roles';
+
 }

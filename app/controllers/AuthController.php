@@ -6,7 +6,7 @@ class AuthController extends \BaseController {
 
 	public function signUp()
 	{
-		return View::make('auth.sign-up');
+		return View::make('f04');
 	}
 
 
