@@ -112,6 +112,26 @@ Form::macro('btnSubmit', function($value, $btn_style = 'btn btn-black')
 });
 
 
+Form::macro('btnActionEditRecord', function($data_id, $name="Sửa", $class="btnEdit_item", $modal="modal_e_item")
+{
+
+    return '<a class="'. $class .'" data-toggle="modal" href="#'. $modal .'" data-id="'. $data_id .'">
+            <i class="fa fa-edit done"></i> 
+            <i class="fa fa-spin fa-refresh loading"></i>
+            '. $name .'
+        </a>';
+});
+
+Form::macro('btnActionDelRecord', function($data_id, $name="Xóa", $class="btnDel_item", $modal="modal_d_item")
+{
+
+    return '<a class="'. $class .'" href="javascript:;;" data-token="'. Session::getToken() .'" data-id="'. $data_id .'">
+            <i class="fa fa-edit done"></i> 
+            <i class="fa fa-spin fa-refresh loading"></i>
+            '. $name .'
+        </a>';
+});
+
 
 if (! function_exists ( 'errorMessage' )) {
     function errorMessage($name) {

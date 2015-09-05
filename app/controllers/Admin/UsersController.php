@@ -37,12 +37,20 @@ class UsersController extends \BaseController {
 		$data = \Input::all();
 
 		if(\Request::ajax()) {
-	        $validator = \Validator::make($data, \Link::$rules);
+	        $validator = \Validator::make($data, \User::$signup_rules);
 	        if ($validator->fails())
 	        {
 	            return \Response::json($validator->messages(), 500);
 	        }
-	        $link = \Link::create(['name'=>$data['name'], 'link'=>$data['link'], 'description'=>$data['description']]);
+	        $user = \User::create([
+	        	'username'=>$data['username']
+	        	, 'password'=>\Hash::make($data['password'])
+	        	, 'email'=>$data['email']
+	        	, 'first_name'=>$data['first_name']
+	        	, 'last_name'=>$data['last_name']
+	        	, 'address'=>$data['address']
+	        	, 'phone_number'=>$data['phone_number']
+	        ]);
 	        
 	        return 1;
 	    }
@@ -70,8 +78,8 @@ class UsersController extends \BaseController {
 	public function edit($id)
 	{
 		$id = \Input::get('id');
-        $link = \Link::find($id);
-        return \Response::json($link);
+        $user = \User::find($id);
+        return \Response::json($user);
 	}
 
 
@@ -86,16 +94,24 @@ class UsersController extends \BaseController {
 		$data = \Input::all();
 
 		if(\Request::ajax()) {
-	        $validator = \Validator::make($data, \Link::$rules);
+	        $validator = \Validator::make($data, \User::$update_rules);
 	        if ($validator->fails())
 	        {
 	            return \Response::json($validator->messages(), 500);
 	        }
 
 			$id = $data['id'];
-	        $link = \Link::findOrFail($id);
+	        $user = \User::findOrFail($id);
 	        
-	        $link->update(['name'=>$data['name'], 'link'=>$data['link'], 'description'=>$data['description']]);
+	        $user->update([
+	        	'username'=>$data['username']
+	        	, 'email'=>$data['email']
+	        	, 'first_name'=>$data['first_name']
+	        	, 'last_name'=>$data['last_name']
+	        	, 'address'=>$data['address']
+	        	, 'phone_number'=>$data['phone_number']
+	        ]);
+
 	        return 1;
 	    }
 	}
@@ -110,7 +126,7 @@ class UsersController extends \BaseController {
 	public function destroy($id)
 	{
 		$id = \Input::get('id');
-		\Link::destroy($id);
+		\User::destroy($id);
 		return 1;
 	}
 

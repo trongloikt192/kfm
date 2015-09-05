@@ -1,5 +1,7 @@
 <?php
 
+namespace Admin;
+
 class AuthController extends \BaseController {
 
 	/**

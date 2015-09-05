@@ -31,7 +31,7 @@ Route::group(['prefix' => 'admincp'], function()
         Route::resource('b03', 'UsersController');
         Route::resource('b04', 'CategoriesController');
         Route::resource('b05', 'PostsController');
-        Route::resource('b06', 'CustommersController');
+        Route::resource('b06', 'CustomersController');
         Route::resource('b07', 'FaqController');
         Route::resource('b08', 'ContactController');
         Route::resource('b09', 'ThemesController');

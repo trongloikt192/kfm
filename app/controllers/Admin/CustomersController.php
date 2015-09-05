@@ -1,7 +1,7 @@
 <?php
 namespace Admin;
 
-class CustommersController extends \BaseController {
+class CustomersController extends \BaseController {
 
 	/**
 	 * Display a listing of the resource.
@@ -11,8 +11,8 @@ class CustommersController extends \BaseController {
 	public function index()
 	{
 		//
-		$custommers = \Custommer::all();
-        return \View::make('admincp.b06', compact('custommers'));
+		$customers = \Customer::all();
+        return \View::make('admincp.b06', compact('customers'));
 	}
 
 

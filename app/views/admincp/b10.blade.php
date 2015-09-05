@@ -38,16 +38,9 @@
                                 <td>{{ $link->link }}</td>
                                 <td>{{ $link->description }}</td>
                                 <td class="center">
-                                    <a class="btnEdit_item" data-toggle="modal" href='#modal_e_item' data-id="{{ $link->id }}">
-                                        <i class="fa fa-edit done"></i> 
-                                        <i class="fa fa-spin fa-refresh loading"></i>
-                                        Sửa
-                                    </a> | 
-                                    <a class="btnDel_item" href='javascript:;;' data-token="{{ Session::getToken() }}" data-id="{{ $link->id }}">
-                                        <i class="fa fa-remove done"></i> 
-                                        <i class="fa fa-spin fa-refresh loading"></i>
-                                        Xóa
-                                    </a>
+                                    {{ Form::btnActionEditRecord($link->id) }}
+                                    | 
+                                    {{ Form::btnActionDelRecord($link->id) }}
                                 </td>
                             </tr>
                         @endforeach

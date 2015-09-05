@@ -1,458 +1,167 @@
 @extends('admincp.layouts_admincp.master')
 
 @section('title')
-	Người dùng
+	Tài khoản
 @stop
 
 @section('content')
 
+	<button href="#modal_a_item" data-toggle="modal" class="btn btn-default"><i class="fa fa-plus"></i> Thêm mới</button>
 
-	<button href="javascript:;" class="btn btn-default"><i class="fa fa-plus"></i> Add More</button>
+    <div class="fluid">
+        
+        <div class="widget grid12">
+            <div class="widget-header">
+                <div class="widget-title">
+                    {{-- <i class="fa fa-pencil"></i> Simple Inputs --}}
+                </div>
+                <div class="widget-controls">
+                    {{-- <div class="badge msg-badge">34</div> --}}
+                </div>
+            </div> <!-- /widget-header -->
+            
+            <div class="widget-content pad20f">
 
-	<div class="fluid">
-		
-		<div class="widget grid12">
-			<div class="widget-header">
-				<div class="widget-title">
-					{{-- <i class="fa fa-pencil"></i> Simple Inputs --}}
-				</div>
-				<div class="widget-controls">
-					<div class="badge msg-badge">34</div>
-				</div>
-			</div> <!-- /widget-header -->
-			
-			<div class="widget-content pad20f">
+                <table class="table" id="datatable">
+                    <thead>
+                        <tr>
+                            <th>Tài khoản</th>
+                            <th>Email</th>
+                            <th>Họ tên</th>
+                            <th>Điện thoại</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($users as $user)
+                            <tr>
+                                <td>{{ $user->username }}</td>
+                                <td>{{ $user->email }}</td>
+                                <td>{{ $user->full_name }}</td>
+                                <td>{{ $user->phone_number }}</td>
+                                <td class="center">
+                                    {{ Form::btnActionEditRecord($user->id) }}
+                                    | 
+                                    {{ Form::btnActionDelRecord($user->id) }}
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>Tài khoản</th>
+                            <th>Email</th>
+                            <th>Họ tên</th>
+                            <th>Điện thoại</th>
+                            <th>Actions</th>
+                        </tr>
+                    </tfoot>
+                </table>
+                
+            </div> <!-- /widget-content -->
 
-				<table class="table" id="example1">
-					<thead>
-						<tr>
-							<th>Rendering engine</th>
-							<th>Browser</th>
-							<th>Platform(s)</th>
-							<th>Engine version</th>
-							<th>CSS grade</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>Trident</td>
-							<td>Internet
-								 Explorer 4.0</td>
-							<td>Win 95+</td>
-							<td class="center">4</td>
-							<td class="center">X</td>
-						</tr>
-						<tr>
-							<td>Trident</td>
-							<td>Internet
-								 Explorer 5.0</td>
-							<td>Win 95+</td>
-							<td class="center">5</td>
-							<td class="center">C</td>
-						</tr>
-						<tr>
-							<td>Trident</td>
-							<td>Internet
-								 Explorer 5.5</td>
-							<td>Win 95+</td>
-							<td class="center">5.5</td>
-							<td class="center">A</td>
-						</tr>
-						<tr>
-							<td>Trident</td>
-							<td>Internet
-								 Explorer 6</td>
-							<td>Win 98+</td>
-							<td class="center">6</td>
-							<td class="center">A</td>
-						</tr>
-						<tr>
-							<td>Trident</td>
-							<td>Internet Explorer 7</td>
-							<td>Win XP SP2+</td>
-							<td class="center">7</td>
-							<td class="center">A</td>
-						</tr>
-						<tr>
-							<td>Trident</td>
-							<td>AOL browser (AOL desktop)</td>
-							<td>Win XP</td>
-							<td class="center">6</td>
-							<td class="center">A</td>
-						</tr>
-						<tr>
-							<td>Gecko</td>
-							<td>Firefox 1.0</td>
-							<td>Win 98+ / OSX.2+</td>
-							<td class="center">1.7</td>
-							<td class="center">A</td>
-						</tr>
-						<tr>
-							<td>Gecko</td>
-							<td>Firefox 1.5</td>
-							<td>Win 98+ / OSX.2+</td>
-							<td class="center">1.8</td>
-							<td class="center">A</td>
-						</tr>
-						<tr>
-							<td>Gecko</td>
-							<td>Firefox 2.0</td>
-							<td>Win 98+ / OSX.2+</td>
-							<td class="center">1.8</td>
-							<td class="center">A</td>
-						</tr>
-						<tr>
-							<td>Gecko</td>
-							<td>Firefox 3.0</td>
-							<td>Win 2k+ / OSX.3+</td>
-							<td class="center">1.9</td>
-							<td class="center">A</td>
-						</tr>
-						<tr>
-							<td>Gecko</td>
-							<td>Camino 1.0</td>
-							<td>OSX.2+</td>
-							<td class="center">1.8</td>
-							<td class="center">A</td>
-						</tr>
-						<tr>
-							<td>Gecko</td>
-							<td>Camino 1.5</td>
-							<td>OSX.3+</td>
-							<td class="center">1.8</td>
-							<td class="center">A</td>
-						</tr>
-						<tr>
-							<td>Gecko</td>
-							<td>Netscape 7.2</td>
-							<td>Win 95+ / Mac OS 8.6-9.2</td>
-							<td class="center">1.7</td>
-							<td class="center">A</td>
-						</tr>
-						<tr>
-							<td>Gecko</td>
-							<td>Netscape Browser 8</td>
-							<td>Win 98SE+</td>
-							<td class="center">1.7</td>
-							<td class="center">A</td>
-						</tr>
-						<tr>
-							<td>Gecko</td>
-							<td>Netscape Navigator 9</td>
-							<td>Win 98+ / OSX.2+</td>
-							<td class="center">1.8</td>
-							<td class="center">A</td>
-						</tr>
-						<tr>
-							<td>Gecko</td>
-							<td>Mozilla 1.0</td>
-							<td>Win 95+ / OSX.1+</td>
-							<td class="center">1</td>
-							<td class="center">A</td>
-						</tr>
-						<tr>
-							<td>Gecko</td>
-							<td>Mozilla 1.1</td>
-							<td>Win 95+ / OSX.1+</td>
-							<td class="center">1.1</td>
-							<td class="center">A</td>
-						</tr>
-						<tr>
-							<td>Gecko</td>
-							<td>Mozilla 1.2</td>
-							<td>Win 95+ / OSX.1+</td>
-							<td class="center">1.2</td>
-							<td class="center">A</td>
-						</tr>
-						<tr>
-							<td>Gecko</td>
-							<td>Mozilla 1.3</td>
-							<td>Win 95+ / OSX.1+</td>
-							<td class="center">1.3</td>
-							<td class="center">A</td>
-						</tr>
-						<tr>
-							<td>Gecko</td>
-							<td>Mozilla 1.4</td>
-							<td>Win 95+ / OSX.1+</td>
-							<td class="center">1.4</td>
-							<td class="center">A</td>
-						</tr>
-						<tr>
-							<td>Gecko</td>
-							<td>Mozilla 1.5</td>
-							<td>Win 95+ / OSX.1+</td>
-							<td class="center">1.5</td>
-							<td class="center">A</td>
-						</tr>
-						<tr>
-							<td>Gecko</td>
-							<td>Mozilla 1.6</td>
-							<td>Win 95+ / OSX.1+</td>
-							<td class="center">1.6</td>
-							<td class="center">A</td>
-						</tr>
-						<tr>
-							<td>Gecko</td>
-							<td>Mozilla 1.7</td>
-							<td>Win 98+ / OSX.1+</td>
-							<td class="center">1.7</td>
-							<td class="center">A</td>
-						</tr>
-						<tr>
-							<td>Gecko</td>
-							<td>Mozilla 1.8</td>
-							<td>Win 98+ / OSX.1+</td>
-							<td class="center">1.8</td>
-							<td class="center">A</td>
-						</tr>
-						<tr>
-							<td>Gecko</td>
-							<td>Seamonkey 1.1</td>
-							<td>Win 98+ / OSX.2+</td>
-							<td class="center">1.8</td>
-							<td class="center">A</td>
-						</tr>
-						<tr>
-							<td>Gecko</td>
-							<td>Epiphany 2.20</td>
-							<td>Gnome</td>
-							<td class="center">1.8</td>
-							<td class="center">A</td>
-						</tr>
-						<tr>
-							<td>Webkit</td>
-							<td>Safari 1.2</td>
-							<td>OSX.3</td>
-							<td class="center">125.5</td>
-							<td class="center">A</td>
-						</tr>
-						<tr>
-							<td>Webkit</td>
-							<td>Safari 1.3</td>
-							<td>OSX.3</td>
-							<td class="center">312.8</td>
-							<td class="center">A</td>
-						</tr>
-						<tr>
-							<td>Webkit</td>
-							<td>Safari 2.0</td>
-							<td>OSX.4+</td>
-							<td class="center">419.3</td>
-							<td class="center">A</td>
-						</tr>
-						<tr>
-							<td>Webkit</td>
-							<td>Safari 3.0</td>
-							<td>OSX.4+</td>
-							<td class="center">522.1</td>
-							<td class="center">A</td>
-						</tr>
-						<tr>
-							<td>Webkit</td>
-							<td>OmniWeb 5.5</td>
-							<td>OSX.4+</td>
-							<td class="center">420</td>
-							<td class="center">A</td>
-						</tr>
-						<tr>
-							<td>Webkit</td>
-							<td>iPod Touch / iPhone</td>
-							<td>iPod</td>
-							<td class="center">420.1</td>
-							<td class="center">A</td>
-						</tr>
-						<tr>
-							<td>Webkit</td>
-							<td>S60</td>
-							<td>S60</td>
-							<td class="center">413</td>
-							<td class="center">A</td>
-						</tr>
-						<tr>
-							<td>Presto</td>
-							<td>Opera 7.0</td>
-							<td>Win 95+ / OSX.1+</td>
-							<td class="center">-</td>
-							<td class="center">A</td>
-						</tr>
-						<tr>
-							<td>Presto</td>
-							<td>Opera 7.5</td>
-							<td>Win 95+ / OSX.2+</td>
-							<td class="center">-</td>
-							<td class="center">A</td>
-						</tr>
-						<tr>
-							<td>Presto</td>
-							<td>Opera 8.0</td>
-							<td>Win 95+ / OSX.2+</td>
-							<td class="center">-</td>
-							<td class="center">A</td>
-						</tr>
-						<tr>
-							<td>Presto</td>
-							<td>Opera 8.5</td>
-							<td>Win 95+ / OSX.2+</td>
-							<td class="center">-</td>
-							<td class="center">A</td>
-						</tr>
-						<tr>
-							<td>Presto</td>
-							<td>Opera 9.0</td>
-							<td>Win 95+ / OSX.3+</td>
-							<td class="center">-</td>
-							<td class="center">A</td>
-						</tr>
-						<tr>
-							<td>Presto</td>
-							<td>Opera 9.2</td>
-							<td>Win 88+ / OSX.3+</td>
-							<td class="center">-</td>
-							<td class="center">A</td>
-						</tr>
-						<tr>
-							<td>Presto</td>
-							<td>Opera 9.5</td>
-							<td>Win 88+ / OSX.3+</td>
-							<td class="center">-</td>
-							<td class="center">A</td>
-						</tr>
-						<tr>
-							<td>Presto</td>
-							<td>Opera for Wii</td>
-							<td>Wii</td>
-							<td class="center">-</td>
-							<td class="center">A</td>
-						</tr>
-						<tr>
-							<td>Presto</td>
-							<td>Nokia N800</td>
-							<td>N800</td>
-							<td class="center">-</td>
-							<td class="center">A</td>
-						</tr>
-						<tr>
-							<td>Presto</td>
-							<td>Nintendo DS browser</td>
-							<td>Nintendo DS</td>
-							<td class="center">8.5</td>
-							<td class="center">C/A<sup>1</sup></td>
-						</tr>
-						<tr>
-							<td>KHTML</td>
-							<td>Konqureror 3.1</td>
-							<td>KDE 3.1</td>
-							<td class="center">3.1</td>
-							<td class="center">C</td>
-						</tr>
-						<tr>
-							<td>KHTML</td>
-							<td>Konqureror 3.3</td>
-							<td>KDE 3.3</td>
-							<td class="center">3.3</td>
-							<td class="center">A</td>
-						</tr>
-						<tr>
-							<td>KHTML</td>
-							<td>Konqureror 3.5</td>
-							<td>KDE 3.5</td>
-							<td class="center">3.5</td>
-							<td class="center">A</td>
-						</tr>
-						<tr>
-							<td>Tasman</td>
-							<td>Internet Explorer 4.5</td>
-							<td>Mac OS 8-9</td>
-							<td class="center">-</td>
-							<td class="center">X</td>
-						</tr>
-						<tr>
-							<td>Tasman</td>
-							<td>Internet Explorer 5.1</td>
-							<td>Mac OS 7.6-9</td>
-							<td class="center">1</td>
-							<td class="center">C</td>
-						</tr>
-						<tr>
-							<td>Tasman</td>
-							<td>Internet Explorer 5.2</td>
-							<td>Mac OS 8-X</td>
-							<td class="center">1</td>
-							<td class="center">C</td>
-						</tr>
-						<tr>
-							<td>Misc</td>
-							<td>NetFront 3.1</td>
-							<td>Embedded devices</td>
-							<td class="center">-</td>
-							<td class="center">C</td>
-						</tr>
-						<tr>
-							<td>Misc</td>
-							<td>NetFront 3.4</td>
-							<td>Embedded devices</td>
-							<td class="center">-</td>
-							<td class="center">A</td>
-						</tr>
-						<tr>
-							<td>Misc</td>
-							<td>Dillo 0.8</td>
-							<td>Embedded devices</td>
-							<td class="center">-</td>
-							<td class="center">X</td>
-						</tr>
-						<tr>
-							<td>Misc</td>
-							<td>Links</td>
-							<td>Text only</td>
-							<td class="center">-</td>
-							<td class="center">X</td>
-						</tr>
-						<tr>
-							<td>Misc</td>
-							<td>Lynx</td>
-							<td>Text only</td>
-							<td class="center">-</td>
-							<td class="center">X</td>
-						</tr>
-						<tr>
-							<td>Misc</td>
-							<td>IE Mobile</td>
-							<td>Windows Mobile 6</td>
-							<td class="center">-</td>
-							<td class="center">C</td>
-						</tr>
-						<tr>
-							<td>Misc</td>
-							<td>PSP browser</td>
-							<td>PSP</td>
-							<td class="center">-</td>
-							<td class="center">C</td>
-						</tr>
-						<tr>
-							<td>Other browsers</td>
-							<td>All others</td>
-							<td>-</td>
-							<td class="center">-</td>
-							<td class="center">U</td>
-						</tr>
-					</tbody>
-					<tfoot>
-						<tr>
-							<th>Rendering engine</th>
-							<th>Browser</th>
-							<th>Platform(s)</th>
-							<th>Engine version</th>
-							<th>CSS grade</th>
-						</tr>
-					</tfoot>
-				</table>
-				
-			</div> <!-- /widget-content -->
 
-		</div> <!-- /widget -->
-	</div>
+            
 
-</div>
+        </div> <!-- /widget -->
+    </div>
+@stop
+
+
+@section('modal')
+    <div class="modal fade" id="modal_a_item">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Thêm tài khoản</h4>
+                </div>
+
+                {{ Form::open(['route'=> ['admincp.b03.store'], 'id'=> 'form_a_item']) }}
+                <div class="modal-body">
+                    <p>
+                        Xin quý khách vui lòng nhập vào tên đăng nhập và địa chỉ email để lấy lại mật khẩu.
+                    </p>
+
+                    {{ Form::errorField() }}
+                    {{ Form::textField('username', 'Tài khoản', null) }}
+                    {{ Form::passwordField('password', 'Mật khẩu', null) }}
+                    {{ Form::textField('first_name', 'Họ', null) }}
+                    {{ Form::textField('last_name', 'Tên', null) }}
+                    {{ Form::emailField('email', 'Email', null) }}
+                    {{ Form::textField('address', 'Địa chỉ', null) }}
+                    {{ Form::textField('phone_number', 'Số điện thoại', null) }}
+                    
+                </div>
+                <div class="modal-footer">
+                    {{ Form::btnSubmit('Thêm') }}
+                    <button type="reset" class="btn btn-green">Làm mới</button>
+                    <button type="button" class="btn btn-red" data-dismiss="modal">Hủy</button>
+                </div>
+                {{ Form::close() }}
+
+            </div>
+        </div>
+    </div><!-- /modal add New -->
+
+    <div class="modal fade" id="modal_e_item">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Sửa thông tin tài khoản</h4>
+                </div>
+
+                {{ Form::open(['route'=> ['admincp.b10.update'], 'id'=> 'form_e_item']) }}
+                <div class="modal-body">
+                    <p>
+                        Xin quý khách vui lòng nhập vào tên đăng nhập và địa chỉ email để lấy lại mật khẩu.
+                    </p>
+
+                    {{ Form::errorField() }}
+                    {{ Form::hidden('id') }}
+                   	{{ Form::textField('username', 'Tài khoản', null) }}
+                    {{ Form::textField('first_name', 'Họ', null) }}
+                    {{ Form::textField('last_name', 'Tên', null) }}
+                    {{ Form::emailField('email', 'Email', null) }}
+                    {{ Form::textField('address', 'Địa chỉ', null) }}
+                    {{ Form::textField('phone_number', 'Số điện thoại', null) }}
+
+                </div>
+                <div class="modal-footer">
+                    {{ Form::btnSubmit('Cập nhật') }}
+                    <button type="button" class="btn btn-red" data-dismiss="modal">Hủy</button>
+                </div>
+                {{ Form::close() }}
+
+            </div>
+        </div>
+    </div><!-- /modal Edit -->
+
+@stop
+
+
+@section('scripts')
+    <script type="text/javascript">
+
+        var dataTable = $("#datatable");
+        var form_a_item = $('#form_a_item');
+        var form_e_item = $('#form_e_item');
+        var btnEdit_item = $('.btnEdit_item');
+        var btnDel_item = $('.btnDel_item');
+        var modal_a_item = $('#modal_a_item');
+        var modal_e_item = $('#modal_e_item');
+
+        
+
+        $(document).ready(function() {
+            installTable( dataTable );
+            beforeGetOM();
+            xhrGetOM_detail_item( btnEdit_item, "{{ route('admincp.b03.edit') }}", modal_e_item);
+            xhrInsert_item( form_a_item, "{{ route('admincp.b03.store') }}" );
+            xhrUpdate_item( form_e_item, "{{ route('admincp.b03.update') }}" );
+            xhrDelete_item( btnDel_item, "{{ route('admincp.b03.destroy') }}" );
+        });
+    </script>
+
 @stop

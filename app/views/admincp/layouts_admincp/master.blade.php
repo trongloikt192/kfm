@@ -7,7 +7,7 @@
         Remove this if you use the .htaccess -->
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-        <title>KFM Control Panel | @yield('title')</title>
+        <title>KFM Admin Control Panel | Quản lý @yield('title')</title>
         <meta name="description" content="" />
         <meta name="author" content="" />
 
