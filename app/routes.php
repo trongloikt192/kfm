@@ -14,16 +14,17 @@ Route::group(['prefix' => 'admincp'], function()
 {
     Route::group(['namespace' => 'Admin'], function()
     {
-        Route::resource('b01', 'LinksController');
-        Route::resource('b02', 'LinksController');
-        Route::resource('b03', 'LinksController');
-        Route::resource('b04', 'LinksController');
-        Route::resource('b05', 'LinksController');
-        Route::resource('b06', 'LinksController');
-        Route::resource('b07', 'LinksController');
-        Route::resource('b08', 'LinksController');
-        Route::resource('b09', 'LinksController');
+        Route::resource('b01', 'AuthController');
+        Route::resource('b02', 'DashboardController');
+        Route::resource('b03', 'UsersController');
+        Route::resource('b04', 'CategoriesController');
+        Route::resource('b05', 'PostsController');
+        Route::resource('b06', 'CustommersController');
+        Route::resource('b07', 'FaqController');
+        Route::resource('b08', 'ContactController');
+        Route::resource('b09', 'ThemesController');
         Route::resource('b10', 'LinksController');
+        Route::resource('b11', 'RolesController');
     });
 });
 
@@ -35,12 +36,13 @@ Route::get('terms',     'PagesController@terms');
 Route::get('privacy',   'PagesController@privacy');
 Route::get('faqs',      'PagesController@faqs');
 Route::get('about',     'PagesController@about');
-Route::get('/f01',      'PagesController@home');
-Route::get('/f02',      'PagesController@f02');
-Route::get('/f03',      'PagesController@f03');
-Route::get('/f04',      'PagesController@f04');
-Route::get('/f05',      'PagesController@f05');
-Route::get('/f06',      'PagesController@f06');
+
+Route::get('/f01',      'HomeController@index');
+Route::get('/f02',      'PostsController@index');
+Route::get('/f03',      'RemindersController@getRemind');
+Route::get('/f04',      'AuthController@getLogin');
+Route::get('/f05',      'ContactController@index');
+Route::get('/f06',      'SearchController@index');
 
 
 // Developer Routes
