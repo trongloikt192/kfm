@@ -73,8 +73,9 @@ function xhrGetOM_detail_item( _btnOM, _url, _modal ) {
                 $(this).prop('disabled', true);
             },
             success: function( json ) {
+                var INPUT_SELECTOR = "input,select,textarea";
                 $.each(json, function(key, value) {
-                    form_modal.find('input[name='+ key +']').val(value);
+                    form_modal.find(INPUT_SELECTOR).filter('[name='+ key +']').val(value);
                 });
 
                 isSuccess = true;

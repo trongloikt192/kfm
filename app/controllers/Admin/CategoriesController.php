@@ -12,7 +12,8 @@ class CategoriesController extends \BaseController {
 	{
 		//
 		$categories = \Category::all();
-        return \View::make('admincp.b04', compact('categories'));
+		$categories_list = $categories->lists('name', 'id');
+        return \View::make('admincp.b04', compact('categories', 'categories_list'));
 	}
 
 
@@ -37,12 +38,12 @@ class CategoriesController extends \BaseController {
 		$data = \Input::all();
 
 		if(\Request::ajax()) {
-	        $validator = \Validator::make($data, \Link::$rules);
+	        $validator = \Validator::make($data, \Category::$rules);
 	        if ($validator->fails())
 	        {
 	            return \Response::json($validator->messages(), 500);
 	        }
-	        $link = \Link::create(['name'=>$data['name'], 'link'=>$data['link'], 'description'=>$data['description']]);
+	        $link = \Category::create(['name'=>$data['name'], 'link'=>$data['link'], 'description'=>$data['description']]);
 	        
 	        return 1;
 	    }
@@ -70,7 +71,7 @@ class CategoriesController extends \BaseController {
 	public function edit($id)
 	{
 		$id = \Input::get('id');
-        $link = \Link::find($id);
+        $link = \Category::find($id);
         return \Response::json($link);
 	}
 
@@ -86,14 +87,14 @@ class CategoriesController extends \BaseController {
 		$data = \Input::all();
 
 		if(\Request::ajax()) {
-	        $validator = \Validator::make($data, \Link::$rules);
+	        $validator = \Validator::make($data, \Category::$rules);
 	        if ($validator->fails())
 	        {
 	            return \Response::json($validator->messages(), 500);
 	        }
 
 			$id = $data['id'];
-	        $link = \Link::findOrFail($id);
+	        $link = \Category::findOrFail($id);
 	        
 	        $link->update(['name'=>$data['name'], 'link'=>$data['link'], 'description'=>$data['description']]);
 	        return 1;
@@ -110,7 +111,7 @@ class CategoriesController extends \BaseController {
 	public function destroy($id)
 	{
 		$id = \Input::get('id');
-		\Link::destroy($id);
+		\Category::destroy($id);
 		return 1;
 	}
 

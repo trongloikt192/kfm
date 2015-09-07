@@ -77,7 +77,7 @@
                     <h4 class="modal-title">Thêm tài khoản</h4>
                 </div>
 
-                {{ Form::open(['route'=> ['admincp.b03.store'], 'id'=> 'form_a_item']) }}
+                {{ Form::open(['id'=> 'form_a_item']) }}
                 <div class="modal-body">
                     <p>
                         Xin quý khách vui lòng nhập vào tên đăng nhập và địa chỉ email để lấy lại mật khẩu.
@@ -112,7 +112,7 @@
                     <h4 class="modal-title">Sửa thông tin tài khoản</h4>
                 </div>
 
-                {{ Form::open(['route'=> ['admincp.b10.update'], 'id'=> 'form_e_item']) }}
+                {{ Form::open(['id'=> 'form_e_item']) }}
                 <div class="modal-body">
                     <p>
                         Xin quý khách vui lòng nhập vào tên đăng nhập và địa chỉ email để lấy lại mật khẩu.

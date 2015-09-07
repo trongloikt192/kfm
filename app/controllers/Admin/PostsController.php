@@ -12,7 +12,9 @@ class PostsController extends \BaseController {
 	{
 		//
 		$posts = \Post::all();
-        return \View::make('admincp.b05', compact('posts'));
+		$categories = \Category::all();
+		$categories_list = $categories->lists('name', 'id');
+        return \View::make('admincp.b05', compact('posts', 'categories_list'));
 	}
 
 

@@ -41,7 +41,7 @@ Form::macro('emailField', function($name, $label, $placeholder = '')
 });
 
 
-Form::macro('textareaField', function($name, $label, $placeholder, $size)
+Form::macro('textareaField', function($name, $label, $placeholder, $size='100%x10')
 {
     $value = Form::getValueAttribute($name);
     $element = Form::textarea($name, $value, ['placeholder'=> $placeholder, 'class'=>'form-control', 'id'=>$name, 'size'=>$size]);

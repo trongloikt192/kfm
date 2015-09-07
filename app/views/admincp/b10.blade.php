@@ -139,8 +139,6 @@
         var modal_a_item = $('#modal_a_item');
         var modal_e_item = $('#modal_e_item');
 
-        
-
         $(document).ready(function() {
             installTable( dataTable );
             beforeGetOM();
