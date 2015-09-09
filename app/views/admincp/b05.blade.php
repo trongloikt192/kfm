@@ -27,7 +27,7 @@
                         <tr>
                             <th>Tiêu đề</th>
                             <th>Mô tả</th>
-                            <th>Thuộc danh mục</th>
+                            <th>Trạng thái</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -36,7 +36,7 @@
                             <tr>
                                 <td>{{ $post->title }}</td>
                                 <td>{{ $post->description }}</td>
-                                <td>{{ $post->content_vi }}</td>
+                                <td>{{ $post->status }}</td>
                                 <td class="center">
                                     {{ Form::btnActionEditRecord($post->id) }}
                                     | 
@@ -47,9 +47,9 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th>Danh mục</th>
+                            <th>Tiêu đề</th>
                             <th>Mô tả</th>
-                            <th>Thuộc danh mục</th>
+                            <th>Trạng thái</th>
                             <th>Actions</th>
                         </tr>
                     </tfoot>
@@ -67,7 +67,7 @@
 
 @section('modal')
     <div class="modal fade" id="modal_a_item">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -81,9 +81,12 @@
                     </p>
 
                     {{ Form::errorField() }}
-                    {{ Form::textField('name', 'Tên danh mục', null) }}
+                    {{ Form::textField('title', 'Tiêu đề', null) }}
+                    {{ Form::textField('slug', 'Slug', null) }}
                     {{ Form::textareaField('description', 'Mô tả', null) }}
-                    {{ Form::selectField('parent_id', $categories_list, null, 'Thuộc danh mục') }}
+                    {{ Form::textareaField('content_vi', 'Nội dung tiếng Việt', null) }}
+                    {{ Form::textareaField('content_en', 'Nội dung tiếng Anh', null) }}
+                    {{ Form::checkboxField('status', 'Public') }}
                     
                 </div>
                 <div class="modal-footer">
@@ -98,7 +101,7 @@
     </div><!-- /modal add New -->
 
     <div class="modal fade" id="modal_e_item">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -113,9 +116,12 @@
 
                     {{ Form::errorField() }}
                     {{ Form::hidden('id') }}
-                   	{{ Form::textField('name', 'Tên danh mục', null) }}
+                   	{{ Form::textField('title', 'Tiêu đề', null) }}
+                    {{ Form::textField('slug', 'Slug', null) }}
                     {{ Form::textareaField('description', 'Mô tả', null) }}
-                    {{ Form::selectField('parent_id', $categories_list, null, 'Thuộc danh mục') }}
+                    {{ Form::textareaField('content_vi', 'Nội dung tiếng Việt', null) }}
+                    {{ Form::textareaField('content_en', 'Nội dung tiếng Anh', null) }}
+                    {{ Form::checkboxField('status', 'Public') }}
 
                 </div>
                 <div class="modal-footer">

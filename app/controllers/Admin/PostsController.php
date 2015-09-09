@@ -12,9 +12,8 @@ class PostsController extends \BaseController {
 	{
 		//
 		$posts = \Post::all();
-		$categories = \Category::all();
-		$categories_list = $categories->lists('name', 'id');
-        return \View::make('admincp.b05', compact('posts', 'categories_list'));
+		// $categories_list = $categories->lists('name', 'id');
+        return \View::make('admincp.b05', compact('posts'));
 	}
 
 
@@ -39,12 +38,22 @@ class PostsController extends \BaseController {
 		$data = \Input::all();
 
 		if(\Request::ajax()) {
-	        $validator = \Validator::make($data, \Link::$rules);
+	        $validator = \Validator::make($data, \Post::$rules);
 	        if ($validator->fails())
 	        {
 	            return \Response::json($validator->messages(), 500);
 	        }
-	        $link = \Link::create(['name'=>$data['name'], 'link'=>$data['link'], 'description'=>$data['description']]);
+	        $post = \Post::create([
+	        	'title'=>$data['title']
+	        	, 'slug'=>$data['slug']
+	        	, 'description'=>$data['description']
+	        	, 'content_vi'=>$data['content_vi']
+	        	, 'content_en'=>$data['content_en']
+	        	, 'image'=>$data['image']
+	        	, 'status'=>$data['status']
+	        	, 'category_id'=>$data['category_id']
+	        	, 'user_id'=>$data['user_id']
+	        ]);
 	        
 	        return 1;
 	    }
@@ -72,7 +81,7 @@ class PostsController extends \BaseController {
 	public function edit($id)
 	{
 		$id = \Input::get('id');
-        $link = \Link::find($id);
+        $post = \Post::find($id);
         return \Response::json($link);
 	}
 
@@ -88,16 +97,26 @@ class PostsController extends \BaseController {
 		$data = \Input::all();
 
 		if(\Request::ajax()) {
-	        $validator = \Validator::make($data, \Link::$rules);
+	        $validator = \Validator::make($data, \Post::$rules);
 	        if ($validator->fails())
 	        {
 	            return \Response::json($validator->messages(), 500);
 	        }
 
 			$id = $data['id'];
-	        $link = \Link::findOrFail($id);
+	        $post = \Post::findOrFail($id);
 	        
-	        $link->update(['name'=>$data['name'], 'link'=>$data['link'], 'description'=>$data['description']]);
+	        $post = \Post::update([
+	        	'title'=>$data['title']
+	        	, 'slug'=>$data['slug']
+	        	, 'description'=>$data['description']
+	        	, 'content_vi'=>$data['content_vi']
+	        	, 'content_en'=>$data['content_en']
+	        	, 'image'=>$data['image']
+	        	, 'status'=>$data['status']
+	        	, 'category_id'=>$data['category_id']
+	        	, 'user_id'=>$data['user_id']
+	        ]);
 	        return 1;
 	    }
 	}
@@ -112,7 +131,7 @@ class PostsController extends \BaseController {
 	public function destroy($id)
 	{
 		$id = \Input::get('id');
-		\Link::destroy($id);
+		\Post::destroy($id);
 		return 1;
 	}
 

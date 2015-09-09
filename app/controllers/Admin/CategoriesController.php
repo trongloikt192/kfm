@@ -43,7 +43,7 @@ class CategoriesController extends \BaseController {
 	        {
 	            return \Response::json($validator->messages(), 500);
 	        }
-	        $link = \Category::create(['name'=>$data['name'], 'link'=>$data['link'], 'description'=>$data['description']]);
+	        $category = \Category::create(['name'=>$data['name'], 'description'=>$data['description'], 'parent_id'=>$data['parent_id']]);
 	        
 	        return 1;
 	    }

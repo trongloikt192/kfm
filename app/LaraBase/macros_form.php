@@ -94,6 +94,18 @@ Form::macro('fileField', function($name, $label)
 });
 
 
+Form::macro('checkboxField', function($name, $label)
+{
+    return "<div class='form-group " .errorClass($name)."'>
+            <label class='control-label' for='{$name}'>
+            <input type='checkbox' name='{$name}'>
+            {$label}
+            </label>"
+            .errorMessage($name).
+            "</div>";
+});
+
+
 Form::macro('submitField', function($value = 'Submit', $btn_style = 'btn btn-primary')
 {
     return "<div class='form-group'>
