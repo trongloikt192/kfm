@@ -37,12 +37,21 @@ class CustomersController extends \BaseController {
 		$data = \Input::all();
 
 		if(\Request::ajax()) {
-	        $validator = \Validator::make($data, \Link::$rules);
+	        $validator = \Validator::make($data, \Customer::$rules);
 	        if ($validator->fails())
 	        {
 	            return \Response::json($validator->messages(), 500);
 	        }
-	        $link = \Link::create(['name'=>$data['name'], 'link'=>$data['link'], 'description'=>$data['description']]);
+	        $customer = \Customer::create([
+	        	'name'=>$data['name']
+	        	, 'business_scope'=>$data['business_scope']
+	        	, 'delegate'=>$data['delegate']
+	        	, 'address'=>$data['address']
+	        	, 'email'=>$data['email']
+	        	, 'phone_number'=>$data['phone_number']
+	        	, 'domain'=>$data['domain']
+	        	, 'logo'=>$data['logo']
+	        ]);
 	        
 	        return 1;
 	    }
@@ -70,8 +79,8 @@ class CustomersController extends \BaseController {
 	public function edit($id)
 	{
 		$id = \Input::get('id');
-        $link = \Link::find($id);
-        return \Response::json($link);
+        $customer = \Customer::find($id);
+        return \Response::json($customer);
 	}
 
 
@@ -86,16 +95,25 @@ class CustomersController extends \BaseController {
 		$data = \Input::all();
 
 		if(\Request::ajax()) {
-	        $validator = \Validator::make($data, \Link::$rules);
+	        $validator = \Validator::make($data, \Customer::$rules);
 	        if ($validator->fails())
 	        {
 	            return \Response::json($validator->messages(), 500);
 	        }
 
 			$id = $data['id'];
-	        $link = \Link::findOrFail($id);
+	        $customer = \Customer::findOrFail($id);
 	        
-	        $link->update(['name'=>$data['name'], 'link'=>$data['link'], 'description'=>$data['description']]);
+	        $customer->update([
+	        	'name'=>$data['name']
+	        	, 'business_scope'=>$data['business_scope']
+	        	, 'delegate'=>$data['delegate']
+	        	, 'address'=>$data['address']
+	        	, 'email'=>$data['email']
+	        	, 'phone_number'=>$data['phone_number']
+	        	, 'domain'=>$data['domain']
+	        	, 'logo'=>$data['logo']
+	        ]);
 	        return 1;
 	    }
 	}
@@ -110,7 +128,7 @@ class CustomersController extends \BaseController {
 	public function destroy($id)
 	{
 		$id = \Input::get('id');
-		\Link::destroy($id);
+		\Customer::destroy($id);
 		return 1;
 	}
 

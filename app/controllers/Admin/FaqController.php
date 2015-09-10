@@ -37,12 +37,12 @@ class FaqController extends \BaseController {
 		$data = \Input::all();
 
 		if(\Request::ajax()) {
-	        $validator = \Validator::make($data, \Link::$rules);
+	        $validator = \Validator::make($data, \Faq::$rules);
 	        if ($validator->fails())
 	        {
 	            return \Response::json($validator->messages(), 500);
 	        }
-	        $link = \Link::create(['name'=>$data['name'], 'link'=>$data['link'], 'description'=>$data['description']]);
+	        $faq = \Faq::create(['name'=>$data['name'], 'link'=>$data['link'], 'description'=>$data['description']]);
 	        
 	        return 1;
 	    }
@@ -70,8 +70,8 @@ class FaqController extends \BaseController {
 	public function edit($id)
 	{
 		$id = \Input::get('id');
-        $link = \Link::find($id);
-        return \Response::json($link);
+        $faq = \Faq::find($id);
+        return \Response::json($faq);
 	}
 
 
@@ -86,16 +86,16 @@ class FaqController extends \BaseController {
 		$data = \Input::all();
 
 		if(\Request::ajax()) {
-	        $validator = \Validator::make($data, \Link::$rules);
+	        $validator = \Validator::make($data, \Faq::$rules);
 	        if ($validator->fails())
 	        {
 	            return \Response::json($validator->messages(), 500);
 	        }
 
 			$id = $data['id'];
-	        $link = \Link::findOrFail($id);
+	        $faq = \Faq::findOrFail($id);
 	        
-	        $link->update(['name'=>$data['name'], 'link'=>$data['link'], 'description'=>$data['description']]);
+	        $faq->update(['reply_content'=>$data['reply_content']]);
 	        return 1;
 	    }
 	}
@@ -110,7 +110,7 @@ class FaqController extends \BaseController {
 	public function destroy($id)
 	{
 		$id = \Input::get('id');
-		\Link::destroy($id);
+		\Faq::destroy($id);
 		return 1;
 	}
 
