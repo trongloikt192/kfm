@@ -37,12 +37,12 @@ class ContactController extends \BaseController {
 		$data = \Input::all();
 
 		if(\Request::ajax()) {
-	        $validator = \Validator::make($data, \Link::$rules);
+	        $validator = \Validator::make($data, \Contact::$rules);
 	        if ($validator->fails())
 	        {
 	            return \Response::json($validator->messages(), 500);
 	        }
-	        $link = \Link::create(['name'=>$data['name'], 'link'=>$data['link'], 'description'=>$data['description']]);
+	        $contact = \Contact::create(['name'=>$data['name'], 'Contact'=>$data['Contact'], 'description'=>$data['description']]);
 	        
 	        return 1;
 	    }
@@ -70,8 +70,8 @@ class ContactController extends \BaseController {
 	public function edit($id)
 	{
 		$id = \Input::get('id');
-        $link = \Link::find($id);
-        return \Response::json($link);
+        $contact = \Contact::find($id);
+        return \Response::json($contact);
 	}
 
 
@@ -86,16 +86,16 @@ class ContactController extends \BaseController {
 		$data = \Input::all();
 
 		if(\Request::ajax()) {
-	        $validator = \Validator::make($data, \Link::$rules);
+	        $validator = \Validator::make($data, \Contact::$rules);
 	        if ($validator->fails())
 	        {
 	            return \Response::json($validator->messages(), 500);
 	        }
 
 			$id = $data['id'];
-	        $link = \Link::findOrFail($id);
+	        $contact = \Contact::findOrFail($id);
 	        
-	        $link->update(['name'=>$data['name'], 'link'=>$data['link'], 'description'=>$data['description']]);
+	        $contact->update(['name'=>$data['name'], 'Contact'=>$data['Contact'], 'description'=>$data['description']]);
 	        return 1;
 	    }
 	}
@@ -110,7 +110,7 @@ class ContactController extends \BaseController {
 	public function destroy($id)
 	{
 		$id = \Input::get('id');
-		\Link::destroy($id);
+		\Contact::destroy($id);
 		return 1;
 	}
 

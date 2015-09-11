@@ -35,6 +35,9 @@ function installTable( _table ) {
     if( $.fn.dataTable ) {
         _table.dataTable({
             sPaginationType: "full_numbers",
+            "language": {
+                "url" : "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Vietnamese.json"
+            }
         });
     }
 }
