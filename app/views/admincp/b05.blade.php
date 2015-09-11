@@ -86,8 +86,13 @@
                     {{ Form::textareaField('description', 'Mô tả', null) }}
                     {{ Form::textareaField('content_vi', 'Nội dung tiếng Việt', null) }}
                     {{ Form::textareaField('content_en', 'Nội dung tiếng Anh', null) }}
-                    {{ Form::checkboxField('status', 'Public') }}
-                    
+                    {{-- {{ Form::checkboxField('status', 'Public') }} --}}
+
+                    <label class='control-label' for='status'>Đăng bài</label>
+                    <div class="w-switches">
+                        <input type="checkbox" id="switch-1" checked />
+                        <label class="switch green" for="switch-1"><i></i></label>
+                    </div>  
                 </div>
                 <div class="modal-footer">
                     {{ Form::btnSubmit('Thêm') }}

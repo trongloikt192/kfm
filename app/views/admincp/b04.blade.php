@@ -84,7 +84,7 @@
                     {{ Form::textField('name', 'Tên danh mục', null) }}
                     {{ Form::textareaField('description', 'Mô tả', null) }}
                     {{ Form::selectField('parent_id', $categories_list, null, 'Thuộc danh mục') }}
-                    
+
                 </div>
                 <div class="modal-footer">
                     {{ Form::btnSubmit('Thêm') }}

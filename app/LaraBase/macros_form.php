@@ -55,13 +55,14 @@ Form::macro('textareaField', function($name, $label, $placeholder, $size='100%x1
 
 Form::macro('selectField', function($name, $options, $value, $label)
 {
-    $element = Form::select($name, $options, $value, ['class'=>'form-control']);
-    return "<div class='form-group " .errorClass($name)."'>
-            <label class='control-label' for='{$name}'>{$label}</label>
+    $element = Form::select($name, $options, $value, ['class'=>'form-control dropdown-select']);
+    return "<label class='control-label' for='{$name}'>{$label}</label>
+            <div class='form-group dropdown" .errorClass($name)."'>
             {$element}"
             .errorMessage($name).
             "</div>";
 });
+
 
 Form::macro('multiSelectField', function($name, $options, $value = null, $label)
 {
@@ -104,6 +105,16 @@ Form::macro('checkboxField', function($name, $label)
             .errorMessage($name).
             "</div>";
 });
+
+
+// Form::macro('radioboxField_lib', function($name, $options, $value, $label)
+// {
+//     return "<label class='control-label' for='{$name}'>{$label}</label>
+//             <div class='w-switches'>
+//                 <input type='checkbox' id='switch-1' checked />
+//                 <label class='switch green' for='switch-1'><i></i></label>
+//             </div>";
+// });
 
 
 Form::macro('submitField', function($value = 'Submit', $btn_style = 'btn btn-primary')

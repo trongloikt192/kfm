@@ -75,37 +75,6 @@
 
 
 @section('modal')
-    <div class="modal fade" id="modal_a_item">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">Thêm liên hệ</h4>
-                </div>
-
-                {{ Form::open(['id'=> 'form_a_item']) }}
-                <div class="modal-body">
-                    <p>
-                        Xin quý khách vui lòng nhập vào tên đăng nhập và địa chỉ email để lấy lại mật khẩu.
-                    </p>
-
-                    {{ Form::errorField() }}
-                    {{ Form::textField('name', 'Tên danh mục', null) }}
-                    {{ Form::textareaField('description', 'Mô tả', null) }}
-                    {{ Form::selectField('parent_id', $categories_list, null, 'Thuộc danh mục') }}
-                    
-                </div>
-                <div class="modal-footer">
-                    {{ Form::btnSubmit('Thêm') }}
-                    <button type="reset" class="btn btn-green">Làm mới</button>
-                    <button type="button" class="btn btn-red" data-dismiss="modal">Hủy</button>
-                </div>
-                {{ Form::close() }}
-
-            </div>
-        </div>
-    </div><!-- /modal add New -->
-
     <div class="modal fade" id="modal_e_item">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -134,7 +103,7 @@
                     		{{ Form::textField('status', 'Trạng thái', null) }}
                     	</div>
                     	<div class="col-md-12">
-                    		{{ Form::textField('content', 'Nội dung liên hệ', null, '100%x5') }}
+                    		{{ Form::textareaField('content', 'Nội dung liên hệ', null, '100%x5') }}
                     	</div>
                     </div>
 

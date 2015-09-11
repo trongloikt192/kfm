@@ -84,14 +84,19 @@
                     </p>
 
                     {{ Form::errorField() }}
-                    {{ Form::textField('username', 'Tài khoản', null) }}
-                    {{ Form::passwordField('password', 'Mật khẩu', null) }}
-                    {{ Form::textField('first_name', 'Họ', null) }}
-                    {{ Form::textField('last_name', 'Tên', null) }}
-                    {{ Form::emailField('email', 'Email', null) }}
-                    {{ Form::textField('address', 'Địa chỉ', null) }}
-                    {{ Form::textField('phone_number', 'Số điện thoại', null) }}
-                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{ Form::textField('username', 'Tài khoản', null) }}
+                            {{ Form::passwordField('password', 'Mật khẩu', null) }}
+                            {{ Form::emailField('email', 'Email', null) }}
+                            {{ Form::textField('address', 'Địa chỉ', null) }}
+                        </div>
+                        <div class="col-md-6">
+                            {{ Form::textField('first_name', 'Họ', null) }}
+                            {{ Form::textField('last_name', 'Tên', null) }}
+                            {{ Form::textField('phone_number', 'Số điện thoại', null) }}
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     {{ Form::btnSubmit('Thêm') }}
@@ -120,12 +125,19 @@
 
                     {{ Form::errorField() }}
                     {{ Form::hidden('id') }}
-                   	{{ Form::textField('username', 'Tài khoản', null) }}
-                    {{ Form::textField('first_name', 'Họ', null) }}
-                    {{ Form::textField('last_name', 'Tên', null) }}
-                    {{ Form::emailField('email', 'Email', null) }}
-                    {{ Form::textField('address', 'Địa chỉ', null) }}
-                    {{ Form::textField('phone_number', 'Số điện thoại', null) }}
+                   	<div class="row">
+                        <div class="col-md-6">
+                            {{ Form::textField('username', 'Tài khoản', null) }}
+                            {{ Form::passwordField('password', 'Mật khẩu', null) }}
+                            {{ Form::emailField('email', 'Email', null) }}
+                            {{ Form::textField('address', 'Địa chỉ', null) }}
+                        </div>
+                        <div class="col-md-6">
+                            {{ Form::textField('first_name', 'Họ', null) }}
+                            {{ Form::textField('last_name', 'Tên', null) }}
+                            {{ Form::textField('phone_number', 'Số điện thoại', null) }}
+                        </div>
+                    </div>
 
                 </div>
                 <div class="modal-footer">

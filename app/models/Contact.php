@@ -1,6 +1,6 @@
 <?php
 
-class Customer extends \Eloquent {
+class Contact extends \Eloquent {
 	protected $table = 'contacts';
 
 	protected $fillable = ['status'];

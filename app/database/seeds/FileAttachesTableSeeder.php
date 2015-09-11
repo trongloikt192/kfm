@@ -8,13 +8,15 @@ class FileAttachesTableSeeder extends Seeder {
 
 	public function run()
 	{
+		DB::table('file_attaches')->delete();
+		
 		$faker = Faker::create();
 
 		foreach(range(1, 10) as $index)
 		{
 			FileAttach::create([
-				'name' => $faker->sentence(6),
-				'link' => $faker->url
+				// 'name' => $faker->sentence(1),
+				// 'link' => $faker->url
 			]);
 		}
 	}
