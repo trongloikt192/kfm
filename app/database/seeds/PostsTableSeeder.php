@@ -14,12 +14,12 @@ class PostsTableSeeder extends Seeder {
 		foreach(range(1, 10) as $index)
 		{
 			Post::create([
-				'title' => $faker->sentences(1),
+				'title' => $faker->sentence(10),
 				'content_vi' => $faker->text(500),
 				'content_en' => $faker->text(500),
 				'slug' => $faker->slug,
 				'image' => $faker->imageUrl(640, 480),
-				'description' => $faker->sentences(2),
+				'description' => $faker->paragraph(3),
 				'status' => $faker->numberBetween(0, 1),
 				'user_id' => $faker->numberBetween(1, 10),
 				'category_id' => $faker->numberBetween(1, 10)

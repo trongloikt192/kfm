@@ -1,7 +1,7 @@
 <?php
 
-class Tag extends \Eloquent {
-	protected $table = 'tags';
+class Document extends \Eloquent {
+	protected $table = 'documents';
 
 	protected $fillable = ['name'];
 

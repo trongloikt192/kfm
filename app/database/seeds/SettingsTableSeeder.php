@@ -14,7 +14,7 @@ class SettingsTableSeeder extends Seeder {
 		foreach(range(1, 1) as $index)
 		{
 			Setting::create([
-				'company_name' => $faker->company,
+				'company' => $faker->company,
 				'logo' => $faker->imageUrl(640, 480),
 				'sologan' => $faker->sentence(10),
 				'silde_images' => '',

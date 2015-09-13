@@ -3,12 +3,12 @@
 // Composer: "fzaninotto/faker": "v1.3.0"
 use Faker\Factory as Faker;
 
-class FeedbackTableSeeder extends Seeder {
+class FeedbacksTableSeeder extends Seeder {
 
 	public function run()
 	{
 
-		DB::table('feedback')->delete();
+		DB::table('feedbacks')->delete();
 
 		$faker = Faker::create();
 

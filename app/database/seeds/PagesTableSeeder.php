@@ -14,7 +14,7 @@ class PagesTableSeeder extends Seeder {
 		foreach(range(1, 10) as $index)
 		{
 			Page::create([
-				'title' => $faker->sentences(1),
+				'title' => $faker->sentence(10),
 				'slug' => $faker->slug,
 				'content' => $faker->text(200)
 			]);

@@ -15,13 +15,14 @@ class CustomersTableSeeder extends Seeder {
 		{
 			Customer::create([
 				'name' => $faker->company,
+				'company' => $faker->company,
 				'delegate' => $faker->name,
 				'logo' => $faker->imageUrl(640, 480),
 				'domain' => $faker->domainName,
 				'email' => $faker->freeEmail,
 				'address' => $faker->address,
 				'phone_number' => $faker->phoneNumber,
-				'business_scope' => $faker->catchPhrase
+				'description' => $faker->catchPhrase
 			]);
 		}
 	}

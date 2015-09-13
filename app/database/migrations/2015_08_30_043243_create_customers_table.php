@@ -16,13 +16,14 @@ class CreateCustomersTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('name', 50);
+			$table->string('company', 50);
             $table->string('delegate');
             $table->string('logo', 50);
             $table->string('domain', 50);
             $table->string('email', 50);
             $table->string('address');
             $table->string('phone_number');
-            $table->string('business_scope', 32);
+            $table->string('description', 32);
 			$table->timestamps();
 		});
 	}

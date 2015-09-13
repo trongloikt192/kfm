@@ -16,14 +16,14 @@ class DatabaseSeeder extends Seeder {
 		$this->call('CustomersTableSeeder');
 		$this->call('FaqTableSeeder');
 		$this->call('ContactsTableSeeder');
-		$this->call('FeedbackTableSeeder');
+		$this->call('FeedbacksTableSeeder');
 		// $this->call('RolesTableSeeder');
 		$this->call('SettingsTableSeeder');
 		$this->call('TagsTableSeeder');
 		$this->call('UsersTableSeeder');
-		$this->call('FileAttachesTableSeeder');
-		// $this->call('PagesTableSeeder');
-		// $this->call('PostsTableSeeder');
+		$this->call('DocumentsTableSeeder');
+		$this->call('PagesTableSeeder');
+		$this->call('PostsTableSeeder');
 		
 	}
 
