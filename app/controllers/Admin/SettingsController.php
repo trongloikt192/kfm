@@ -1,7 +1,7 @@
 <?php
 namespace Admin;
 
-class ThemesController extends \BaseController {
+class SettingsController extends \BaseController {
 
 	/**
 	 * Display a listing of the resource.
@@ -11,8 +11,8 @@ class ThemesController extends \BaseController {
 	public function index()
 	{
 		//
-		$themes = \Theme::all();
-        return \View::make('admincp.b09', compact('themes'));
+		$setting = \Setting::find(1);
+        return \View::make('admincp.b09', compact('setting'));
 	}
 
 
@@ -37,12 +37,12 @@ class ThemesController extends \BaseController {
 		$data = \Input::all();
 
 		if(\Request::ajax()) {
-	        $validator = \Validator::make($data, \Link::$rules);
+	        $validator = \Validator::make($data, \Setting::$rules);
 	        if ($validator->fails())
 	        {
 	            return \Response::json($validator->messages(), 500);
 	        }
-	        $link = \Link::create(['name'=>$data['name'], 'link'=>$data['link'], 'description'=>$data['description']]);
+	        $link = \Setting::create(['name'=>$data['name'], 'link'=>$data['link'], 'description'=>$data['description']]);
 	        
 	        return 1;
 	    }
@@ -70,7 +70,7 @@ class ThemesController extends \BaseController {
 	public function edit($id)
 	{
 		$id = \Input::get('id');
-        $link = \Link::find($id);
+        $link = \Setting::find($id);
         return \Response::json($link);
 	}
 
@@ -86,14 +86,14 @@ class ThemesController extends \BaseController {
 		$data = \Input::all();
 
 		if(\Request::ajax()) {
-	        $validator = \Validator::make($data, \Link::$rules);
+	        $validator = \Validator::make($data, \Setting::$rules);
 	        if ($validator->fails())
 	        {
 	            return \Response::json($validator->messages(), 500);
 	        }
 
 			$id = $data['id'];
-	        $link = \Link::findOrFail($id);
+	        $link = \Setting::findOrFail($id);
 	        
 	        $link->update(['name'=>$data['name'], 'link'=>$data['link'], 'description'=>$data['description']]);
 	        return 1;
@@ -110,7 +110,7 @@ class ThemesController extends \BaseController {
 	public function destroy($id)
 	{
 		$id = \Input::get('id');
-		\Link::destroy($id);
+		\Setting::destroy($id);
 		return 1;
 	}
 

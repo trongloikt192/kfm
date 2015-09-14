@@ -34,9 +34,9 @@ Route::group(['prefix' => 'admincp'], function()
         Route::resource('b06', 'CustomersController');
         Route::resource('b07', 'FaqController');
         Route::resource('b08', 'ContactController');
-        Route::resource('b09', 'ThemesController');
-        Route::resource('b10', 'LinksController');
-        Route::resource('b11', 'RolesController');
+        Route::resource('b09', 'SettingsController');
+        // Route::resource('b10', 'LinksController');
+        // Route::resource('b11', 'RolesController');
     });
 });
 
