@@ -22,7 +22,7 @@
             
             <div class="widget-content pad20f">
 
-                <table class="table" id="datatable">
+                <table class="table table-bordered" id="datatable">
                     <thead>
                         <tr>
                             <th>Danh mục</th>
@@ -76,10 +76,6 @@
 
                 {{ Form::open(['id'=> 'form_a_item']) }}
                 <div class="modal-body">
-                    <p>
-                        Xin quý khách vui lòng nhập vào tên đăng nhập và địa chỉ email để lấy lại mật khẩu.
-                    </p>
-
                     {{ Form::errorField() }}
                     {{ Form::textField('name', 'Tên danh mục', null) }}
                     {{ Form::textareaField('description', 'Mô tả', null) }}
@@ -146,6 +142,7 @@
         $(document).ready(function() {
             installTable( dataTable );
             beforeGetOM();
+            afterCloseOM();
             xhrGetOM_detail_item( btnEdit_item, "{{ route('admincp.b04.edit') }}", modal_e_item);
             xhrInsert_item( form_a_item, "{{ route('admincp.b04.store') }}" );
             xhrUpdate_item( form_e_item, "{{ route('admincp.b04.update') }}" );

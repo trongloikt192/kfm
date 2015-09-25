@@ -46,7 +46,7 @@
             @include('admincp.layouts_admincp.sidebar')
             
 
-            <div id="content" class="clearfix">
+            <div id="layout_content" class="clearfix">
 
                 <div class="header">
                     

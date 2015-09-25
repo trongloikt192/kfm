@@ -82,7 +82,7 @@ class PostsController extends \BaseController {
 	{
 		$id = \Input::get('id');
         $post = \Post::find($id);
-        return \Response::json($link);
+        return \Response::json($post);
 	}
 
 

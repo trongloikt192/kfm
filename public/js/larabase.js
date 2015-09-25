@@ -48,7 +48,7 @@ function installTable( _table ) {
  @param: 
  	_btnOM : Button để hiển thị modal - example: $('.btnEdit_item')
  	_url : Url để ajax lấy dữ liệu - example: "{{ route('admincp.b10.edit') }}"
- 	_modal : Modal để đổ dữ liệu và hiển thị dữ liệu - example: $("#modal_e_item")
+ 	_modal : Đổ dữ liệu vào Modal để hiển thị - example: $("#modal_e_item")
  */
 function xhrGetOM_detail_item( _btnOM, _url, _modal ) {
     _btnOM.click(function(e) {
@@ -76,9 +76,13 @@ function xhrGetOM_detail_item( _btnOM, _url, _modal ) {
                 $(this).prop('disabled', true);
             },
             success: function( json ) {
-                var INPUT_SELECTOR = "input,select,textarea";
+                var INPUT_SELECTOR = form_modal.find("input,select,textarea");
+                
                 $.each(json, function(key, value) {
-                    form_modal.find(INPUT_SELECTOR).filter('[name='+ key +']').val(value);
+                    INPUT_SELECTOR
+                        .filter('[name='+ key +']').val(value)
+                         // Trường hợp image phải dùng thuộc tính SRC
+                        .filter('[type=image]').attr("src", value);
                 });
 
                 isSuccess = true;
@@ -359,6 +363,13 @@ function beforeGetOM() {
     modal.on('shown.bs.modal', function(e) {
     	var form = $(this).find('form');
         (form.find('input:visible:first')).focus();
+    });
+}
+function afterCloseOM() {
+    var modal = $('#modals > .modal');
+
+    modal.on('hidden.bs.modal', function(e) {
+    	var form = $(this).find('form');
         (form.find('.errors')).html('');
     });
 }

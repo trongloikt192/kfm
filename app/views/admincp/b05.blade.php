@@ -36,7 +36,7 @@
                             <tr>
                                 <td>{{ $post->title }}</td>
                                 <td>{{ $post->description }}</td>
-                                <td>{{ $post->status }}</td>
+                                <td>{{ $post->status == 1 ? '<span class="label label-success">Public</span>' : '<span class="label label-danger">Unpublic</span>' }}</td>
                                 <td class="center">
                                     {{ Form::btnActionEditRecord($post->id) }}
                                     | 
@@ -83,7 +83,7 @@
                     {{ Form::errorField() }}
                     {{ Form::textField('title', 'Tiêu đề', null) }}
                     {{ Form::textField('slug', 'Slug', null) }}
-                    {{ Form::textareaField('description', 'Mô tả', null) }}
+                    {{ Form::textareaField('description', 'Mô tả', null, '100%x3') }}
                     {{ Form::textareaField('content_vi', 'Nội dung tiếng Việt', null) }}
                     {{ Form::textareaField('content_en', 'Nội dung tiếng Anh', null) }}
                     {{-- {{ Form::checkboxField('status', 'Public') }} --}}
@@ -123,7 +123,7 @@
                     {{ Form::hidden('id') }}
                    	{{ Form::textField('title', 'Tiêu đề', null) }}
                     {{ Form::textField('slug', 'Slug', null) }}
-                    {{ Form::textareaField('description', 'Mô tả', null) }}
+                    {{ Form::textareaField('description', 'Mô tả', null, '100%x3') }}
                     {{ Form::textareaField('content_vi', 'Nội dung tiếng Việt', null) }}
                     {{ Form::textareaField('content_en', 'Nội dung tiếng Anh', null) }}
                     {{ Form::checkboxField('status', 'Public') }}

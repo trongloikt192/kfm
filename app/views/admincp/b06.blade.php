@@ -139,6 +139,7 @@
                     		{{ Form::textField('phone_number', 'Số điện thoại', null) }}
                     		{{ Form::textField('domain', 'Website', null) }}
                     		{{ Form::textField('logo', 'Hình logo', null) }}
+                    		<input type="image" name="logo" src="" class="img-responsive"/>
                     	</div>
                     </div>
                 </div>
@@ -170,6 +171,7 @@
         $(document).ready(function() {
             installTable( dataTable );
             beforeGetOM();
+            afterCloseOM();
             xhrGetOM_detail_item( btnEdit_item, "{{ route('admincp.b06.edit') }}", modal_e_item);
             xhrInsert_item( form_a_item, "{{ route('admincp.b06.store') }}" );
             xhrUpdate_item( form_e_item, "{{ route('admincp.b06.update') }}" );

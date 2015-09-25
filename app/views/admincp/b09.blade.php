@@ -19,7 +19,7 @@
 			</div> <!-- /widget-header -->
 			
 			<div class="widget-content pad20f">
-			{{ Form::open() }}
+			{{ Form::open(['id'=> 'form_e_settings']) }}
 				<div class="row">
 					<div class="col-md-6">
                 		{{ Form::textField('logo', 'Hình Logo', null) }}
@@ -55,7 +55,7 @@
 				</div> <!-- /widget-header -->
 				
 				<div class="widget-content pad20 w-switches">
-
+					{{ Form::open(['id'=> 'form_e_slides']) }}
 					<div class="row">
 						<div class="col-md-12">
 	                		{{ Form::textField('slide_images', 'Slide', null) }}
@@ -65,13 +65,30 @@
 	                		<button class="btn btn-blue" type="submit">Cập nhật</button>
 	                	</div>
 					</div>
+					{{ Form::close() }}
 				</div> <!-- /widget-content -->
 
 			</div> <!-- /widget -->
 			
 		</div> <!-- /fluid -->
+	</div>
+@stop
+
+@section('scripts')
+    <script type="text/javascript">
+
+        var dataTable = $("#datatable");
+        var form_a_item = $('#form_a_item');
+        var form_e_item = $('#form_e_item');
+        var btnEdit_item = $('.btnEdit_item');
+        var btnDel_item = $('.btnDel_item');
+        var modal_a_item = $('#modal_a_item');
+        var modal_e_item = $('#modal_e_item');
 
 
+        $(document).ready(function() {
+            xhrUpdate_item( form_e_item, "{{ route('admincp.b09.update') }}" );
+        });
+    </script>
 
-</div>
 @stop

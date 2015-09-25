@@ -106,7 +106,6 @@ Form::macro('checkboxField', function($name, $label)
             "</div>";
 });
 
-
 // Form::macro('radioboxField_lib', function($name, $options, $value, $label)
 // {
 //     return "<label class='control-label' for='{$name}'>{$label}</label>

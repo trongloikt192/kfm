@@ -22,7 +22,7 @@
             
             <div class="widget-content pad20f">
 
-                <table class="table" id="datatable">
+                <table class="table table-bordered" id="datatable">
                     <thead>
                         <tr>
                             <th>Tài khoản</th>
@@ -79,22 +79,19 @@
 
                 {{ Form::open(['id'=> 'form_a_item']) }}
                 <div class="modal-body">
-                    <p>
-                        Xin quý khách vui lòng nhập vào tên đăng nhập và địa chỉ email để lấy lại mật khẩu.
-                    </p>
-
                     {{ Form::errorField() }}
                     <div class="row">
                         <div class="col-md-6">
                             {{ Form::textField('username', 'Tài khoản', null) }}
                             {{ Form::passwordField('password', 'Mật khẩu', null) }}
+                            {{ Form::passwordField('re_password', 'Xác thực mật khẩu', null) }}
                             {{ Form::emailField('email', 'Email', null) }}
-                            {{ Form::textField('address', 'Địa chỉ', null) }}
                         </div>
                         <div class="col-md-6">
                             {{ Form::textField('first_name', 'Họ', null) }}
                             {{ Form::textField('last_name', 'Tên', null) }}
                             {{ Form::textField('phone_number', 'Số điện thoại', null) }}
+                            {{ Form::textField('address', 'Địa chỉ', null) }}
                         </div>
                     </div>
                 </div>
@@ -119,16 +116,12 @@
 
                 {{ Form::open(['id'=> 'form_e_item']) }}
                 <div class="modal-body">
-                    <p>
-                        Xin quý khách vui lòng nhập vào tên đăng nhập và địa chỉ email để lấy lại mật khẩu.
-                    </p>
-
                     {{ Form::errorField() }}
                     {{ Form::hidden('id') }}
                    	<div class="row">
                         <div class="col-md-6">
                             {{ Form::textField('username', 'Tài khoản', null) }}
-                            {{ Form::passwordField('password', 'Mật khẩu', null) }}
+                            <!--{{ Form::passwordField('password', 'Mật khẩu', null) }}-->
                             {{ Form::emailField('email', 'Email', null) }}
                             {{ Form::textField('address', 'Địa chỉ', null) }}
                         </div>
