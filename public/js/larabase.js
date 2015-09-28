@@ -50,7 +50,7 @@ function installTable( _table ) {
  	_url : Url để ajax lấy dữ liệu - example: "{{ route('admincp.b10.edit') }}"
  	_modal : Đổ dữ liệu vào Modal để hiển thị - example: $("#modal_e_item")
  */
-function xhrGetOM_detail_item( _btnOM, _url, _modal ) {
+function xhrGetOM_detail_item( _btnOM, _url, _modal, _callback ) {
     _btnOM.click(function(e) {
         e.preventDefault();
 
@@ -97,6 +97,8 @@ function xhrGetOM_detail_item( _btnOM, _url, _modal ) {
                 } else {
                     toastr.error( "Error" , "Notifications" );
                 }
+
+                _callback();
             }
         }); 
     });

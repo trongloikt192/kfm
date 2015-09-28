@@ -4,9 +4,15 @@
 	Bài viết
 @stop
 
+
+@section('styles')
+    {{ HTML::style('plugins/ckeditor/plugins/codesnippet/lib/highlight/styles/default.css') }}
+@stop
+
+
 @section('content')
 
-	<button href="#modal_a_item" data-toggle="modal" class="btn btn-default"><i class="fa fa-plus"></i> Thêm mới</button>
+	<button href="#modal_ae_post" data-toggle="modal" class="btn btn-default"><i class="fa fa-plus"></i> Thêm mới</button>
 
     <div class="fluid">
         
@@ -22,7 +28,7 @@
             
             <div class="widget-content pad20f">
 
-                <table class="table" id="datatable">
+                <table class="table table-bordered" id="datatable">
                     <thead>
                         <tr>
                             <th>Tiêu đề</th>
@@ -38,7 +44,7 @@
                                 <td>{{ $post->description }}</td>
                                 <td>{{ $post->status == 1 ? '<span class="label label-success">Public</span>' : '<span class="label label-danger">Unpublic</span>' }}</td>
                                 <td class="center">
-                                    {{ Form::btnActionEditRecord($post->id) }}
+                                    {{ Form::btnActionEditRecord($post->id, "Sửa", "btnEdit_item", "modal_ae_post") }}
                                     | 
                                     {{ Form::btnActionDelRecord($post->id) }}
                                 </td>
@@ -66,19 +72,16 @@
 
 
 @section('modal')
-    <div class="modal fade" id="modal_a_item">
-        <div class="modal-dialog modal-lg">
+    <div class="modal fade" id="modal_ae_post">
+        <div class="modal-dialog" style="width: 1024px;">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">Thêm bài viết</h4>
+                    <h4 class="modal-title">Bài viết</h4>
                 </div>
 
-                {{ Form::open(['id'=> 'form_a_item']) }}
+                {{ Form::open(['id'=> 'form_ae_post']) }}
                 <div class="modal-body">
-                    <p>
-                        Xin quý khách vui lòng nhập vào tên đăng nhập và địa chỉ email để lấy lại mật khẩu.
-                    </p>
 
                     {{ Form::errorField() }}
                     {{ Form::textField('title', 'Tiêu đề', null) }}
@@ -90,13 +93,14 @@
 
                     <label class='control-label' for='status'>Đăng bài</label>
                     <div class="w-switches">
-                        <input type="checkbox" id="switch-1" checked />
-                        <label class="switch green" for="switch-1"><i></i></label>
+                        <input name="status" type="checkbox" id="status" checked />
+                        <label class="switch green" for="status"><i></i></label>
                     </div>  
+
                 </div>
                 <div class="modal-footer">
-                    {{ Form::btnSubmit('Thêm') }}
-                    <button type="reset" class="btn btn-green">Làm mới</button>
+                    {{ Form::btnSubmit('Đồng ý') }}
+                    {{-- <button type="reset" class="btn btn-green">Làm mới</button> --}}
                     <button type="button" class="btn btn-red" data-dismiss="modal">Hủy</button>
                 </div>
                 {{ Form::close() }}
@@ -105,62 +109,117 @@
         </div>
     </div><!-- /modal add New -->
 
-    <div class="modal fade" id="modal_e_item">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">Sửa thông tin bài viết</h4>
-                </div>
-
-                {{ Form::open(['id'=> 'form_e_item']) }}
-                <div class="modal-body">
-                    <p>
-                        Xin quý khách vui lòng nhập vào tên đăng nhập và địa chỉ email để lấy lại mật khẩu.
-                    </p>
-
-                    {{ Form::errorField() }}
-                    {{ Form::hidden('id') }}
-                   	{{ Form::textField('title', 'Tiêu đề', null) }}
-                    {{ Form::textField('slug', 'Slug', null) }}
-                    {{ Form::textareaField('description', 'Mô tả', null, '100%x3') }}
-                    {{ Form::textareaField('content_vi', 'Nội dung tiếng Việt', null) }}
-                    {{ Form::textareaField('content_en', 'Nội dung tiếng Anh', null) }}
-                    {{ Form::checkboxField('status', 'Public') }}
-
-                </div>
-                <div class="modal-footer">
-                    {{ Form::btnSubmit('Cập nhật') }}
-                    <button type="button" class="btn btn-red" data-dismiss="modal">Hủy</button>
-                </div>
-                {{ Form::close() }}
-
-            </div>
-        </div>
-    </div><!-- /modal Edit -->
 
 @stop
 
 
 @section('scripts')
+    {{ HTML::script('plugins/ckeditor/ckeditor.js') }}
+
     <script type="text/javascript">
 
+        var configCKE = {
+            codeSnippet_theme: 'Monokai',
+            // language: '',
+            height: 400,
+            // filebrowserBrowseUrl: '{{ url() }}',
+            toolbarGroups: [
+                { name: 'clipboard',   groups: [ 'clipboard', 'undo' ] },
+                { name: 'editing',     groups: [ 'find', 'selection', 'spellchecker' ] },
+                { name: 'links' },
+                { name: 'insert' },
+                { name: 'forms' },
+                { name: 'tools' },
+                { name: 'document',    groups: [ 'mode', 'document', 'doctools' ] },
+                { name: 'others' },
+                //'/',
+                { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
+                { name: 'paragraph',   groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ] },
+                { name: 'styles' },
+                { name: 'colors' }
+            ]
+        };
+
         var dataTable = $("#datatable");
-        var form_a_item = $('#form_a_item');
-        var form_e_item = $('#form_e_item');
+        var form_ae_post = $('#form_ae_post');
         var btnEdit_item = $('.btnEdit_item');
         var btnDel_item = $('.btnDel_item');
-        var modal_a_item = $('#modal_a_item');
-        var modal_e_item = $('#modal_e_item');
+        var modal_ae_post = $('#modal_ae_post');
+
+
+        function xhrGetOM_detail_item( _btnOM, _url, _modal ) {
+            _btnOM.click(function(e) {
+                e.preventDefault();
+
+                var form_modal = _modal.find('form');
+                var id = $(this).attr('data-id');
+
+                var url = _url;
+                var method = 'GET';
+                var data = {'id' : id};
+                var isSuccess = false;
+                var loading = $(this).find('.loading');
+                var done = $(this).find('.done');
+
+                $.ajax({
+                    url : url,
+                    type: method,
+                    data: data,
+                    dataType: 'json',
+                    beforeSend: function() {
+                        loading.fadeIn();
+                        done.hide();
+                        $(this).prop('disabled', true);
+                    },
+                    success: function( json ) {
+                        var INPUT_SELECTOR = form_modal.find("input,select,textarea");
+                        
+                        $.each(json, function(key, value) {
+                            INPUT_SELECTOR
+                                .filter('[name='+ key +']').val(value)
+                                 // Trường hợp image phải dùng thuộc tính SRC
+                                .filter('[type=image]').attr("src", value);
+                        });
+
+                        isSuccess = true;
+
+                        CKEDITOR.instances.content_vi.setData( json["content_vi"], function() {
+                            this.checkDirty();  // true
+                        });
+                        CKEDITOR.instances.content_en.setData( json["content_en"], function() {
+                            this.checkDirty();  // true
+                        });
+                    },
+                    complete: function() {
+                        loading.hide();
+                        done.show();
+                        $(this).prop('disabled', false);
+
+                        if(isSuccess) {
+                            _modal.modal("show");
+                        } else {
+                            toastr.error( "Error" , "Notifications" );
+                        }
+                    }
+                }); 
+            });
+        }
 
 
         $(document).ready(function() {
             installTable( dataTable );
             beforeGetOM();
-            xhrGetOM_detail_item( btnEdit_item, "{{ route('admincp.b05.edit') }}", modal_e_item);
-            xhrInsert_item( form_a_item, "{{ route('admincp.b05.store') }}" );
-            xhrUpdate_item( form_e_item, "{{ route('admincp.b05.update') }}" );
+            afterCloseOM();
+
+            xhrGetOM_detail_item( btnEdit_item, "{{ route('admincp.b05.edit') }}", modal_ae_post );
+            xhrInsert_item( form_ae_post, "{{ route('admincp.b05.store') }}" );
+            xhrUpdate_item( form_ae_post, "{{ route('admincp.b05.update') }}" );
             xhrDelete_item( btnDel_item, "{{ route('admincp.b05.destroy') }}" );
+
+            
+            CKEDITOR.replace( 'content_vi', configCKE);
+            configCKE['height'] = 100;     
+            CKEDITOR.replace( 'content_en', configCKE);
         });
     </script>
 
