@@ -12,8 +12,8 @@ class PostsController extends \BaseController {
 	{
 		//
 		$posts = \Post::all();
-		// $categories_list = $categories->lists('name', 'id');
-        return \View::make('admincp.b05', compact('posts'));
+		$categories = \Category::all()->lists('name', 'id');
+        return \View::make('admincp.b05', compact('posts','categories'));
 	}
 
 
@@ -43,6 +43,7 @@ class PostsController extends \BaseController {
 	        {
 	            return \Response::json($validator->messages(), 500);
 	        }
+	        
 	        $post = \Post::create([
 	        	'title'=>$data['title']
 	        	, 'slug'=>$data['slug']
@@ -106,7 +107,7 @@ class PostsController extends \BaseController {
 			$id = $data['id'];
 	        $post = \Post::findOrFail($id);
 	        
-	        $post = \Post::update([
+	        $post->update([
 	        	'title'=>$data['title']
 	        	, 'slug'=>$data['slug']
 	        	, 'description'=>$data['description']
@@ -115,7 +116,7 @@ class PostsController extends \BaseController {
 	        	, 'image'=>$data['image']
 	        	, 'status'=>$data['status']
 	        	, 'category_id'=>$data['category_id']
-	        	, 'user_id'=>$data['user_id']
+	        	// , 'user_id'=>$data['user_id']
 	        ]);
 	        return 1;
 	    }

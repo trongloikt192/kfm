@@ -27,7 +27,7 @@
 	</div>
 
 
-		<div id="content" class="c-login clearfix">
+		<div id="layout_content" class="c-login clearfix">
 
 			<div class="header">
 					<a href="index.html"><img src="{{asset('img/logo.png')}}"></a>

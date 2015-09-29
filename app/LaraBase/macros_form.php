@@ -126,7 +126,7 @@ Form::macro('submitField', function($value = 'Submit', $btn_style = 'btn btn-pri
 
 Form::macro('btnSubmit', function($value, $btn_style = 'btn btn-black') 
 {
-    return "<button type='submit' class='{$btn_style} btnSubmit'>
+    return "<button id='btnSubmit' type='submit' class='{$btn_style} btnSubmit'>
             <i class='fa fa-check done'></i>
             <i class='fa fa-spin fa-refresh loading'></i>
             {$value}

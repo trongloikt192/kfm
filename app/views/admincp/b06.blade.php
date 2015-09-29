@@ -139,7 +139,8 @@
                     		{{ Form::textField('phone_number', 'Số điện thoại', null) }}
                     		{{ Form::textField('domain', 'Website', null) }}
                     		{{ Form::textField('logo', 'Hình logo', null) }}
-                    		<input type="image" name="logo" src="" class="img-responsive"/>
+                    		<img name="logo" src="" class="img-responsive"/>
+                    		
                     	</div>
                     </div>
                 </div>

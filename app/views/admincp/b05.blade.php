@@ -84,18 +84,31 @@
                 <div class="modal-body">
 
                     {{ Form::errorField() }}
+                    {{ Form::hidden('id') }}
                     {{ Form::textField('title', 'Tiêu đề', null) }}
                     {{ Form::textField('slug', 'Slug', null) }}
                     {{ Form::textareaField('description', 'Mô tả', null, '100%x3') }}
                     {{ Form::textareaField('content_vi', 'Nội dung tiếng Việt', null) }}
                     {{ Form::textareaField('content_en', 'Nội dung tiếng Anh', null) }}
                     {{-- {{ Form::checkboxField('status', 'Public') }} --}}
-
-                    <label class='control-label' for='status'>Đăng bài</label>
-                    <div class="w-switches">
-                        <input name="status" type="checkbox" id="status" checked />
-                        <label class="switch green" for="status"><i></i></label>
-                    </div>  
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{ Form::selectField('category_id', $categories, null, 'Danh mục') }}
+                            
+                            <label class='control-label' for='status'>Đăng bài</label>
+                            <div class="w-switches">
+                                <input name="status" type="checkbox" id="status" checked />
+                                <label class="switch green" for="status"><i></i></label>
+                            </div>  
+                        </div>
+                        <div class="col-md-6">
+                            {{ Form::textField('image', 'Hình đại diện', null) }}
+                            <img name="image" src="" class="img-responsive"/>
+                        </div>
+                    </div>
+                    
+                    
 
                 </div>
                 <div class="modal-footer">
@@ -119,7 +132,7 @@
     <script type="text/javascript">
 
         var configCKE = {
-            codeSnippet_theme: 'Monokai',
+            // codeSnippet_theme: 'Monokai',
             // language: '',
             height: 400,
             // filebrowserBrowseUrl: '{{ url() }}',
@@ -146,7 +159,7 @@
         var btnDel_item = $('.btnDel_item');
         var modal_ae_post = $('#modal_ae_post');
 
-
+        // Override
         function xhrGetOM_detail_item( _btnOM, _url, _modal ) {
             _btnOM.click(function(e) {
                 e.preventDefault();
@@ -172,16 +185,14 @@
                         $(this).prop('disabled', true);
                     },
                     success: function( json ) {
-                        var INPUT_SELECTOR = form_modal.find("input,select,textarea");
+                        var INPUT_SELECTOR = form_modal.find("input,select,textarea,img");
                         
                         $.each(json, function(key, value) {
                             INPUT_SELECTOR
                                 .filter('[name='+ key +']').val(value)
                                  // Trường hợp image phải dùng thuộc tính SRC
-                                .filter('[type=image]').attr("src", value);
+                                .filter('img').prop("src", value);
                         });
-
-                        isSuccess = true;
 
                         CKEDITOR.instances.content_vi.setData( json["content_vi"], function() {
                             this.checkDirty();  // true
@@ -189,6 +200,14 @@
                         CKEDITOR.instances.content_en.setData( json["content_en"], function() {
                             this.checkDirty();  // true
                         });
+                        
+                        if( json["status"] == "1" ) {
+                            $("#status").prop('checked', true);
+                        } else {
+                            $("#status").prop('checked', false);
+                        }
+                        
+                        isSuccess = true;
                     },
                     complete: function() {
                         loading.hide();
@@ -196,12 +215,231 @@
                         $(this).prop('disabled', false);
 
                         if(isSuccess) {
+                            $("#btnSubmit").attr('data-action', 'update');
                             _modal.modal("show");
                         } else {
                             toastr.error( "Error" , "Notifications" );
                         }
                     }
                 }); 
+            });
+        }
+        
+        // Override
+        function xhrInsert_item( _formInsert, _url) {
+            _formInsert.submit(function(e) {
+                e.preventDefault();
+        
+                var form = $(this);
+                var _modal = form.closest('.modal');
+        
+                // var url = form.attr('action');
+                var url = _url;
+                var method = 'POST';
+                
+                // Custom data ckeditor
+                var data = form.serializeArray();
+                data[5]["value"] = CKEDITOR.instances.content_vi.getData(); // content_vi
+                data[6]["value"] = CKEDITOR.instances.content_en.getData(); // content_en
+                data = data.concat(
+                    _formInsert.find('input[type=checkbox]:not(:checked)').map(
+                        function() {
+                            return {"name": this.name, "value": this.value}
+                        }).get()
+                );
+                
+                var isSuccess = false;
+                var loading = form.find('.loading');
+                var done = form.find('.done');
+                var errorField = form.find('.errors');
+                var btnSubmit = form.find('.btnSubmit');
+                
+                var isUpdate = btnSubmit.attr('data-action');
+                if( isUpdate === 'update' ) {
+                    return false;
+                }
+        
+                $.confirm({
+                    title: '',
+                    content: 'Bạn đồng ý <b>thêm</b> thông tin này không ?',
+                    keyboardEnabled: true,
+                    columnClass: 'col-md-4 col-md-offset-4',
+                    animationSpeed: 200, // 0.2 seconds
+                    confirm: function(){
+                        $.ajax({
+                            url : url,
+                            type: method,
+                            data: data,
+                            dataType: 'json',
+                            beforeSend: function() {
+                                loading.fadeIn();
+                                done.hide();
+                                btnSubmit.prop('disabled', true);
+                                errorField.html('');
+                            },
+                            success: function( json ) {
+        
+                                isSuccess = true;
+                                form[0].reset(); //clear form
+                                
+                            },
+                            error :function( jqXhr ) {
+                                if( jqXhr.status === 401 )  //redirect if not authenticated user.
+                                    $( location ).prop( 'pathname', 'auth/login' );
+                                else {
+                                    //process validation errors here.
+                                    var errors = jqXhr.responseJSON; //this will get the errors response data.
+                                    //show them somewhere in the markup
+                                    //e.g
+                                    var errorsHtml = '<div class="alert alert-danger"><ul class="list-unstyled">';
+        
+                                    $.each( errors , function( key, value ) {
+                                        errorsHtml += '<li>' + value[0] + '</li>'; //showing only the first error.
+        
+                                    });
+                                    errorsHtml += '</ul></di>';
+        
+                                    errorField.html( errorsHtml );
+                                }
+                            },
+                            complete: function() {
+                                loading.hide();
+                                done.show();
+                                btnSubmit.prop('disabled', false); //enable button
+        
+                                if(isSuccess) {
+                                	if(_modal.length > 0) {
+                                		_modal.modal('hide');
+                                	}
+        
+                                    toastr.success( "Success" , "Notifications" );
+                                    xhrRefresh();
+                                } else {
+                                    toastr.error( "Error" , "Notifications" );
+                                }
+                            }
+                        }); 
+                    }
+                });
+                               
+            });
+        }
+        
+        // Override
+        function xhrUpdate_item( _formEdit, _url ) {
+            _formEdit.submit(function(e) {
+                e.preventDefault();
+        
+                var form = $(this);
+                var _modal = form.closest('.modal');
+        
+                // var url = form.attr('action');
+                var url = _url;
+                var method = 'PUT';
+                
+                // Custom data ckeditor
+                var data = form.serializeArray();
+                data[5]["value"] = CKEDITOR.instances.content_vi.getData(); // content_vi
+                data[6]["value"] = CKEDITOR.instances.content_en.getData(); // content_en
+                data = data.concat(
+                    _formEdit.find('input[type=checkbox]:not(:checked)').map(
+                        function() {
+                            return {"name": this.name, "value": this.value}
+                        }).get()
+                );
+                
+                
+                console.log(data);
+                
+                return false;
+                
+                var isSuccess = false;
+                var loading = form.find('.loading');
+                var done = form.find('.done');
+                var errorField = form.find('.errors');
+                var btnSubmit = form.find('.btnSubmit');
+                
+                var isUpdate = btnSubmit.attr('data-action');
+                
+                if( isUpdate !== 'update' ) {
+                    return false;
+                }
+        
+                $.confirm({
+                    title: '',
+                    content: 'Bạn đồng ý <b>sửa</b> thông tin này không ?',
+                    keyboardEnabled: true,
+                    columnClass: 'col-md-4 col-md-offset-4',
+                    animationSpeed: 200, // 0.2 seconds
+                    confirm: function(){
+                        $.ajax({
+                            url : url,
+                            type: method,
+                            data: data,
+                            dataType: 'json',
+                            beforeSend: function() {
+                                loading.fadeIn();
+                                done.hide();
+                                btnSubmit.prop('disabled', true);
+                                errorField.html('');
+                            },
+                            success: function( json ) {
+        
+                                isSuccess = true;
+                                form[0].reset(); //clear form
+                                
+                            },
+                            error :function( jqXhr ) {
+                                if( jqXhr.status === 401 )  //redirect if not authenticated user.
+                                    $( location ).prop( 'pathname', 'auth/login' );
+                                else {
+                                    //process validation errors here.
+                                    var errors = jqXhr.responseJSON; //this will get the errors response data.
+                                    //show them somewhere in the markup
+                                    //e.g
+                                    var errorsHtml = '<div class="alert alert-danger"><ul class="list-unstyled">';
+        
+                                    $.each( errors , function( key, value ) {
+                                        errorsHtml += '<li>' + value[0] + '</li>'; //showing only the first error.
+        
+                                    });
+                                    errorsHtml += '</ul></di>';
+        
+                                    errorField.html( errorsHtml );
+                                }
+                            },
+                            complete: function() {
+                                loading.hide();
+                                done.show();
+                                btnSubmit.prop('disabled', false); //enable button
+        
+                                if(isSuccess) {
+                                	if(_modal.length > 0) {
+                                		_modal.modal('hide');
+                                	}
+        
+                                    toastr.success( "Success" , "Notifications" );
+                                    xhrRefresh();
+                                } else {
+                                    toastr.error( "Error" , "Notifications" );
+                                }
+                            }
+                        }); 
+                    }
+                });
+                               
+            });
+        }
+
+        
+        // Override
+        function afterCloseOM() {
+            var modal = $('#modals > .modal');
+        
+            modal.on('hidden.bs.modal', function(e) {
+            	var form = $(this).find('form');
+                (form.find('.errors')).html('');
+                $("#btnSubmit").attr('data-action', '');
             });
         }
 

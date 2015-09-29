@@ -24,9 +24,9 @@ class Post extends \Eloquent {
         return $this->belongsToMany('Tag')->withTimestamps();
     }
 
-    public function categories()
+    public function category()
     {
-        return $this->belongsToMany('Category')->withTimestamps();
+        return $this->belongsTo('Category');
     }
 
     public function documents()

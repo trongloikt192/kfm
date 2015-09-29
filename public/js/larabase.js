@@ -50,7 +50,7 @@ function installTable( _table ) {
  	_url : Url để ajax lấy dữ liệu - example: "{{ route('admincp.b10.edit') }}"
  	_modal : Đổ dữ liệu vào Modal để hiển thị - example: $("#modal_e_item")
  */
-function xhrGetOM_detail_item( _btnOM, _url, _modal, _callback ) {
+function xhrGetOM_detail_item( _btnOM, _url, _modal ) {
     _btnOM.click(function(e) {
         e.preventDefault();
 
@@ -76,13 +76,13 @@ function xhrGetOM_detail_item( _btnOM, _url, _modal, _callback ) {
                 $(this).prop('disabled', true);
             },
             success: function( json ) {
-                var INPUT_SELECTOR = form_modal.find("input,select,textarea");
+                var INPUT_SELECTOR = form_modal.find("input,select,textarea,img");
                 
                 $.each(json, function(key, value) {
                     INPUT_SELECTOR
                         .filter('[name='+ key +']').val(value)
                          // Trường hợp image phải dùng thuộc tính SRC
-                        .filter('[type=image]').attr("src", value);
+                        .filter('img').prop("src", value);
                 });
 
                 isSuccess = true;
@@ -97,8 +97,6 @@ function xhrGetOM_detail_item( _btnOM, _url, _modal, _callback ) {
                 } else {
                     toastr.error( "Error" , "Notifications" );
                 }
-
-                _callback();
             }
         }); 
     });
