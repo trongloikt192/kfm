@@ -185,13 +185,13 @@
                         $(this).prop('disabled', true);
                     },
                     success: function( json ) {
-                        var INPUT_SELECTOR = form_modal.find("input,select,textarea,img");
-                        
+                        var INPUT_SELECTOR = form_modal.find("input,select,textarea");
+                        var IMG_SELECTOR = form_modal.find("img");
+
                         $.each(json, function(key, value) {
-                            INPUT_SELECTOR
-                                .filter('[name='+ key +']').val(value)
-                                 // Trường hợp image phải dùng thuộc tính SRC
-                                .filter('img').prop("src", value);
+                            INPUT_SELECTOR.filter('[name='+ key +']:not([type=checkbox])').val(value);
+                            // Trường hợp image phải dùng thuộc tính SRC
+                            IMG_SELECTOR.filter('[name='+ key +']').prop("src", value);
                         });
 
                         CKEDITOR.instances.content_vi.setData( json["content_vi"], function() {
@@ -341,17 +341,13 @@
                 var data = form.serializeArray();
                 data[5]["value"] = CKEDITOR.instances.content_vi.getData(); // content_vi
                 data[6]["value"] = CKEDITOR.instances.content_en.getData(); // content_en
-                data = data.concat(
-                    _formEdit.find('input[type=checkbox]:not(:checked)').map(
-                        function() {
-                            return {"name": this.name, "value": this.value}
-                        }).get()
-                );
-                
-                
-                console.log(data);
-                
-                return false;
+
+                // Checkbox post 
+                if( form.find("#status").is(':checkbox') == true ) {
+                    data[7]["value"] = "1";
+                } else {
+                    data.push({'name':'status', 'value':'0'});
+                }
                 
                 var isSuccess = false;
                 var loading = form.find('.loading');
@@ -438,8 +434,11 @@
         
             modal.on('hidden.bs.modal', function(e) {
             	var form = $(this).find('form');
+                form[0].reset(); //clear form
                 (form.find('.errors')).html('');
                 $("#btnSubmit").attr('data-action', '');
+                CKEDITOR.instances.content_vi.setData('');
+                CKEDITOR.instances.content_en.setData('');
             });
         }
 

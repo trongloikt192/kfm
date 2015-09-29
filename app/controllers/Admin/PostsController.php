@@ -37,6 +37,8 @@ class PostsController extends \BaseController {
 	{
 		$data = \Input::all();
 
+		
+
 		if(\Request::ajax()) {
 	        $validator = \Validator::make($data, \Post::$rules);
 	        if ($validator->fails())
@@ -53,7 +55,7 @@ class PostsController extends \BaseController {
 	        	, 'image'=>$data['image']
 	        	, 'status'=>$data['status']
 	        	, 'category_id'=>$data['category_id']
-	        	, 'user_id'=>$data['user_id']
+	        	// , 'user_id'=>$data['user_id']
 	        ]);
 	        
 	        return 1;
@@ -96,7 +98,7 @@ class PostsController extends \BaseController {
 	public function update($id)
 	{
 		$data = \Input::all();
-
+print_r($data); exit();
 		if(\Request::ajax()) {
 	        $validator = \Validator::make($data, \Post::$rules);
 	        if ($validator->fails())

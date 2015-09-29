@@ -76,13 +76,13 @@ function xhrGetOM_detail_item( _btnOM, _url, _modal ) {
                 $(this).prop('disabled', true);
             },
             success: function( json ) {
-                var INPUT_SELECTOR = form_modal.find("input,select,textarea,img");
+                var INPUT_SELECTOR = form_modal.find("input,select,textarea");
+                var IMG_SELECTOR = form_modal.find("img");
                 
                 $.each(json, function(key, value) {
-                    INPUT_SELECTOR
-                        .filter('[name='+ key +']').val(value)
-                         // Trường hợp image phải dùng thuộc tính SRC
-                        .filter('img').prop("src", value);
+                    INPUT_SELECTOR.filter('[name='+ key +']:not([type=checkbox])').val(value);
+                    // Trường hợp image phải dùng thuộc tính SRC
+                    IMG_SELECTOR.filter('[name='+ key +']').prop("src", value);
                 });
 
                 isSuccess = true;
@@ -371,5 +371,6 @@ function afterCloseOM() {
     modal.on('hidden.bs.modal', function(e) {
     	var form = $(this).find('form');
         (form.find('.errors')).html('');
+        form[0].reset(); //clear form
     });
 }

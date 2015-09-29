@@ -3,7 +3,7 @@
 class Post extends \Eloquent {
 	protected $table = 'posts';
 
-	protected $fillable = ['name', 'description'];
+	protected $fillable = ['title', 'description', 'slug', 'content_vi', 'content_en', 'category_id', 'image', 'status'];
 
 	public static $rules = [
 		'title' => 'required|min:3',
