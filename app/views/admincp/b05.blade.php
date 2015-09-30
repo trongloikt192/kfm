@@ -80,7 +80,7 @@
                     <h4 class="modal-title">Bài viết</h4>
                 </div>
 
-                {{ Form::open(['id'=> 'form_ae_post']) }}
+                {{ Form::open(['id'=> 'form_ae_post','files'=>true]) }}
                 <div class="modal-body">
 
                     {{ Form::errorField() }}
@@ -103,7 +103,7 @@
                             </div>  
                         </div>
                         <div class="col-md-6">
-                            {{ Form::textField('image', 'Hình đại diện', null) }}
+                            {{ Form::fileField('image', 'Hình đại diện') }}
                             <img name="image" src="" class="img-responsive"/>
                         </div>
                     </div>
@@ -189,7 +189,7 @@
                         var IMG_SELECTOR = form_modal.find("img");
 
                         $.each(json, function(key, value) {
-                            INPUT_SELECTOR.filter('[name='+ key +']:not([type=checkbox])').val(value);
+                            INPUT_SELECTOR.filter('[name='+ key +']:not([type=checkbox]):not([type=file])').val(value);
                             // Trường hợp image phải dùng thuộc tính SRC
                             IMG_SELECTOR.filter('[name='+ key +']').prop("src", value);
                         });
@@ -236,17 +236,29 @@
                 // var url = form.attr('action');
                 var url = _url;
                 var method = 'POST';
-                
-                // Custom data ckeditor
                 var data = form.serializeArray();
-                data[5]["value"] = CKEDITOR.instances.content_vi.getData(); // content_vi
-                data[6]["value"] = CKEDITOR.instances.content_en.getData(); // content_en
-                data = data.concat(
-                    _formInsert.find('input[type=checkbox]:not(:checked)').map(
-                        function() {
-                            return {"name": this.name, "value": this.value}
-                        }).get()
-                );
+                // Custom data
+                for(var i=0; i<data.length; i++) {
+                    var name = data[i].name;
+                    if( name == 'content_en' ){
+                        data[i].value = CKEDITOR.instances.content_en.getData(); // content_en
+                    }
+                    
+                    if( name == 'content_vi' ) {
+                        data[i].value = CKEDITOR.instances.content_vi.getData(); // content_vi
+                    }
+                    
+                    // Checkbox post 
+                    if( form.find("#status").is(':checked') == true && name =='status' ) {
+                        data[i].value = "1";
+                    }
+                }
+                
+                if( form.find("#status").is(':checked') == false ) {
+                    data.push({'name':'status', 'value':'0'});
+                }
+                
+                console.log(data); return false;
                 
                 var isSuccess = false;
                 var loading = form.find('.loading');
@@ -336,16 +348,25 @@
                 // var url = form.attr('action');
                 var url = _url;
                 var method = 'PUT';
-                
-                // Custom data ckeditor
                 var data = form.serializeArray();
-                data[5]["value"] = CKEDITOR.instances.content_vi.getData(); // content_vi
-                data[6]["value"] = CKEDITOR.instances.content_en.getData(); // content_en
-
-                // Checkbox post 
-                if( form.find("#status").is(':checkbox') == true ) {
-                    data[7]["value"] = "1";
-                } else {
+                // Custom data
+                for(var i=0; i<data.length; i++) {
+                    var name = data[i].name;
+                    if( name == 'content_en' ){
+                        data[i].value = CKEDITOR.instances.content_en.getData(); // content_en
+                    }
+                    
+                    if( name == 'content_vi' ) {
+                        data[i].value = CKEDITOR.instances.content_vi.getData(); // content_vi
+                    }
+                    
+                    // Checkbox post 
+                    if( form.find("#status").is(':checked') == true && name =='status' ) {
+                        data[i].value = "1";
+                    }
+                }
+                
+                if( form.find("#status").is(':checked') == false ) {
                     data.push({'name':'status', 'value':'0'});
                 }
                 

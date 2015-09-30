@@ -7,7 +7,9 @@ class Post extends \Eloquent {
 
 	public static $rules = [
 		'title' => 'required|min:3',
-		'content_vi' => 'required|min:100'
+		'content_vi' => 'required|min:100',
+		'category_id' => 'required'
+		
 	];
 
 	public static function validate($data){
