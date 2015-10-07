@@ -30,3 +30,10 @@ function cancel_button($text = "Cancel")
 {
     return "<a href=' " . URL::previous() . " ' class='btn btn-default pull-right'>$text</a>";
 }
+
+// Generate the url for given Image
+// Used in user>profile.blade.php
+function postImage_url()
+{
+    return asset('/uploads/posts_img/');
+}

@@ -30,12 +30,13 @@ Route::group(['prefix' => 'admincp'], function()
         Route::resource('b02', 'DashboardController');
         Route::resource('b03', 'UsersController');
         Route::resource('b04', 'CategoriesController');
+        Route::post('b05/uploadImage', ['as' => 'admincp.b05.uploadImage', 'uses' => 'PostsController@uploadImage'] );
+        Route::post('b05/uploadFile', ['as' => 'admincp.b05.uploadFile', 'uses' => 'PostsController@uploadFile'] );
         Route::resource('b05', 'PostsController');
         Route::resource('b06', 'CustomersController');
         Route::resource('b07', 'FaqController');
         Route::resource('b08', 'ContactController');
         Route::resource('b09', 'SettingsController');
-        // Route::resource('b10', 'LinksController');
         // Route::resource('b11', 'RolesController');
     });
 });

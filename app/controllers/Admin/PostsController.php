@@ -1,6 +1,7 @@
 <?php
 namespace Admin;
 
+
 class PostsController extends \BaseController {
 
 	/**
@@ -111,34 +112,7 @@ class PostsController extends \BaseController {
 	        $id = $data['id'];
 	        $post = \Post::findOrFail($id);
 			
-			// 2. XỬ LÝ IMAGE
-			if (\Input::hasFile('image'))
-	        {
-				$image = \Input::file('image');
-				
-	            if($post->image) {
-	                $oldFile = public_path('uploads/posts_img/').$post->image;
-	                \File::delete($oldFile);
-	            }
-	
-	            // $filename = time() .'-'. $image->getClientOriginalName();
-	
-	            $filename = $image->getClientOriginalName();
-	            $extension = File::extension($filename);
-	
-	            $filename = str_replace(' ', '_', $post->title);
-	            $filename = preg_replace( '([^a-zA-Z0-9_])', '', $filename );
-	            $filename = $filename . '_' . time() . '.' . $extension; 
-	
-	            $image->move('uploads/posts_img', $filename);
-	
-	            $post->image = $filename;
-	            $post->save();
-	            
-	            
-	        }
-			
-			// 3. UPDATE
+			// 2. UPDATE
 	        $post->update([
 	        	'title'=>$data['title']
 	        	, 'slug'=>$data['slug']
@@ -170,5 +144,72 @@ class PostsController extends \BaseController {
 		\Post::destroy($id);
 		return 1;
 	}
-
+	
+	
+	public function uploadImage() {
+		try {
+			// 1. UPLOAD FILE
+        	// Directory where we're storing uploaded images
+			// Remember to set correct permissions or it won't work
+			$upload_dir = public_path('uploads/posts_img/');
+			
+			$uploader = new \FileUpload('image');
+			
+			// Handle the upload
+			$result = $uploader->handleUpload($upload_dir);
+			
+			if (!$result) {
+			  exit(\Response::json(array('success' => false, 'msg' => $uploader->getErrorMsg())));  
+			}
+			
+			// 2. REMOVE OLD FILE & UPDATE DATABASE
+			$id = \Input::get('id');
+        	$post = \Post::findOrFail($id);
+			if($post->image) {
+                $oldFile = $upload_dir . $post->image;
+                \File::delete($oldFile);
+            }
+			$post->image = $uploader->getFileName();
+            $post->save();
+			
+			return \Response::json(array('success' => true, 'source' => $uploader->getFileName()));
+			
+		} catch (Exception $ex) {
+			exit(\Response::json(array('success' => false, 'msg' => $ex->getMessage())));  
+		}
+	}
+	
+	
+	public function uploadFile() {
+		try {
+			// 1. UPLOAD FILE
+        	// Directory where we're storing uploaded images
+			// Remember to set correct permissions or it won't work
+			$upload_dir = public_path('uploads/post_files/');
+			
+			$uploader = new \FileUpload('fileAttachs');
+			
+			// Handle the upload
+			$result = $uploader->handleUpload($upload_dir);
+			
+			if (!$result) {
+			  exit(\Response::json(array('success' => false, 'msg' => $uploader->getErrorMsg())));  
+			}
+			
+			// // 2. REMOVE OLD FILE & UPDATE DATABASE
+			// $id = \Input::get('id');
+   //     	$post = \Post::findOrFail($id);
+			// if($post->image) {
+   //             $oldFile = $upload_dir . $post->image;
+   //             \File::delete($oldFile);
+   //         }
+			// $post->image = $uploader->getFileName();
+   //         $post->save();
+			
+			return \Response::json(array('success' => true, 'source' => $uploader->getFileName()));
+			
+		} catch (Exception $ex) {
+			exit(\Response::json(array('success' => false, 'msg' => $ex->getMessage())));  
+		}
+	}
 }
