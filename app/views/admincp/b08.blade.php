@@ -22,7 +22,7 @@
             
             <div class="widget-content pad20f">
 
-                <table class="table" id="datatable">
+                <table class="table table-bordered" id="datatable">
                     <thead>
                         <tr>
                             <th>Họ tên</th>
@@ -42,7 +42,7 @@
                                 <td>{{ $contact->phone_number }}</td>
                                 <td>{{ $contact->company }}</td>
                                 <td>{{ $contact->content }}</td>
-                                <td>{{ $contact->status }}</td>
+                                <td>{{ $contact->status == 1 ? '<span class="label label-success">checked</span>' : '<span class="label label-danger">unchecked</span>' }}</td>
                                 <td class="center">
                                     {{ Form::btnActionEditRecord($contact->id) }}
                                     | 
@@ -85,10 +85,6 @@
 
                 {{ Form::open(['id'=> 'form_e_item']) }}
                 <div class="modal-body">
-                    <p>
-                        Xin quý khách vui lòng nhập vào tên đăng nhập và địa chỉ email để lấy lại mật khẩu.
-                    </p>
-
                     {{ Form::errorField() }}
                     {{ Form::hidden('id') }}
                    	<div class="row">
@@ -134,7 +130,7 @@
 
 
         $(document).ready(function() {
-            installTable( dataTable );
+            installTable( dataTable, {order : [[ 5, "desc" ]]} );
             beforeGetOM();
             xhrGetOM_detail_item( btnEdit_item, "{{ route('admincp.b08.edit') }}", modal_e_item);
             xhrInsert_item( form_a_item, "{{ route('admincp.b08.store') }}" );

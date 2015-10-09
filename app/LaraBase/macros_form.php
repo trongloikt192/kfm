@@ -98,12 +98,12 @@ Form::macro('fileField', function($name, $label)
 Form::macro('checkboxField', function($name, $label)
 {
     return "<div class='form-group " .errorClass($name)."'>
-            <label class='control-label' for='{$name}'>
-            <input type='checkbox' name='{$name}'>
-            {$label}
-            </label>"
-            .errorMessage($name).
-            "</div>";
+            <label class='control-label' for='{$name}'>{$label}</label>
+            <div class='w-switches'>
+            <input name='{$name}' type='checkbox' id='{$name}' value='1'/>
+            <label class='switch green' for='{$name}'><i></i></label>
+            </div>
+            </div>";
 });
 
 // Form::macro('radioboxField_lib', function($name, $options, $value, $label)

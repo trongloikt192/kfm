@@ -98,8 +98,6 @@ class PostsController extends \BaseController {
 	{
 		$data = \Input::all();
 		
-		print_r($data); exit();
-		
 		if(\Request::ajax()) {
 			
 			// 1. CHECK VALIDATE
@@ -151,7 +149,7 @@ class PostsController extends \BaseController {
 			// 1. UPLOAD FILE
         	// Directory where we're storing uploaded images
 			// Remember to set correct permissions or it won't work
-			$upload_dir = public_path('uploads/posts_img/');
+			$upload_dir = public_path('uploads/post_images/');
 			
 			$uploader = new \FileUpload('image');
 			

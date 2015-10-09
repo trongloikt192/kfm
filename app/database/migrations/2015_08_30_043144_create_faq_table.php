@@ -24,7 +24,7 @@ class CreateFaqTable extends Migration {
 			$table->string('competence', 20);
 			$table->string('phone_number', 15);
 			$table->string('email', 50);
-			$table->string('status', 10);
+			$table->boolean('status')->default(false);
 			$table->timestamps();
 		});
 	}

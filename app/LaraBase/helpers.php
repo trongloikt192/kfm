@@ -35,5 +35,5 @@ function cancel_button($text = "Cancel")
 // Used in user>profile.blade.php
 function postImage_url()
 {
-    return asset('/uploads/posts_img/');
+    return asset('/uploads/post_images/');
 }

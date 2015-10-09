@@ -72,7 +72,7 @@ class FileUpload {
              * Xóa khoảng trắng và ký tự đặc biệt của filename
              * ngày 07.10.2015
              */
-            $this->fileName = preg_replace( '([^a-zA-Z0-9_.])', '', $this->fileName );
+            $this->fileName = preg_replace( '([^a-zA-Z0-9_.-])', '_', $this->fileName );
         }
     }
 

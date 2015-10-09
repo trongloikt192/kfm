@@ -119,6 +119,7 @@
     {{-- {{ HTML::script('https://cdnjs.cloudflare.com/ajax/libs/jquery.easytabs/3.2.0/jquery.easytabs.min.js') }} --}}
     {{-- {{ HTML::script('https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js') }} --}}
     {{ HTML::script('https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.2/toastr.min.js') }}
+    {{ HTML::script('https://cdnjs.cloudflare.com/ajax/libs/jquery.serializeJSON/2.6.1/jquery.serializejson.min.js') }}
 
     {{ HTML::script('https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.8/js/jquery.dataTables.min.js') }}
     {{ HTML::script('https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.8/js/dataTables.bootstrap.min.js') }}

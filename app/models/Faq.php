@@ -3,7 +3,7 @@
 class Faq extends \Eloquent {
 	protected $table = 'faq';
 
-	protected $fillable = ['title', 'content', 'status', 'reply_content'];
+	protected $fillable = ['status', 'reply_content'];
 
 	public static $rules = [
 		'full_name' => 'required|min:3'

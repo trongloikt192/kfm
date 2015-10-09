@@ -22,7 +22,7 @@
             
             <div class="widget-content pad20f">
 
-                <table class="table" id="datatable">
+                <table class="table table-bordered" id="datatable">
                     <thead>
                         <tr>
                             <th>Họ và tên</th>
@@ -102,7 +102,7 @@
                     	<div class="col-md-6">
                     		{{ Form::textField('phone_number', 'Số điện thoại', null) }}
 		                    {{ Form::emailField('email', 'Email', null) }}
-                    		{{ Form::textField('status', 'Đăng lên trang chủ?', null) }}
+                    		{{ Form::checkboxField('status', 'Đăng lên trang chủ?') }}
                     	</div>
                     	<div class="col-md-12">
                     		{{ Form::textareaField('content', 'Nội dung câu hỏi', null, '100%x5') }}

@@ -11,7 +11,7 @@ class ContactController extends \BaseController {
 	public function index()
 	{
 		//
-		$contacts = \Contact::all();
+		$contacts = \Contact::orderBy('status', 'asc')->get();
         return \View::make('admincp.b08', compact('contacts'));
 	}
 

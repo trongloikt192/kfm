@@ -95,7 +95,7 @@ class FaqController extends \BaseController {
 			$id = $data['id'];
 	        $faq = \Faq::findOrFail($id);
 	        
-	        $faq->update(['reply_content'=>$data['reply_content']]);
+	        $faq->update(['reply_content'=>$data['reply_content'], 'status' => $data['status']]);
 	        return 1;
 	    }
 	}

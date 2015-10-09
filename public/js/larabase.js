@@ -7,6 +7,7 @@
   	jquery.dataTables.min.js - ver 1.10.8
  	jquery-confirm.js - ver 1.7.5
  	toastr.min.js - ver 2.1.2
+ 	serializejson - ver 2.6.1
  	HTML:
 	 	Table
 	 	Button Edit
@@ -30,15 +31,20 @@
  @param: 
  	_table : Bảng cần cài đặt - example: $('#datatable')
  */
-function installTable( _table ) {
+function installTable( _table, options ) {
+    var defaults = {
+        sPaginationType: "full_numbers",
+        language: {
+            "url" : "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Vietnamese.json"
+        }
+    }
+    
+    /* merge defaults and options, without modifying defaults */
+    var settings = $.extend({}, defaults, options);
+    
     // Data Tables
     if( $.fn.dataTable ) {
-        _table.dataTable({
-            sPaginationType: "full_numbers",
-            "language": {
-                "url" : "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Vietnamese.json"
-            }
-        });
+        _table.dataTable(settings);
     }
 }
 
@@ -76,13 +82,20 @@ function xhrGetOM_detail_item( _btnOM, _url, _modal ) {
                 $(this).prop('disabled', true);
             },
             success: function( json ) {
-                var INPUT_SELECTOR = form_modal.find("input,select,textarea");
+                var INPUT_SELECTOR = form_modal.find("input:not([type=checkbox]),select,textarea");
                 var IMG_SELECTOR = form_modal.find("img");
+                var CKBOX_SELECTOR = form_modal.find('input:checkbox');
                 
                 $.each(json, function(key, value) {
-                    INPUT_SELECTOR.filter('[name='+ key +']:not([type=checkbox])').val(value);
+                    INPUT_SELECTOR.filter('[name='+ key +']').val(value);
+                    
                     // Trường hợp image phải dùng thuộc tính SRC
                     IMG_SELECTOR.filter('[name='+ key +']').prop("src", value);
+                    
+                    /* Checkbox true/false 
+                     * Y/c thuộc tính của field: $table->boolean('status')->default(false);
+                     */
+                    CKBOX_SELECTOR.filter('[name='+ key +']').prop('checked', value);
                 });
 
                 isSuccess = true;
@@ -119,7 +132,9 @@ function xhrInsert_item( _formInsert, _url) {
         // var url = form.attr('action');
         var url = _url;
         var method = 'POST';
-        var data = form.serialize();
+        // var data = form.serializeArray();
+        var data = form.serializeJSON({checkboxUncheckedValue: '0'});
+        
         var isSuccess = false;
         var loading = form.find('.loading');
         var done = form.find('.done');
@@ -209,7 +224,9 @@ function xhrUpdate_item( _formEdit, _url ) {
         // var url = form.attr('action');
         var url = _url;
         var method = 'PUT';
-        var data = form.serialize();
+        // var data = form.serializeArray();
+        var data = form.serializeJSON({checkboxUncheckedValue: '0'});
+        
         var isSuccess = false;
         var loading = form.find('.loading');
         var done = form.find('.done');

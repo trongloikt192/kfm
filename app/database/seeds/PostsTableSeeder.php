@@ -20,7 +20,7 @@ class PostsTableSeeder extends Seeder {
 				'slug' => $faker->slug,
 				'image' => $faker->imageUrl(640, 480),
 				'description' => $faker->paragraph(3),
-				'status' => $faker->numberBetween(0, 1),
+				'status' => false,
 				'user_id' => $faker->numberBetween(1, 10),
 				'category_id' => $faker->numberBetween(1, 10)
 			]);

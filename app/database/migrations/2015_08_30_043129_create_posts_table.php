@@ -21,7 +21,7 @@ class CreatePostsTable extends Migration {
 			$table->string('slug');
 			$table->string('image');
 			$table->text('description');
-			$table->string('status', 50);
+			$table->boolean('status')->default(false);
 			$table->integer('user_id')->unsigned()->index();
 			$table->integer('category_id')->unsigned()->index();
             $table->softDeletes();

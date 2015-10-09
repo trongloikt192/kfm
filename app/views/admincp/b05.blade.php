@@ -90,19 +90,11 @@
                     {{ Form::textareaField('description', 'Mô tả', null, '100%x3') }}
                     {{ Form::textareaField('content_vi', 'Nội dung tiếng Việt', null) }}
                     {{ Form::textareaField('content_en', 'Nội dung tiếng Anh', null) }}
-                    {{-- {{ Form::checkboxField('status', 'Public') }} --}}
                     
                     <div class="row">
                         <div class="col-md-6">
                             {{ Form::selectField('category_id', $categories, null, 'Danh mục') }}
-                            
-                            <div class="form-group">
-                                <label class='control-label' for='status'>Đăng bài</label>
-                                <div class="w-switches">
-                                    <input name="status" type="checkbox" id="status" checked />
-                                    <label class="switch green" for="status"><i></i></label>
-                                </div>
-                            </div>
+                            {{ Form::checkboxField('status', 'Đăng bài') }}
                             
                             <div class="form-group">
                                 <label class='control-label' for='status'>Tài liệu đính kèm</label>
@@ -111,14 +103,11 @@
                                     <i class='fa fa-upload'></i>
                                     Tải tài liệu
                                 </button>
-                                <div id="progressOuterFile" class="progress progress-striped active" style="display:none;">
-                                    <div id="progressBarFile" class="progress-bar progress-bar-success"  role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
-                                    </div>
-                                </div>
                                 <p id="msgBoxFile" class="help-block"></p>
-                                <div id="listFile">
+                                <div id="pic-progress-wrap" class="progress-wrap" style="margin-top:10px;margin-bottom:10px;"></div>
+                                <ul id="listFile">
                                     
-                                </div>
+                                </ul>
                             </div>
                             
                         </div>
@@ -135,7 +124,7 @@
                                     </div>
                                 </div>
                                 <p id="msgBoxImage" class="help-block"></p>
-                                <div id="pic-progress-wrap" class="progress-wrap" style="margin-top:10px;margin-bottom:10px;"></div>
+                                
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -299,8 +288,6 @@
                 if( form.find("#status").is(':checked') == false ) {
                     data.push({'name':'status', 'value':'0'});
                 }
-                
-                console.log(data); return false;
                 
                 var isSuccess = false;
                 var loading = form.find('.loading');
@@ -501,7 +488,8 @@
                 $("#btnSubmit").attr('data-action', '');
                 CKEDITOR.instances.content_vi.setData('');
                 CKEDITOR.instances.content_en.setData('');
-                $("#msgBox").html('');
+                $("#msgBoxImage").html('');
+                $("#msgBoxFile").html('');
             });
         }
 
@@ -590,12 +578,11 @@
             };
             
             var btnUpload = document.getElementById('btnUploadFiles'),
-                wrap = document.getElementById('pic-progress-wrap'),
-                progressBar = document.getElementById('progressBarFile'),
-                progressOuter = document.getElementById('progressOuterFile'),
+                wrap = document.getElementById('msgBoxFile'),
                 msgBox = document.getElementById('msgBoxFile'),
-                listFile = document.getElementById('listFile'),
                 drgbox = document.getElementById('btnUploadFiles');
+                
+            var listFile = $("#listFile");
             
             
             var uploader = new ss.SimpleUpload({
@@ -604,13 +591,13 @@
                 url: _url,
                 name: 'fileAttachs',
                 data: _data,
-                allowedExtensions: ['doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx'],
+                allowedExtensions: ['doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'pdf', 'txt'],
                 hoverClass: 'hover',
                 focusClass: 'focus',
                 maxSize: 5120, // kilobytes
                 multiple: true,
                 multipart: true,
-                maxUploads: 2,
+                maxUploads: 5,
                 queue: false,
                 responseType: 'json',
                 debug: true, // Debug
@@ -621,13 +608,9 @@
                     msgBox.innerHTML = 'Kích thước file ('+(fileSize/1024).toFixed(2)+'MB) vượt quá dung lượng cho phép (5MB)';
                 },
                 onExtError: function() {
-                    msgBox.innerHTML = 'Invalid file type. Please select a DOC, DOCX, XSL, XSLX, PPT, PPTX files.';
+                    msgBox.innerHTML = 'Kiểu tệp tin không phù hợp. Các kiểu được phép DOC, DOCX, XSL, XSLX, PPT, PPTX, PDF.';
                 },
-                startXHR: function() {
-                    progressOuter.style.display = 'block'; // make progress bar visible
-                    this.setProgressBar(progressBar);
-                },
-                onSubmit: function() {
+                onSubmit: function(filename, extension) {
                     var prog = document.createElement('div'),
                        outer = document.createElement('div'),
                        bar = document.createElement('div'),
@@ -651,29 +634,26 @@
                     msgBox.innerHTML = '';
                 },
                 onComplete: function(filename, response) {
-                    progressOuter.style.display = 'none'; // hide progress bar when upload is completed
-            
                     if (!response) {
-                        msgBox.innerHTML = 'Không thể tải hình';
+                        msgBox.innerHTML = 'Không thể tải file';
                         return;
                     }
             
                     if (response.success === true) {
-                        msgBox.innerHTML = '<strong>' + filename + '</strong>' + ' thay đổi thành công.';
-                        listFile.innerHTML = filename + '</br>';
+                        // msgBox.innerHTML = '<strong>' + filename + '</strong>' + ' thay đổi thành công.';
+                        listFile.append('<li>' + filename + '</li>');
                     }
                     else {
                         if (response.msg) {
                             msgBox.innerHTML = response.msg;
                         }
                         else {
-                            msgBox.innerHTML = 'Có lỗi xảy ra trong quá trình tải hình';
+                            msgBox.innerHTML = 'Có lỗi xảy ra trong quá trình tải file';
                         }
                     }
                 },
                 onError: function() {
-                    progressOuter.style.display = 'none';
-                    msgBox.innerHTML = 'Không thể tải hình';
+                    msgBox.innerHTML = 'Không thể tải file';
                 }
             });
         }

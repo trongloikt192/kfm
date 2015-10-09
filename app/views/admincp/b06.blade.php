@@ -22,7 +22,7 @@
             
             <div class="widget-content pad20f">
 
-                <table class="table" id="datatable">
+                <table class="table table-bordered" id="datatable">
                     <thead>
                         <tr>
                             <th>Tên công ty</th>
@@ -82,9 +82,6 @@
 
                 {{ Form::open(['id'=> 'form_a_item']) }}
                 <div class="modal-body">
-                    <p>
-                        Xin quý khách vui lòng nhập vào tên đăng nhập và địa chỉ email để lấy lại mật khẩu.
-                    </p>
 					{{ Form::errorField() }}
                     <div class="row">
                     	<div class="col-md-6">

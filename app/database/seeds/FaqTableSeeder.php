@@ -23,7 +23,7 @@ class FaqTableSeeder extends Seeder {
 				'competence' => $faker->catchPhrase,
 				'phone_number' => $faker->phoneNumber,
 				'email' => $faker->freeEmail,
-				'status' => $faker->numberBetween(0,1)
+				'status' => false
 			]);
 		}
 	}
