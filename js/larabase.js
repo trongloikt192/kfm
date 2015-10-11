@@ -179,7 +179,7 @@ function xhrInsert_item( _formInsert, _url) {
                                 errorsHtml += '<li>' + value[0] + '</li>'; //showing only the first error.
 
                             });
-                            errorsHtml += '</ul></di>';
+                            errorsHtml += '</ul></div>';
 
                             errorField.html( errorsHtml );
                         }
@@ -271,7 +271,7 @@ function xhrUpdate_item( _formEdit, _url ) {
                                 errorsHtml += '<li>' + value[0] + '</li>'; //showing only the first error.
 
                             });
-                            errorsHtml += '</ul></di>';
+                            errorsHtml += '</ul></div>';
 
                             errorField.html( errorsHtml );
                         }

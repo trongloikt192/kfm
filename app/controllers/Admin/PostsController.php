@@ -44,10 +44,16 @@ class PostsController extends \BaseController {
 	        {
 	            return \Response::json($validator->messages(), 500);
 	        }
+
+	        $slug = $data['slug'];
+	        if(empty($slug)) {
+		    	$slug = $data['title'];
+		    }
+		    $slug = genarate_slug( $slug );
 	        
 	        $post = \Post::create([
 	        	'title'=>$data['title']
-	        	, 'slug'=>$data['slug']
+	        	, 'slug'=>$slug
 	        	, 'description'=>$data['description']
 	        	, 'content_vi'=>$data['content_vi']
 	        	, 'content_en'=>$data['content_en']
@@ -106,6 +112,12 @@ class PostsController extends \BaseController {
 	        {
 	            return \Response::json($validator->messages(), 500);
 	        }
+
+	        $slug = $data['slug'];
+	        if(empty($slug)) {
+		    	$slug = $data['title'];
+		    }
+		    $slug = genarate_slug( $slug );
 	        
 	        $id = $data['id'];
 	        $post = \Post::findOrFail($id);
@@ -113,7 +125,7 @@ class PostsController extends \BaseController {
 			// 2. UPDATE
 	        $post->update([
 	        	'title'=>$data['title']
-	        	, 'slug'=>$data['slug']
+	        	, 'slug'=>$slug
 	        	, 'description'=>$data['description']
 	        	, 'content_vi'=>$data['content_vi']
 	        	, 'content_en'=>$data['content_en']
@@ -149,7 +161,7 @@ class PostsController extends \BaseController {
 			// 1. UPLOAD FILE
         	// Directory where we're storing uploaded images
 			// Remember to set correct permissions or it won't work
-			$upload_dir = public_path('uploads/post_images/');
+			$upload_dir = public_path('uploads/images/post/');
 			
 			$uploader = new \FileUpload('image');
 			
@@ -183,7 +195,7 @@ class PostsController extends \BaseController {
 			// 1. UPLOAD FILE
         	// Directory where we're storing uploaded images
 			// Remember to set correct permissions or it won't work
-			$upload_dir = public_path('uploads/post_files/');
+			$upload_dir = public_path('uploads/files/post/');
 			
 			$uploader = new \FileUpload('fileAttachs');
 			

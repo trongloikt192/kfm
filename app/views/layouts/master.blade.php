@@ -9,8 +9,14 @@
 
     <meta name="description" content="Website kiem toan & tu van">
     <meta name="author" content="KFM!">
+    <style type="text/css">
+        /*body {
+            background-image: url("{{ url('img/bodybg.jpg') }}");
+        }*/
+    </style>
+    
 
-    {{ HTML::style('https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.5/simplex/bootstrap.min.css') }}
+    {{ HTML::style('css/simplex_cus.min.css') }}
     {{ HTML::style('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css') }}
     {{ HTML::style('css/style.css') }}
     
@@ -20,16 +26,8 @@
     <div class="container" style="">
         <div class="row">
             <div class="col-md-12">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div style="height:170px;">
-                            <div class="jumbotron">
-                                <h2>KFM Logo <small>+ Sologan</small></h2>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
+                @include('layouts/header')
                 @include('layouts/navigation')
                 @include('layouts/notifications')
                 @yield('ajax-notifications')

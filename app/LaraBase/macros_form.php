@@ -5,6 +5,10 @@ Form::macro('errorField', function()
     return "<div class='errors'></div>";
 });
 
+Form::macro('successField', function() 
+{
+    return "<div class='success'></div>";
+});
 
 Form::macro('textField', function($name, $label, $placeholder = '', $value = null)
 {

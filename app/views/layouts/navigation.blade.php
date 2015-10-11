@@ -6,7 +6,7 @@
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
              <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
         </button> 
-        <a class="navbar-brand" href="#">KFM</a>
+        <a class="navbar-brand" href="{{ url('f01') }}">KFM</a>
     </div>
     
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -15,18 +15,41 @@
                 <a href="#">Giới thiệu</a>
             </li>
             <li>
-                <a href="#">Sản phẩm & Dịch Vụ</a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sản phẩm & Dịch Vụ <strong class="caret"></strong></a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="#">Dịch vụ kiểm toán Báo cáo tài chính</a>
+                    </li>
+                    <li role="separator" class="divider"></li>
+                    <li>
+                        <a href="#">Dịch vụ Thẩm định kiểm toán đầu tư và xây dựng cơ bản</a>
+                    </li>
+                    <li role="separator" class="divider"></li>
+                    <li>
+                        <a href="#">Dịch vụ Quản lý dự án</a>
+                    </li>
+                    <li role="separator" class="divider"></li>
+                    <li>
+                        <a href="#">Dịch vụ tư vấn</a>
+                    </li>
+                    <li role="separator" class="divider"></li>
+                    <li>
+                        <a href="#">Dịch vụ kế toán</a>
+                    </li>
+                </ul>
             </li>
             
             <li class="dropdown">
-                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hỗ Trợ Khách Hàng <strong class="caret"></strong></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hỗ Trợ Khách Hàng <strong class="caret"></strong></a>
                 <ul class="dropdown-menu">
                     <li>
                         <a href="#">Các câu hỏi thường gặp</a>
                     </li>
+                    <li role="separator" class="divider"></li>
                     <li>
                         <a href="#">Đặt câu hỏi</a>
                     </li>
+                    <li role="separator" class="divider"></li>
                     <li>
                         <a href="#">Văn phòng và chi nhánh</a>
                     </li>

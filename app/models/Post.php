@@ -23,7 +23,7 @@ class Post extends \Eloquent {
 
 	public function tags()
     {
-        return $this->belongsToMany('Tag')->withTimestamps();
+        return $this->belongsToMany('Tag');
     }
 
     public function category()

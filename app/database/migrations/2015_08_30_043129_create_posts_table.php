@@ -27,6 +27,9 @@ class CreatePostsTable extends Migration {
             $table->softDeletes();
 			$table->timestamps();
 		});
+
+		// fixed: FullText cho Chức năng search
+		DB::statement('ALTER TABLE posts ADD FULLTEXT search(title, content_vi)');
 	}
 
 	/**

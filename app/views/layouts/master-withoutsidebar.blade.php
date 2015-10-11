@@ -20,17 +20,8 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div style="height:170px;"></div>
-                    </div>
-                </div>
-                <!-- <header>
-                    <div id="masthead">
-                        <h1 class="site-title"><span><a href="index.php">HuGo Bloger</a></span></h1>
-                        <h2 class="site-description">Where I can share</h2>
-                    </div>
-                </header> -->
+                
+                @include('layouts/header')
                 @include('layouts/navigation')
                 @include('layouts/notifications')
                 @yield('ajax-notifications')

@@ -15,6 +15,7 @@
 @stop
 
 @section('content')
+
     {{-- height: 258px --}}
     <div class="carousel slide" id="carousel-304998">
         <ol class="carousel-indicators">
@@ -27,35 +28,35 @@
         </ol>
         <div class="carousel-inner">
             <div class="item active">
-                <img alt="Carousel Bootstrap First" src="http://lorempixel.com/output/sports-q-c-1600-500-1.jpg" />
+                <img alt="" src="{{ image_url('setting', $layout_slides->slide_1) }}" />
                 <div class="carousel-caption">
                     <h4>
-                        First Thumbnail label
+
                     </h4>
                     <p>
-                        Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+
                     </p>
                 </div>
             </div>
             <div class="item">
-                <img alt="Carousel Bootstrap Second" src="http://lorempixel.com/output/sports-q-c-1600-500-2.jpg" />
+                <img alt="Slide 2" src="{{ image_url('setting', $layout_slides->slide_2) }}" />
                 <div class="carousel-caption">
                     <h4>
-                        Second Thumbnail label
+                        
                     </h4>
                     <p>
-                        Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+                        
                     </p>
                 </div>
             </div>
             <div class="item">
-                <img alt="Carousel Bootstrap Third" src="http://lorempixel.com/output/sports-q-c-1600-500-3.jpg" />
+                <img alt="Side 3" src="{{ image_url('setting', $layout_slides->slide_3) }}" />
                 <div class="carousel-caption">
                     <h4>
-                        Third Thumbnail label
+                    
                     </h4>
                     <p>
-                        Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+
                     </p>
                 </div>
             </div>
@@ -64,65 +65,36 @@
     
 	<div class="page-header">
         <h1>
-            Tin Tức <small>những tin tức mới nhất</small>
+            Tin Tức <small>những tin tức & hoạt động mới nhất</small>
         </h1>
     </div>
     <div class="row">
-        <div class="col-md-4">
-            <div class="thumbnail">
-                <img alt="Bootstrap Thumbnail First" src="{{ $posts[0]->image }}" />
-                <div class="caption">
-                    <h3>
-                        {{ $posts[0]->title }}
-                    </h3>
-                    <p>
-                        {{ $posts[0]->description }}
-                    </p>
-                    <p>
-                        <a class="btn btn-sm btn-primary" href="#">Xem</a>
-                    </p>
+        @for ($i = 0; $i < ( $news_len > 3 ? 3 : $news_len ); $i++)
+            <div class="col-md-4">
+                <div class="thumbnail">
+                    <img alt="{{$news[$i]->title}}" src="{{ image_url('post', $news[$i]->image) }}" />
+                    <div class="caption">
+                        <h3>
+                            {{ link_to('/f02/' . $news[$i]->slug, $news[$i]->title) }}
+                        </h3>
+                        <p>
+                            {{ $news[$i]->description }}
+                        </p>
+                        <p>
+                            <a class="btn btn-sm btn-primary" href="{{ url('/f02/' . $news[$i]->slug) }}">Xem tin tức</a>
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-4">
-            <div class="thumbnail">
-                <img alt="Bootstrap Thumbnail Second" src="{{ $posts[1]->image }}" />
-                <div class="caption">
-                    <h3>
-                        {{ $posts[1]->title }}
-                    </h3>
-                    <p>
-                        {{ $posts[1]->description }}
-                    </p>
-                    <p>
-                        <a class="btn btn-sm btn-primary" href="#">Xem</a>
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="thumbnail">
-                <img alt="Bootstrap Thumbnail Third" src="{{ $posts[2]->image }}" />
-                <div class="caption">
-                    <h3>
-                        {{ $posts[2]->title }}
-                    </h3>
-                    <p>
-                        {{ $posts[2]->description }}
-                    </p>
-                    <p>
-                        <a class="btn btn-sm btn-primary" href="#">Xem</a>
-                    </p>
-                </div>
-            </div>
-        </div>
+        @endfor
+
 
         <div class="col-md-12">
-            @for ($i = 3; $i < count($posts); $i++)
+            @for ($i = 3; $i < $news_len; $i++)
                 <div id="div-login-msg">
                     <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
                     <span id="text-login-msg">
-                        <a href="">{{ $posts[$i]->title }}</a> - {{ $posts[$i]->created_at->format('d/m/Y - g:ia') }}
+                        {{ link_to('/f02/' . $news[$i]->slug, $news[$i]->title) }} - {{ $news[$i]->created_at->format('d/m/Y - g:ia') }}
                     </span>
                 </div>
             @endfor
@@ -132,102 +104,38 @@
 
     <div class="page-header">
         <h1>
-            Sản phẩm! <small>Interface Builder for Bootstrap</small>
+            Sản Phẩm <small>những sản phẩm & dịch vụ mới nhất</small>
         </h1>
     </div>
     <div class="row">
-        <div class="col-md-4">
-            <div class="thumbnail">
-                <img alt="Bootstrap Thumbnail First" src="http://lorempixel.com/output/people-q-c-600-200-1.jpg" />
-                <div class="caption">
-                    <h3>
-                        Thumbnail label
-                    </h3>
-                    <p>
-                        Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
-                    </p>
-                    <p>
-                        <a class="btn btn-sm btn-primary" href="#">Action</a> <a class="btn" href="#">Action</a>
-                    </p>
+        @for ($i = 0; $i < ( $products_len > 3 ? 3 : $products_len ); $i++)
+            <div class="col-md-4">
+                <div class="thumbnail">
+                    {{-- <img alt="{{$products[$i]->title}}" src="{{ image_url('post', $products[$i]->image) }}" /> --}}
+                    <div class="caption">
+                        <h3>
+                            {{ link_to('/f02/' . $products[$i]->slug, $products[$i]->title) }}
+                        </h3>
+                        <p>
+                            {{ $products[$i]->description }}
+                        </p>
+                        <p>
+                            <a class="btn btn-sm btn-primary" href="{{ url('/f02/' . $products[$i]->slug) }}">Xem</a>
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-4">
-            <div class="thumbnail">
-                <img alt="Bootstrap Thumbnail Second" src="http://lorempixel.com/output/city-q-c-600-200-1.jpg" />
-                <div class="caption">
-                    <h3>
-                        Thumbnail label
-                    </h3>
-                    <p>
-                        Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
-                    </p>
-                    <p>
-                        <a class="btn btn-sm btn-primary" href="#">Action</a> <a class="btn" href="#">Action</a>
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="thumbnail">
-                <img alt="Bootstrap Thumbnail Third" src="http://lorempixel.com/output/sports-q-c-600-200-1.jpg" />
-                <div class="caption">
-                    <h3>
-                        Thumbnail label
-                    </h3>
-                    <p>
-                        Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
-                    </p>
-                    <p>
-                        <a class="btn btn-sm btn-primary" href="#">Xem</a> <a class="btn" href="#">Action</a>
-                    </p>
-                </div>
-            </div>
-        </div>
+        @endfor
 
         <div class="col-md-12">
-            <div id="div-login-msg">
-                <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
-                <span id="text-login-msg">
-                    <a href="">Type your username and password.</a> - 27/07/2015 - 10:52 
-                </span>
-            </div>
-            <div id="div-login-msg">
-                <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
-                <span id="text-login-msg">
-                    <a href="">Type your username and password.</a> - 27/07/2015 - 10:52 
-                </span>
-            </div>
-            <div id="div-login-msg">
-                <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
-                <span id="text-login-msg">
-                    <a href="">Type your username and password.</a> - 27/07/2015 - 10:52 
-                </span>
-            </div>
-            <div id="div-login-msg">
-                <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
-                <span id="text-login-msg">
-                    <a href="">Type your username and password.</a> - 27/07/2015 - 10:52 
-                </span>
-            </div>
-            <div id="div-login-msg">
-                <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
-                <span id="text-login-msg">
-                    <a href="">Type your username and password.</a> - 27/07/2015 - 10:52 
-                </span>
-            </div>
-            <div id="div-login-msg">
-                <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
-                <span id="text-login-msg">
-                    <a href="">Type your username and password.</a> - 27/07/2015 - 10:52 
-                </span>
-            </div>
-            <div id="div-login-msg">
-                <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
-                <span id="text-login-msg">
-                    <a href="">Type your username and password.</a> - 27/07/2015 - 10:52 
-                </span>
-            </div>
+            @for ($i = 3; $i < $products_len; $i++)
+                <div id="div-login-msg">
+                    <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
+                    <span id="text-login-msg">
+                        {{ link_to('/f02/' . $products[$i]->slug, $products[$i]->title) }} - {{ $products[$i]->created_at->format('d/m/Y - g:ia') }}
+                    </span>
+                </div>
+            @endfor
         </div>
     </div>  
 @stop

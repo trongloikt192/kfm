@@ -2,6 +2,19 @@
 
 class PagesController extends \BaseController {
     
+    public function show($slug)
+    {
+        $page = Page::where('slug', $slug)->get();
+
+        $page = $page[0];
+
+        return View::make('f07', compact('page'));
+    }
+
+
+
+
+
     public function saveFeedback()
     {
         $validator = Feedback::validate($data = Input::all());

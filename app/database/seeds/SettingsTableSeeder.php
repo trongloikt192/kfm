@@ -17,8 +17,8 @@ class SettingsTableSeeder extends Seeder {
 				'company' => $faker->company,
 				'logo' => $faker->imageUrl(640, 480),
 				'sologan' => $faker->sentence(10),
-				'silde_images' => '',
-				'map_position' => '{latitude: "'. $faker->latitude .'", longitude: "'. $faker->longitude .'"}',
+				'silde_images' => '{"slide_1":"db_kfm.png","slide_2":"-73.998284","slide_3":"-73.998284"}',
+				'map_position' => '{"latitude": "'. $faker->latitude .'", "longitude": "'. $faker->longitude .'"}',
 				'email' => $faker->freeEmail,
 				'address' => $faker->address,
 				'phone_number' => $faker->phoneNumber

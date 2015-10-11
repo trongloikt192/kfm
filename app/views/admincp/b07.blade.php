@@ -140,7 +140,7 @@
 
 
         $(document).ready(function() {
-            installTable( dataTable );
+            installTable( dataTable, {order : [[ 6, "asc" ]]} );
             beforeGetOM();
             afterCloseOM();
             xhrGetOM_detail_item( btnEdit_item, "{{ route('admincp.b07.edit') }}", modal_e_item);

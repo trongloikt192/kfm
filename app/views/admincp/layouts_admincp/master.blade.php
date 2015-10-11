@@ -128,7 +128,7 @@
     {{ HTML::script('js/larabase.js') }}
     
     <!-- Google Map API -->
-    {{ HTML::script('http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAgrj58PbXr2YriiRDqbnL1RSqrCjdkglBijPNIIYrqkVvD1R4QxRl47Yh2D_0C1l5KXQJGrbkSDvXFA') }}
+    {{ HTML::script('https://maps.googleapis.com/maps/api/js?key=AIzaSyBsoB76dWMCEhD82oMcmeAM93xtR8OlmJE') }}
 
 
     <script type="text/javascript">

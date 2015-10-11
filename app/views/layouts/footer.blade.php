@@ -1,6 +1,6 @@
 <div class="row" style="padding: 10px;">
 	<div class="col-md-9">
-		<p>Khách hàng</p>
+		<p><strong>Khách hàng</strong></p>
 		<!-- Jssor Slider Begin -->
 	    <!-- To move inline styles to css file/block, please specify a class name for each element. --> 
 	    <div id="slider1_container" style="position: relative; top: 0px; left: 0px; width: 803px; height: 100px; overflow: hidden;">
@@ -10,36 +10,17 @@
 	            <div style="filter: alpha(opacity=70); opacity:0.7; position: absolute; display: block;
 	                background-color: #000; top: 0px; left: 0px;width: 100%;height:100%;">
 	            </div>
-	            <div style="position: absolute; display: block; background: url(img/loading.gif) no-repeat center center;
+	            <div style="position: absolute; display: block; background: url('img/loading.gif') no-repeat center center;
 	                top: 0px; left: 0px;width: 100%;height:100%;">
 	            </div>
 	        </div>
 
 	        <!-- Slides Container -->
 	        <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 803px; height: 100px; overflow: hidden;">
-	            <div><img u="image" src="img/ancient-lady/005.jpg" /></div>
-	            <div><img u="image" src="img/ancient-lady/006.jpg" /></div>
-	            <div><img u="image" src="img/ancient-lady/011.jpg" /></div>
-	            <div><img u="image" src="img/ancient-lady/013.jpg" /></div>
-	            <div><img u="image" src="img/ancient-lady/014.jpg" /></div>
-	            <div><img u="image" src="img/ancient-lady/019.jpg" /></div>
-	            <div><img u="image" src="img/ancient-lady/020.jpg" /></div>
-	            <div><img u="image" src="img/ancient-lady/021.jpg" /></div>
-	            <div><img u="image" src="img/ancient-lady/022.jpg" /></div>
-	            <div><img u="image" src="img/ancient-lady/024.jpg" /></div>
-	            <div><img u="image" src="img/ancient-lady/025.jpg" /></div>
-	            <div><img u="image" src="img/ancient-lady/027.jpg" /></div>
-	            <div><img u="image" src="img/ancient-lady/029.jpg" /></div>
-	            <div><img u="image" src="img/ancient-lady/030.jpg" /></div>
-	            <div><img u="image" src="img/ancient-lady/031.jpg" /></div>
-	            <div><img u="image" src="img/ancient-lady/032.jpg" /></div>
-	            <div><img u="image" src="img/ancient-lady/034.jpg" /></div>
-	            <div><img u="image" src="img/ancient-lady/038.jpg" /></div>
-	            <div><img u="image" src="img/ancient-lady/039.jpg" /></div>
-	            <div><img u="image" src="img/ancient-lady/043.jpg" /></div>
-	            <div><img u="image" src="img/ancient-lady/044.jpg" /></div>
-	            <div><img u="image" src="img/ancient-lady/047.jpg" /></div>
-	            <div><img u="image" src="img/ancient-lady/050.jpg" /></div>
+
+	        	@foreach ($logo_customers as $customer)
+	        		<div><img u="image" src="{{ image_url('customer', $customer->logo) }}" /></div>
+				@endforeach
 	        </div>
 	        
 	        <!--#region Bullet Navigator Skin Begin -->
@@ -124,11 +105,11 @@
 
 	<div class="col-md-3">
 		<div>
-			Trang chủ | Giới thiệu | Liên hệ
+			{{ link_to('f01', 'Trang chủ') }} | {{ link_to('f05', 'Giới thiệu') }} | {{ link_to('f05', 'Liên hệ') }}
 		</div>
 		<address>
-			 <strong>Twitter, Inc.</strong><br /> 795 Folsom Ave, Suite 600<br /> San Francisco, CA 94107<br /> <abbr title="Phone">P:</abbr> (123) 456-7890
+			 <strong>Kfm, Inc.</strong><br /> 795 Folsom Ave, Suite 600<br /> San Francisco, CA 94107<br /> <abbr title="Phone">P:</abbr> (123) 456-7890
 		</address>
-		Copyright © 2013 KMF
+		Copyright © 2015 KMF
 	</div>
 </div>

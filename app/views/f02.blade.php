@@ -1,7 +1,7 @@
 @extends('...layouts.master')
 
 @section('header-title')
-    Chi tiết bài viết
+    {{ $post->title }}
 @stop
 
 @section('content-header')
@@ -12,28 +12,14 @@
 @section('content')
 	<div class="row">
 		<div class="col-md-12">
-
+		
 			<div class="panel panel-default">
 				<div class="panel-body">
-					<h2>Trang Chi tiết bài viết</h2>
+					<h2>{{ $post->title }}</h2>
 					<p class="text-muted">
-				        03:49:02 PM | 28/07/2015
+				        {{ $post->created_at->format('G:i A | d/m/Y') }}
 				    </p>
-
-					<p>
-					Ngày 25/7, tại Thành phố Hồ Chí Minh, Bộ Tài chính tổ chức lễ kỷ niệm 15 năm hoạt động của Sở giao dịch chứng khoán Thành phố Hồ Chí Minh (Sở GDCK TPHCM), khai sinh cho sự hoạt động của thị trường chứng khoán Việt Nam. Thủ tướng Chính phủ Nguyễn Tấn Dũng dự và chỉ đạo Hội nghị.
-
-					<br/>
-					Ngày 25/7, tại Thành phố Hồ Chí Minh, Bộ Tài chính tổ chức lễ kỷ niệm 15 năm hoạt động của Sở giao dịch chứng khoán Thành phố Hồ Chí Minh (Sở GDCK TPHCM), khai sinh cho sự hoạt động của thị trường chứng khoán Việt Nam. Thủ tướng Chính phủ Nguyễn Tấn Dũng dự và chỉ đạo Hội nghị.
-					
-					<br/>
-		 			Ngày 25/7, tại Thành phố Hồ Chí Minh, Bộ Tài chính tổ chức lễ kỷ niệm 15 năm hoạt động của Sở giao dịch chứng khoán Thành phố Hồ Chí Minh (Sở GDCK TPHCM), khai sinh cho sự hoạt động của thị trường chứng khoán Việt Nam. Thủ tướng Chính phủ Nguyễn Tấn Dũng dự và chỉ đạo Hội nghị.
-
-		 			<br/>
-		 			Ngày 25/7, tại Thành phố Hồ Chí Minh, Bộ Tài chính tổ chức lễ kỷ niệm 15 năm hoạt động của Sở giao dịch chứng khoán Thành phố Hồ Chí Minh (Sở GDCK TPHCM), khai sinh cho sự hoạt động của thị trường chứng khoán Việt Nam. Thủ tướng Chính phủ Nguyễn Tấn Dũng dự và chỉ đạo Hội nghị.
-		 			<br/>
-
-		 			</p>
+				    {{ $post->content_vi }}
 				</div>
 
 				<div class="panel-footer">
@@ -42,24 +28,14 @@
 					</h3>
 
 					<div>
+					@foreach ($ref_posts as $post) 
 						<div id="div-login-msg">
 			                <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
 			                <span id="text-login-msg">
-			                    <a href="">Type your username and password.</a> - 27/07/2015 - 10:52 
+			                    {{ link_to('f02/' . $post->id, $post->title) }} - {{ $post->created_at->format('d/m/Y | G:i A') }}
 			                </span>
 			            </div>
-			            <div id="div-login-msg">
-			                <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
-			                <span id="text-login-msg">
-			                    <a href="">Type your username and password.</a> - 27/07/2015 - 10:52 
-			                </span>
-			            </div>
-			            <div id="div-login-msg">
-			                <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
-			                <span id="text-login-msg">
-			                    <a href="">Type your username and password.</a> - 27/07/2015 - 10:52 
-			                </span>
-			            </div>
+					@endforeach
 					</div>
 				</div>
 			</div>

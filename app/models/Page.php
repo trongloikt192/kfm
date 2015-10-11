@@ -3,10 +3,10 @@
 class Page extends \Eloquent {
 	protected $table = 'pages';
 	
-	protected $fillable = ['name'];
+	protected $fillable = ['title', 'slug', 'content'];
 
 	public static $rules = [
-		'name' => 'required'
+		'title' => 'required'
 	];
 
 	public static function validate($data){
