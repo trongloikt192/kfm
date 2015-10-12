@@ -34,18 +34,7 @@ class FaqController extends \BaseController {
 	 */
 	public function store()
 	{
-		$data = \Input::all();
-
-		if(\Request::ajax()) {
-	        $validator = \Validator::make($data, \Faq::$rules);
-	        if ($validator->fails())
-	        {
-	            return \Response::json($validator->messages(), 500);
-	        }
-	        $faq = \Faq::create(['name'=>$data['name'], 'link'=>$data['link'], 'description'=>$data['description']]);
-	        
-	        return 1;
-	    }
+		
 	}
 
 

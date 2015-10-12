@@ -17,6 +17,7 @@ class CreateCustomersTable extends Migration {
 			$table->increments('id');
 			$table->string('name', 50);
 			$table->string('company', 50);
+			$table->string('business_scope', 50);
             $table->string('delegate');
             $table->string('logo', 50);
             $table->string('domain', 50);

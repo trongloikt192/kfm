@@ -6,7 +6,7 @@ class BaseController extends Controller {
 
        	$logo_customers = Customer::select(['logo'])->get();
 
-       	$top5posts = Post::select(['id', 'title', 'description', 'image'])
+       	$top5posts = Post::select(['id', 'title', 'slug', 'description', 'image'])
        				->orderBy('updated_at', 'desc')
        				->limit(3)
        				->get();

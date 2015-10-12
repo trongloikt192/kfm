@@ -63,7 +63,6 @@ function xhrGetOM_detail_item( _btnOM, _url, _modal ) {
         var form_modal = _modal.find('form');
         var id = $(this).attr('data-id');
 
-        // var url = "{{ route('admincp.b10.edit') }}";
         var url = _url;
         var method = 'GET';
         var data = {'id' : id};

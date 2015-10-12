@@ -50,5 +50,11 @@ class PagesController extends \BaseController {
     {
         return View::make('pages.privacy');
     }
+    
+    
+    public function pageBuilding()
+    {
+        return View::make('errors.building');
+    }
 
 }

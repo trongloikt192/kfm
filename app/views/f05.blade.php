@@ -125,7 +125,7 @@
                         done.hide();
                         btnSubmit.prop('disabled', true);
                         errorField.html('');
-                        successHtml.html('');
+                        successField.html('');
                     },
                     success: function( json ) {
 

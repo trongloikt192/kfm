@@ -50,7 +50,7 @@ class CustomersController extends \BaseController {
 	        	, 'email'=>$data['email']
 	        	, 'phone_number'=>$data['phone_number']
 	        	, 'domain'=>$data['domain']
-	        	, 'logo'=>$data['logo']
+	        	// , 'logo'=>$data['logo']
 	        ]);
 	        
 	        return 1;
@@ -112,7 +112,7 @@ class CustomersController extends \BaseController {
 	        	, 'email'=>$data['email']
 	        	, 'phone_number'=>$data['phone_number']
 	        	, 'domain'=>$data['domain']
-	        	, 'logo'=>$data['logo']
+	        	// , 'logo'=>$data['logo']
 	        ]);
 	        return 1;
 	    }
@@ -131,5 +131,38 @@ class CustomersController extends \BaseController {
 		\Customer::destroy($id);
 		return 1;
 	}
-
+	
+	
+	public function uploadImage() {
+		try {
+			// 1. UPLOAD FILE
+        	// Directory where we're storing uploaded images
+			// Remember to set correct permissions or it won't work
+			$upload_dir = public_path('uploads/images/customer/');
+			
+			$uploader = new \FileUpload('image');
+			
+			// Handle the upload
+			$result = $uploader->handleUpload($upload_dir);
+			
+			if (!$result) {
+			  exit(\Response::json(array('success' => false, 'msg' => $uploader->getErrorMsg())));  
+			}
+			
+			// 2. REMOVE OLD FILE & UPDATE DATABASE
+			$id = \Input::get('id');
+        	$customer = \Customer::findOrFail($id);
+			if($customer->logo) {
+                $oldFile = $upload_dir . $customer->logo;
+                \File::delete($oldFile);
+            }
+			$customer->logo = $uploader->getFileName();
+            $customer->save();
+			
+			return \Response::json(array('success' => true, 'source' => $uploader->getFileName()));
+			
+		} catch (Exception $ex) {
+			exit(\Response::json(array('success' => false, 'msg' => $ex->getMessage())));  
+		}
+	}
 }

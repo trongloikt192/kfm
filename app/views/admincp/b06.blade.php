@@ -88,13 +88,14 @@
                     		{{ Form::textField('name', 'Tên công ty', null) }}
 		                    {{ Form::textField('business_scope', 'Lĩnh vực', null) }}
 		                    {{ Form::textField('delegate', 'Người đại diện', null) }}
-		                    {{ Form::textareaField('address', 'Địa chỉ', null, '100%x3') }}
+		                    
 		                    {{ Form::emailField('email', 'Email', null) }}
                     	</div>
                     	<div class="col-md-6">
                     		{{ Form::textField('phone_number', 'Số điện thoại', null) }}
                     		{{ Form::textField('domain', 'Website', null) }}
-                    		{{ Form::textField('logo', 'Hình logo', null) }}
+                    		{{ Form::textareaField('address', 'Địa chỉ', null, '100%x3') }}
+                    		
                     	</div>
                     </div>
                 </div>
@@ -135,9 +136,20 @@
                     	<div class="col-md-6">
                     		{{ Form::textField('phone_number', 'Số điện thoại', null) }}
                     		{{ Form::textField('domain', 'Website', null) }}
-                    		{{ Form::textField('logo', 'Hình logo', null) }}
-                    		<img name="logo" src="" class="img-responsive"/>
-                    		
+                    		<div class="form-group">
+                                <label class='control-label' for='status'>Hình logo</label>
+                                </br>
+                                <button id="btnUploadImage" type="button" class="btn btn-blue" data-id="">
+                                    <i class='fa fa-upload'></i>
+                                    Tải hình
+                                </button>
+                                <div id="progressOuterImage" class="progress progress-striped active" style="display:none;">
+                                    <div id="progressBarImage" class="progress-bar progress-bar-success"  role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                                    </div>
+                                </div>
+                                <p id="msgBoxImage" class="help-block"></p>
+                                <img id="picBox" name="logo" src="" class="img-responsive img-thumbnail"/>
+                            </div>
                     	</div>
                     </div>
                 </div>
@@ -155,6 +167,8 @@
 
 
 @section('scripts')
+    {{ HTML::script('plugins/Simple-Ajax-Uploader/SimpleAjaxUploader.min.js') }}
+    
     <script type="text/javascript">
 
         var dataTable = $("#datatable");
@@ -164,7 +178,145 @@
         var btnDel_item = $('.btnDel_item');
         var modal_a_item = $('#modal_a_item');
         var modal_e_item = $('#modal_e_item');
-
+        var image_dir = '{{ image_url("customer") }}';
+        
+        // @Override
+        function xhrGetOM_detail_item( _btnOM, _url, _modal ) {
+            _btnOM.click(function(e) {
+                e.preventDefault();
+        
+                var form_modal = _modal.find('form');
+                var id = $(this).attr('data-id');
+        
+                var url = _url;
+                var method = 'GET';
+                var data = {'id' : id};
+                var isSuccess = false;
+                var loading = $(this).find('.loading');
+                var done = $(this).find('.done');
+        
+                $.ajax({
+                    url : url,
+                    type: method,
+                    data: data,
+                    dataType: 'json',
+                    beforeSend: function() {
+                        loading.fadeIn();
+                        done.hide();
+                        $(this).prop('disabled', true);
+                    },
+                    success: function( json ) {
+                        var INPUT_SELECTOR = form_modal.find("input:not([type=checkbox]),select,textarea");
+                        var IMG_SELECTOR = form_modal.find("img");
+                        var CKBOX_SELECTOR = form_modal.find('input:checkbox');
+                        
+                        $.each(json, function(key, value) {
+                            INPUT_SELECTOR.filter('[name='+ key +']').val(value);
+                            
+                            // Trường hợp image phải dùng thuộc tính SRC
+                            IMG_SELECTOR.filter('[name='+ key +']').prop("src", image_dir +'/'+  value);
+                            
+                            /* Checkbox true/false 
+                             * Y/c thuộc tính của field: $table->boolean('status')->default(false);
+                             */
+                            CKBOX_SELECTOR.filter('[name='+ key +']').prop('checked', value);
+                        });
+        
+                        isSuccess = true;
+                    },
+                    complete: function() {
+                        loading.hide();
+                        done.show();
+                        $(this).prop('disabled', false);
+        
+                        if(isSuccess) {
+                            _modal.modal("show");
+                        } else {
+                            toastr.error( "Error" , "Notifications" );
+                        }
+                    }
+                }); 
+            });
+        }
+    
+        function xhrUploadImage() {
+            
+            var _token = '{{ csrf_token() }}';
+            var _url = '{{ route("admincp.b06.uploadImage") }}';
+            var _data = {
+                '_token': _token, 
+                'id': 0
+            };
+            
+            var btnUpload = document.getElementById('btnUploadImage'),
+                progressBar = document.getElementById('progressBarImage'),
+                progressOuter = document.getElementById('progressOuterImage'),
+                msgBox = document.getElementById('msgBoxImage'),
+                picBox = document.getElementById('picBox'),
+                drgbox = document.getElementById('btnUploadImage');
+            
+            
+            
+            var uploader = new ss.SimpleUpload({
+                dropzone: drgbox,
+                button: btnUpload,
+                url: _url,
+                name: 'image',
+                data: _data,
+                allowedExtensions: ['jpg', 'jpeg', 'png', 'gif'],
+                hoverClass: 'hover',
+                focusClass: 'focus',
+                maxSize: 1024, // kilobytes
+                responseType: 'json',
+                debug: true, // Debug
+                onChange: function() {
+                    _data.id = form_e_item.find('input[name=id]').val();
+                },
+                onSizeError: function( filename, fileSize ) {
+                    msgBox.innerHTML = 'Kích thước file ('+(fileSize/1024).toFixed(2)+'MB) vượt quá dung lượng cho phép (1MB)';
+                },
+                onExtError: function() {
+                    msgBox.innerHTML = 'Invalid file type. Please select a PNG, JPG, GIF image.';
+                },
+                startXHR: function() {
+                    progressOuter.style.display = 'block'; // make progress bar visible
+                    this.setProgressBar(progressBar);
+                },
+                onSubmit: function() {
+                    msgBox.innerHTML = ''; // empty the message box
+                },
+                onComplete: function(filename, response) {
+                    progressOuter.style.display = 'none'; // hide progress bar when upload is completed
+            
+                    if (!response) {
+                        msgBox.innerHTML = 'Không thể tải hình';
+                        return;
+                    }
+            
+                    if (response.success === true) {
+                        msgBox.innerHTML = '<strong>' + filename + '</strong>' + ' thay đổi thành công.';
+                        $("#picBox").attr('src', image_dir + '/' + response.source);
+                    }
+                    else {
+                        if (response.msg) {
+                            msgBox.innerHTML = response.msg;
+                        }
+                        else {
+                            msgBox.innerHTML = 'Có lỗi xảy ra trong quá trình tải hình';
+                        }
+                    }
+                    
+                    setTimeout(function() {
+                        msgBox.innerHTML = '';
+                    }, 2000);
+                },
+                onError: function() {
+                    progressOuter.style.display = 'none';
+                    msgBox.innerHTML = 'Không thể tải hình';
+                }
+            });
+            
+        }
 
         $(document).ready(function() {
             installTable( dataTable );
@@ -174,6 +326,8 @@
             xhrInsert_item( form_a_item, "{{ route('admincp.b06.store') }}" );
             xhrUpdate_item( form_e_item, "{{ route('admincp.b06.update') }}" );
             xhrDelete_item( btnDel_item, "{{ route('admincp.b06.destroy') }}" );
+            
+            xhrUploadImage();
         });
     </script>
 

@@ -3,7 +3,7 @@
 		<p><strong>Khách hàng</strong></p>
 		<!-- Jssor Slider Begin -->
 	    <!-- To move inline styles to css file/block, please specify a class name for each element. --> 
-	    <div id="slider1_container" style="position: relative; top: 0px; left: 0px; width: 803px; height: 100px; overflow: hidden;">
+	    <div id="slider1_container" style="position: relative; top: 0px; left: 0px; width: 780px; height: 100px; overflow: hidden;">
 
 	        <!-- Loading Screen -->
 	        <div u="loading" style="position: absolute; top: 0px; left: 0px;">
@@ -16,7 +16,7 @@
 	        </div>
 
 	        <!-- Slides Container -->
-	        <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 803px; height: 100px; overflow: hidden;">
+	        <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 780px; height: 100px; overflow: hidden;">
 
 	        	@foreach ($logo_customers as $customer)
 	        		<div><img u="image" src="{{ image_url('customer', $customer->logo) }}" /></div>
@@ -98,14 +98,14 @@
 	        <span u="arrowright" class="jssora03r" style="top: 123px; right: 8px;">
 	        </span>
 	        <!--#endregion Arrow Navigator Skin End -->
-	        <a style="display: none" href="http://www.jssor.com">Bootstrap Slider</a>
+	        <!--<a style="display: none" href="http://www.jssor.com">Bootstrap Slider</a>-->
 	    </div>
 	    <!-- Jssor Slider End -->
 	</div>
 
 	<div class="col-md-3">
 		<div>
-			{{ link_to('f01', 'Trang chủ') }} | {{ link_to('f05', 'Giới thiệu') }} | {{ link_to('f05', 'Liên hệ') }}
+			{{ link_to('', 'Trang chủ') }} | {{ link_to('f05', 'Giới thiệu') }} | {{ link_to('f05', 'Liên hệ') }}
 		</div>
 		<address>
 			 <strong>Kfm, Inc.</strong><br /> 795 Folsom Ave, Suite 600<br /> San Francisco, CA 94107<br /> <abbr title="Phone">P:</abbr> (123) 456-7890

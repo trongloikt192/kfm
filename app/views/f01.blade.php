@@ -16,7 +16,6 @@
 
 @section('content')
 
-    {{-- height: 258px --}}
     <div class="carousel slide" id="carousel-304998">
         <ol class="carousel-indicators">
             <li class="active" data-slide-to="0" data-target="#carousel-304998">

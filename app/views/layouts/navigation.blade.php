@@ -6,7 +6,7 @@
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
              <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
         </button> 
-        <a class="navbar-brand" href="{{ url('f01') }}">KFM</a>
+        <a class="navbar-brand" href="{{ url() }}">KFM</a>
     </div>
     
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -43,26 +43,26 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hỗ Trợ Khách Hàng <strong class="caret"></strong></a>
                 <ul class="dropdown-menu">
                     <li>
-                        <a href="#">Các câu hỏi thường gặp</a>
+                        <a href="{{ url('page-building') }}">Các câu hỏi thường gặp</a>
                     </li>
                     <li role="separator" class="divider"></li>
                     <li>
-                        <a href="#">Đặt câu hỏi</a>
+                        <a href="{{ url('page-building') }}">Đặt câu hỏi</a>
                     </li>
                     <li role="separator" class="divider"></li>
                     <li>
-                        <a href="#">Văn phòng và chi nhánh</a>
+                        <a href="{{ url('page-building') }}">Văn phòng và chi nhánh</a>
                     </li>
                 </ul>
             </li>
             <li>
-                <a href="#">Văn Bản Pháp Quy</a>
+                <a href="{{ url('page-building') }}">Văn Bản Pháp Quy</a>
             </li>
             <li>
-                <a href="#">Tin Tức & Hoạt Động</a>
+                <a href="{{ url('page-building') }}">Tin Tức & Hoạt Động</a>
             </li>
             <li>
-                <a href="#">Tuyển Dụng</a>
+                <a href="{{ url('page-building') }}">Tuyển Dụng</a>
             </li>
             
         </ul>

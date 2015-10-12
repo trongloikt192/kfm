@@ -33,6 +33,7 @@ Route::group(['prefix' => 'admincp'], function()
         Route::post('b05/uploadImage', ['as' => 'admincp.b05.uploadImage', 'uses' => 'PostsController@uploadImage'] );
         Route::post('b05/uploadFile', ['as' => 'admincp.b05.uploadFile', 'uses' => 'PostsController@uploadFile'] );
         Route::resource('b05', 'PostsController');
+        Route::post('b06/uploadImage', ['as' => 'admincp.b06.uploadImage', 'uses' => 'CustomersController@uploadImage'] );
         Route::resource('b06', 'CustomersController');
         Route::resource('b07', 'FaqController');
         Route::resource('b08', 'ContactController');
@@ -45,23 +46,29 @@ Route::group(['prefix' => 'admincp'], function()
 
 
 // Public Routes
-Route::get('feedback',  'PagesController@getFeedback');
-Route::post('feedback', 'PagesController@saveFeedback');
-Route::get('terms',     'PagesController@terms');
-Route::get('privacy',   'PagesController@privacy');
-Route::get('faqs',      'PagesController@faqs');
-Route::get('about',     'PagesController@about');
+Route::get('feedback',          'PagesController@getFeedback');
+Route::post('feedback',         'PagesController@saveFeedback');
+Route::get('terms',             'PagesController@terms');
+Route::get('privacy',           'PagesController@privacy');
+Route::get('faqs',              'PagesController@faqs');
+Route::get('about',             'PagesController@about');
+Route::get('page-building',     'PagesController@pageBuilding');
 
-Route::get('/',      'HomeController@index');
-Route::get('/f01',      'HomeController@index');
-Route::get('/f02/{slug}', 'PostsController@show');
-Route::get('/f03',      'RemindersController@getRemind');
-Route::get('/f04',      'AuthController@getLogin');
-Route::resource('/f05',      'ContactController');
-Route::get('/f06',      'SearchController@index');
-Route::post('f06/search', ['as' => 'f06.search', 'uses' => 'SearchController@search']);
-Route::post('f06/searchAjax', ['as' => 'f06.searchAjax', 'uses' => 'SearchController@searchAjax']);
-Route::get('/f07/{slug}', 'PagesController@show');
+
+Route::get('/',                 'HomeController@index');
+Route::get('/f01',              'HomeController@index');
+Route::get('/f02/{slug}',       'PostsController@show');
+Route::get('/f03',              'RemindersController@getRemind');
+Route::get('/f04',              'AuthController@getLogin');
+Route::resource('/f05',         'ContactController');
+Route::get('/f06',              'SearchController@index');
+Route::post('f06/search',       ['as' => 'f06.search', 'uses' => 'SearchController@search']);
+Route::post('f06/searchAjax',   ['as' => 'f06.searchAjax', 'uses' => 'SearchController@searchAjax']);
+Route::get('/f07/{slug}',       'PagesController@show');
+Route::get('/f08',              'FaqController@askQuestion');
+Route::post('/f08',             ['as' => 'f08.sendQuestion', 'uses' => 'FaqController@sendQuestion']);
+Route::get('/f09/{id}',         'FaqController@show');
+Route::get('/f10',              'FaqController@index');
 
 // Developer Routes
 Route::get('hello', 'DevController@hello');

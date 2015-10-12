@@ -44,12 +44,12 @@
 		@foreach ($top5posts as $post)
 			<div class="media">
 			  	<div class="media-left">
-			    	<a href="{{ url('f02' . $post->id ) }}">
+			    	<a href="{{ url('f02/' . $post->slug ) }}">
 			      		<img class="media-object" src="{{ image_url('post', $post->image) }}" alt="{{ $post->title }}" style="max-width: 100px; max-height: 100px;">
 			    	</a>
 			  	</div>
 			  	<div class="media-body">
-			    	<h4 class="media-heading">{{ link_to( 'f02/' . $post->id, $post->title ) }}</h4>
+			    	<h4 class="media-heading">{{ link_to( 'f02/' . $post->slug, $post->title ) }}</h4>
 			    	{{ $post->description }}
 			  	</div>
 			</div>
@@ -68,7 +68,7 @@
 		@foreach ($top5faqs as $faq)
 			<div class="media">
 			  	{{-- <div class="media-left">
-			    	<a href="{{ url('f02' . $faq->id ) }}">
+			    	<a href="{{ url('f02/' . $faq->id ) }}">
 			      		<img class="media-object" src="http://lorempixel.com/90/70/" alt="{{ $faq->title }}">
 			    	</a>
 			  	</div> --}}

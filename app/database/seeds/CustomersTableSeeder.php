@@ -11,7 +11,7 @@ class CustomersTableSeeder extends Seeder {
 
 		$faker = Faker::create();
 
-		foreach(range(1, 10) as $index)
+		foreach(range(1, 5) as $index)
 		{
 			Customer::create([
 				'name' => $faker->company,
