@@ -2,6 +2,14 @@
 
 
 class PostsController extends \BaseController {
+
+    public function index()
+    {
+        $posts = Post::all();
+
+        return View::make('f11', compact('posts'));
+    }
+
     
     public function show($slug)
     {
@@ -24,7 +32,7 @@ class PostsController extends \BaseController {
         }
 
         // $ref_posts = Post::findMany($refs);
-        $ref_posts = Post::select(['id', 'title', 'created_at'])->whereIn('id', $refs)->get();
+        $ref_posts = Post::select(['id', 'title', 'slug', 'created_at'])->whereIn('id', $refs)->get();
 
         return View::make('f02', compact('post', 'ref_posts'));
     }

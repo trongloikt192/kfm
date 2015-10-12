@@ -108,7 +108,7 @@
 			{{ link_to('', 'Trang chủ') }} | {{ link_to('f05', 'Giới thiệu') }} | {{ link_to('f05', 'Liên hệ') }}
 		</div>
 		<address>
-			 <strong>Kfm, Inc.</strong><br /> 795 Folsom Ave, Suite 600<br /> San Francisco, CA 94107<br /> <abbr title="Phone">P:</abbr> (123) 456-7890
+			 <strong>Kfm, Ltd</strong><br /> 795 Folsom Ave, Suite 600<br /> San Francisco, CA 94107<br /> <abbr title="Phone">P:</abbr> (123) 456-7890
 		</address>
 		Copyright © 2015 KMF
 	</div>

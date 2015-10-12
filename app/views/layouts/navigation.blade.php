@@ -43,11 +43,11 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hỗ Trợ Khách Hàng <strong class="caret"></strong></a>
                 <ul class="dropdown-menu">
                     <li>
-                        <a href="{{ url('page-building') }}">Các câu hỏi thường gặp</a>
+                        <a href="{{ url('f10') }}">Các câu hỏi thường gặp</a>
                     </li>
                     <li role="separator" class="divider"></li>
                     <li>
-                        <a href="{{ url('page-building') }}">Đặt câu hỏi</a>
+                        <a href="{{ url('f08/ask-question') }}">Đặt câu hỏi</a>
                     </li>
                     <li role="separator" class="divider"></li>
                     <li>
@@ -59,7 +59,7 @@
                 <a href="{{ url('page-building') }}">Văn Bản Pháp Quy</a>
             </li>
             <li>
-                <a href="{{ url('page-building') }}">Tin Tức & Hoạt Động</a>
+                <a href="{{ url('f11') }}">Tin Tức & Hoạt Động</a>
             </li>
             <li>
                 <a href="{{ url('page-building') }}">Tuyển Dụng</a>

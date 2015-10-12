@@ -1,7 +1,7 @@
 @extends('...layouts.master')
 
 @section('header-title')
-    Trang Kết quả tìm kiếm
+    Câu hỏi về kiểm toán
 @stop
 
 @section('content-header')
@@ -15,29 +15,21 @@
 
 			<div class="panel panel-default">
 				<div class="panel-body">
-					<h3>Kết quả tìm kiếm</h3>
+					<h3>Trả lời câu hỏi</h3>
 					<hr>
 
-					<br/>
-
-					{{ Form::open(['id'=>'search_form', 'class'=>'form-inline'])}}
-						<h4>Nhập từ khóa</h4>
-						<div class="form-group">
-							<input type="text" class="form-control" id="key_search" name="key_search">
-						</div>
-						<button type="submit" class="btn btn-default">Tìm kiếm</button>
-					{{ Form::close() }}
-
-					<br/>
-
-					<div id="no_result" style="display: none;">
-						Không có dữ liệu nào thỏa mãn điều kiện tìm kiếm của bạn.
+					<h4>Chủ đề: {{ $faq->title }}</h4>
+					</br>
+					<div>
+						<strong>Câu hỏi:</strong>
+						<p> {{ $faq->content }}</p>
+					</div>
+					<div class="well well-sm">
+						<strong>Câu trả lời:</strong>
+						<p> {{ $faq->reply_content }}</p>
 					</div>
 
-					<ol id="results" class="search-results node-results">
-					</ol>
-
-					</div>
+				</div>
 			</div>
 			
 		</div>

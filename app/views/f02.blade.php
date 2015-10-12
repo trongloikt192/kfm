@@ -22,22 +22,24 @@
 				    {{ $post->content_vi }}
 				</div>
 
-				<div class="panel-footer">
-					<h3>
-						Các tin khác
-					</h3>
+				@if(count($ref_posts) > 0)
+					<div class="panel-footer">
+						<h3>
+							Các tin khác
+						</h3>
 
-					<div>
-					@foreach ($ref_posts as $post) 
-						<div id="div-login-msg">
-			                <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
-			                <span id="text-login-msg">
-			                    {{ link_to('f02/' . $post->id, $post->title) }} - {{ $post->created_at->format('d/m/Y | G:i A') }}
-			                </span>
-			            </div>
-					@endforeach
+						<div>
+						@foreach ($ref_posts as $post) 
+							<div id="div-login-msg">
+				                <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
+				                <span id="text-login-msg">
+				                    {{ link_to('f02/' . $post->slug, $post->title) }} - {{ $post->created_at->format('d/m/Y | G:i A') }}
+				                </span>
+				            </div>
+						@endforeach
+						</div>
 					</div>
-				</div>
+				@endif
 			</div>
 
 			

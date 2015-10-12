@@ -2,18 +2,20 @@
 
 class FaqController extends \BaseController {
     
-    public function show($slug)
+    public function index()
     {
-        $page = Page::where('slug', $slug)->get();
+        $faqs = Faq::all();
 
-        $page = $page[0];
-
-        return View::make('f07', compact('page'));
+        return View::make('f10', compact('faqs'));
     }
 
 
-    
+    public function show($id)
+    {
+        $faq = Faq::find($id);
 
+        return View::make('f09', compact('faq'));
+    }
 
     public function askQuestion()
     {
@@ -45,34 +47,5 @@ class FaqController extends \BaseController {
 	    }
     }
 
-
-    public function about()
-    {
-        return View::make('pages.about');
-    }
-
-
-    public function faqs()
-    {
-        return View::make('pages.faqs');
-    }
-
-
-    public function terms()
-    {
-        return View::make('pages.terms');
-    }
-
-
-    public function privacy()
-    {
-        return View::make('pages.privacy');
-    }
-    
-    
-    public function pageBuilding()
-    {
-        return View::make('errors.building');
-    }
 
 }

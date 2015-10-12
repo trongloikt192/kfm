@@ -66,12 +66,12 @@
 										<textarea class="form-control" id="content" name="content" rows="7"></textarea>
 									</div>
 								</div>
-								<div class="form-group">
+								{{-- <div class="form-group">
 									<label for="capcha" class="col-sm-3 control-label">Mã bảo vệ*</label>
 									<div class="col-sm-3">
 										<input type="text" class="form-control" id="capcha">
 									</div>
-								</div>
+								</div> --}}
 								<div class="form-group">
 									<div class="col-sm-offset-3 col-sm-12">
 										<button type="submit" class="btn btn-primary">Gửi đi</button>

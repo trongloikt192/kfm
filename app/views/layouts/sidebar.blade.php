@@ -73,7 +73,7 @@
 			    	</a>
 			  	</div> --}}
 			  	<div class="media-body">
-			    	<h4 class="media-heading">{{ link_to( 'f02/' . $faq->id, $faq->title ) }}</h4>
+			    	<h4 class="media-heading">{{ link_to( 'f09/' . $faq->id, $faq->title ) }}</h4>
 			    	{{ $faq->title }}
 			  	</div>
 			</div>

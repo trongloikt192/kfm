@@ -56,19 +56,21 @@ Route::get('page-building',     'PagesController@pageBuilding');
 
 
 Route::get('/',                 'HomeController@index');
-Route::get('/f01',              'HomeController@index');
-Route::get('/f02/{slug}',       'PostsController@show');
-Route::get('/f03',              'RemindersController@getRemind');
-Route::get('/f04',              'AuthController@getLogin');
-Route::resource('/f05',         'ContactController');
-Route::get('/f06',              'SearchController@index');
+Route::get('f01',               'HomeController@index');
+Route::get('f02/{slug}',        'PostsController@show');
+Route::get('f03',               'RemindersController@getRemind');
+Route::get('f04',               'AuthController@getLogin');
+Route::resource('f05',          'ContactController');
+Route::get('f06',               'SearchController@index');
 Route::post('f06/search',       ['as' => 'f06.search', 'uses' => 'SearchController@search']);
 Route::post('f06/searchAjax',   ['as' => 'f06.searchAjax', 'uses' => 'SearchController@searchAjax']);
-Route::get('/f07/{slug}',       'PagesController@show');
-Route::get('/f08',              'FaqController@askQuestion');
-Route::post('/f08',             ['as' => 'f08.sendQuestion', 'uses' => 'FaqController@sendQuestion']);
-Route::get('/f09/{id}',         'FaqController@show');
-Route::get('/f10',              'FaqController@index');
+Route::get('f07/{slug}',        'PagesController@show');
+Route::get('f08/ask-question',  'FaqController@askQuestion');
+Route::post('f08',              ['as' => 'f08.sendQuestion', 'uses' => 'FaqController@sendQuestion']);
+Route::get('f09/{id}',          'FaqController@show');
+Route::get('f10',               'FaqController@index');
+Route::get('f11',               'PostsController@index');
+
 
 // Developer Routes
 Route::get('hello', 'DevController@hello');
