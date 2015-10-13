@@ -30,7 +30,7 @@
 		<div id="layout_content" class="c-login clearfix">
 
 			<div class="header">
-					<a href="index.html"><img src="{{asset('img/logo.png')}}"></a>
+					<a href="index.html"><img src="{{asset('img/KMF_Logo_Blue.png')}}"></a>
 			</div> <!-- /header -->
 
 			<div class="breadcrumbs">
