@@ -12,29 +12,29 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
             <li>
-                <a href="#">Giới thiệu</a>
+                <a href="{{ url('f07/so-luoc-ve-cong-ty-kmf') }}">Giới thiệu</a>
             </li>
             <li>
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sản phẩm & Dịch Vụ <strong class="caret"></strong></a>
                 <ul class="dropdown-menu">
                     <li>
-                        <a href="#">Dịch vụ kiểm toán Báo cáo tài chính</a>
+                        <a href="{{ url('f07/dich-vu-kiem-toan-bao-cao-tai-chinh') }}">Dịch vụ kiểm toán Báo cáo tài chính</a>
                     </li>
                     <li role="separator" class="divider"></li>
                     <li>
-                        <a href="#">Dịch vụ Thẩm định kiểm toán đầu tư và xây dựng cơ bản</a>
+                        <a href="{{ url('f07/dich-vu-tham-dinh-kiem-toan-dau-tu-va-xay-dung-co-ban') }}">Dịch vụ Thẩm định kiểm toán đầu tư và xây dựng cơ bản</a>
                     </li>
                     <li role="separator" class="divider"></li>
                     <li>
-                        <a href="#">Dịch vụ Quản lý dự án</a>
+                        <a href="{{ url('f07/dich-vu-quan-ly-du-an') }}">Dịch vụ Quản lý dự án</a>
                     </li>
                     <li role="separator" class="divider"></li>
                     <li>
-                        <a href="#">Dịch vụ tư vấn</a>
+                        <a href="{{ url('f07/dich-vu-tu-van') }}">Dịch vụ tư vấn</a>
                     </li>
                     <li role="separator" class="divider"></li>
                     <li>
-                        <a href="#">Dịch vụ kế toán</a>
+                        <a href="{{ url('f07/dich-vu-ke-toan') }}">Dịch vụ kế toán</a>
                     </li>
                 </ul>
             </li>

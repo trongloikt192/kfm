@@ -5,10 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>KFM - @yield('header-title')</title>
+    <title>KMF - @yield('header-title')</title>
 
     <meta name="description" content="Website kiem toan & tu van">
     <meta name="author" content="KFM!">
+
+    <link rel="shortcut icon" href="{{ asset('img/favicon.png') }}">
+
     <style type="text/css">
         /*body {
             background-image: url("{{ url('img/bodybg.jpg') }}");

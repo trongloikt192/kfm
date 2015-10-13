@@ -17,6 +17,7 @@
 nav.navbar {
 	text-transform: uppercase; 
 	/*font-weight: bold;*/
+	font-weight: 600;
 }
 
 nav .btn_search {
