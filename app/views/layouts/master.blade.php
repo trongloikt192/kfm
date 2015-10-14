@@ -7,8 +7,8 @@
 
     <title>KMF - @yield('header-title')</title>
 
-    <meta name="description" content="Website kiem toan & tu van">
-    <meta name="author" content="KFM!">
+    <meta name="description" content="KFM cong ty kiem toan & tu van">
+    <meta name="author" content="KFM cong ty kiem toan & tu van">
 
     <link rel="shortcut icon" href="{{ asset('img/favicon.png') }}">
 

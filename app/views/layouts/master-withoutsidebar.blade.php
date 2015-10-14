@@ -5,10 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>KFM - @yield('title')</title>
+    <title>KMF - @yield('title')</title>
 
-    <meta name="description" content="Source code generated using layoutit.com">
-    <meta name="author" content="LayoutIt!">
+    <meta name="description" content="KFM cong ty kiem toan & tu van">
+    <meta name="author" content="KFM cong ty kiem toan & tu van">
 
     {{ HTML::style('css/simplex_cus.min.css') }}
     {{ HTML::style('//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css') }}
