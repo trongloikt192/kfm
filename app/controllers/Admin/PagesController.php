@@ -13,8 +13,9 @@ class PagesController extends \BaseController {
 	{
 		//
 		$pages = \Page::get();
-
-		return \View::make('admincp.b12', compact('pages'));
+		$categories = \Category::where('parent_id', '0')->with('children')->get();
+		
+		return \View::make('admincp.b12', compact('pages', 'categories'));
 	}
 
 
@@ -49,13 +50,13 @@ class PagesController extends \BaseController {
 	        if(empty($slug)) {
 		    	$slug = $data['title'];
 		    }
-
 		    $slug = genarate_slug( $slug );
 
 	        $page = \Page::create([
 	        	'title'=>$data['title']
 	        	, 'slug'=>$slug
 	        	, 'content'=>$data['content']
+	        	, 'category_id'=>$data['category_id']
 	        ]);
 	        
 	        return 1;
@@ -107,22 +108,22 @@ class PagesController extends \BaseController {
 	        {
 	            return \Response::json($validator->messages(), 500);
 	        }
-
+	
+			// MAKE SLUG
 	        $slug = $data['slug'];
 	        if(empty($slug)) {
 		    	$slug = $data['title'];
 		    }
-
 		    $slug = genarate_slug( $slug );
-	        
-	        $id = $data['id'];
-	        $page = \Page::findOrFail($id);
 			
 			// 2. UPDATE
+			$id = $data['id'];
+	        $page = \Page::findOrFail($id);
 	        $page->update([
 	        	'title'=>$data['title']
 	        	, 'slug'=>$slug
 	        	, 'content'=>$data['content']
+	        	, 'category_id'=>$data['category_id']
 	        ]);
 	        return 1;
 	    }

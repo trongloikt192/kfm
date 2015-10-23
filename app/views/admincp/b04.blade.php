@@ -21,39 +21,31 @@
             </div> <!-- /widget-header -->
             
             <div class="widget-content pad20f">
-
-                <table class="table table-bordered" id="datatable">
-                    <thead>
-                        <tr>
-                            <th>Danh mục</th>
-                            <th>Mô tả</th>
-                            <th>Thuộc danh mục</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($categories as $category)
-                            <tr>
-                                <td>{{ $category->name }}</td>
-                                <td>{{ $category->description }}</td>
-                                <td>{{ $category->parent_id }}</td>
-                                <td class="center">
-                                    {{ Form::btnActionEditRecord($category->id) }}
-                                    | 
-                                    {{ Form::btnActionDelRecord($category->id) }}
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th>Danh mục</th>
-                            <th>Mô tả</th>
-                            <th>Thuộc danh mục</th>
-                            <th>Actions</th>
-                        </tr>
-                    </tfoot>
-                </table>
+                
+                <ul>
+                @foreach( $categories as $category )
+                    <li class="well">
+                        <strong>{{ $category->name }}</strong> - {{ Form::btnActionEditRecord($category->id) }} | {{ Form::btnActionDelRecord($category->id) }}
+                        
+                        @if( $category->children ) 
+                            <ul>
+                            @foreach( $category->children as $children )
+                                <li>
+                                    {{ $children->name }} - {{ Form::btnActionEditRecord($children->id) }} | {{ Form::btnActionDelRecord($children->id) }}
+                                    @if( $children->children )
+                                        <ul>
+                                        @foreach( $children->children as $sub_children )
+                                            <li>{{ $sub_children->name }} - {{ Form::btnActionEditRecord($sub_children->id) }} | {{ Form::btnActionDelRecord($sub_children->id) }}</li>
+                                        @endforeach
+                                        </ul>
+                                    @endif
+                                </li>
+                            @endforeach
+                            </ul>
+                        @endif
+                    </li>
+                @endforeach
+                </ul>
                 
             </div> <!-- /widget-content -->
 
@@ -78,9 +70,33 @@
                 <div class="modal-body">
                     {{ Form::errorField() }}
                     {{ Form::textField('name', 'Tên danh mục', null) }}
-                    {{ Form::textareaField('description', 'Mô tả', null) }}
-                    {{ Form::selectField('parent_id', $categories_list, null, 'Thuộc danh mục') }}
-
+                    
+                    <label class='control-label' for='url'>Đường dẫn</label>
+                   	<div class="form-group">
+                   	    <span>{{ url() . '/' }}</span>
+                   	    <input type="text" name="url" id="url"/>
+                    </div>
+                    
+                    <label class='control-label' for='parent_id'>Thuộc danh mục</label>
+                    <div class="form-group">
+                        <select id="parent_id" name="parent_id" class="form-control">
+                            <option value="0">Là mục chính</option>
+                            @foreach( $categories as $category )
+                                <option value="{{ $category->id }}"><strong>{{ $category->name }}</strong></option> 
+                                @if( $category->children )
+                                    @foreach( $category->children as $children )
+                                        <option value="{{ $children->id }}">-- {{ $children->name }}</option>
+                                        @if( $children->children )
+                                            @foreach( $children->children as $sub_children )
+                                                <option value="{{ $sub_children->id }}">---- {{ $sub_children->name }}</option>
+                                            @endforeach
+                                        @endif
+                                    @endforeach
+                                @endif
+                            @endforeach
+                        </select>
+                    </div>
+                    
                 </div>
                 <div class="modal-footer">
                     {{ Form::btnSubmit('Thêm') }}
@@ -103,15 +119,36 @@
 
                 {{ Form::open(['id'=> 'form_e_item']) }}
                 <div class="modal-body">
-                    <p>
-                        Xin quý khách vui lòng nhập vào tên đăng nhập và địa chỉ email để lấy lại mật khẩu.
-                    </p>
 
                     {{ Form::errorField() }}
                     {{ Form::hidden('id') }}
                    	{{ Form::textField('name', 'Tên danh mục', null) }}
-                    {{ Form::textareaField('description', 'Mô tả', null) }}
-                    {{ Form::selectField('parent_id', $categories_list, null, 'Thuộc danh mục') }}
+                   	
+                   	<label class='control-label' for='url'>Đường dẫn</label>
+                   	<div class="form-group">
+                   	    <span>{{ url() . '/' }}</span>
+                   	    <input type="text" name="url" id="url"/>
+                    </div>
+                    
+                    <label class='control-label' for='parent_id'>Thuộc danh mục</label>
+                    <div class="form-group">
+                        <select id="parent_id" name="parent_id" class="form-control">
+                            <option value="0">Là mục chính</option>
+                            @foreach( $categories as $category )
+                                <option value="{{ $category->id }}"><strong>{{ $category->name }}</strong></option> 
+                                @if( $category->children )
+                                    @foreach( $category->children as $children )
+                                        <option value="{{ $children->id }}">-- {{ $children->name }}</option>
+                                        @if( $children->children )
+                                            @foreach( $children->children as $sub_children )
+                                                <option value="{{ $sub_children->id }}">---- {{ $sub_children->name }}</option>
+                                            @endforeach
+                                        @endif
+                                    @endforeach
+                                @endif
+                            @endforeach
+                        </select>
+                    </div>
 
                 </div>
                 <div class="modal-footer">

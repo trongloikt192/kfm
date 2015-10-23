@@ -95,7 +95,14 @@ class ContactController extends \BaseController {
 			$id = $data['id'];
 	        $contact = \Contact::findOrFail($id);
 	        
-	        $contact->update(['name'=>$data['name'], 'Contact'=>$data['Contact'], 'description'=>$data['description']]);
+	        $contact->update([
+	        	'full_name'=>$data['full_name']
+	        	, 'company'=>$data['company']
+	        	, 'phone_number'=>$data['phone_number']
+	        	, 'email'=>$data['email']
+	        	, 'status'=>$data['status']
+	        	, 'content'=>$data['content']
+	        	]);
 	        return 1;
 	    }
 	}

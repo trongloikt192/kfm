@@ -13,7 +13,7 @@ class PostsController extends \BaseController {
 	{
 		//
 		$posts = \Post::all();
-		$categories = \Category::all()->lists('name', 'id');
+		$categories = \Category::where('parent_id', '0')->with('children')->get();
         return \View::make('admincp.b05', compact('posts','categories'));
 	}
 
@@ -57,7 +57,7 @@ class PostsController extends \BaseController {
 	        	, 'description'=>$data['description']
 	        	, 'content_vi'=>$data['content_vi']
 	        	, 'content_en'=>$data['content_en']
-	        	, 'image'=>$data['image']
+	        	// , 'image'=>$data['image']
 	        	, 'status'=>$data['status']
 	        	, 'category_id'=>$data['category_id']
 	        	// , 'user_id'=>$data['user_id']

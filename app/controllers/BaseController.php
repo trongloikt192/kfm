@@ -19,12 +19,13 @@ class BaseController extends Controller {
        	$setting = Setting::first();
        	$layout_slides = json_decode($setting->silde_images);
 
-       	// print_r($layout_slides); exit();
+        $menu = Category::where('parent_id', '0')->with('children', 'pages')->get();
 
        	View::share ( 'logo_customers', $logo_customers );
        	View::share ( 'top5posts', $top5posts );
        	View::share ( 'top5faqs', $top5faqs );
        	View::share ( 'layout_slides', $layout_slides );
+       	View::share ( 'menu', $menu );
     }
 
 	/**

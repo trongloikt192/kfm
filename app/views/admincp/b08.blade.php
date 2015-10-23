@@ -96,7 +96,7 @@
                     	</div>
                     	<div class="col-md-6">
                     	    {{ Form::emailField('email', 'Email', null) }}
-                    		{{ Form::textField('status', 'Trạng thái', null) }}
+                    		{{ Form::checkboxField('status', 'Trạng thái') }}
                     	</div>
                     	<div class="col-md-12">
                     		{{ Form::textareaField('content', 'Nội dung liên hệ', null, '100%x5') }}

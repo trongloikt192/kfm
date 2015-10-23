@@ -93,7 +93,27 @@
                     
                     <div class="row">
                         <div class="col-md-6">
-                            {{ Form::selectField('category_id', $categories, null, 'Danh mục') }}
+                            
+                            <label class='control-label' for='category_id'>Danh mục</label>
+                            <div class="form-group">
+                                <select id="category_id" name="category_id" class="form-control">
+                                    <!--<option value="0">Là mục chính</option>-->
+                                    @foreach( $categories as $category )
+                                        <option value="{{ $category->id }}"><strong>{{ $category->name }}</strong></option> 
+                                        @if( $category->children )
+                                            @foreach( $category->children as $children )
+                                                <option value="{{ $children->id }}">-- {{ $children->name }}</option>
+                                                @if( $children->children )
+                                                    @foreach( $children->children as $sub_children )
+                                                        <option value="{{ $sub_children->id }}">---- {{ $sub_children->name }}</option>
+                                                    @endforeach
+                                                @endif
+                                            @endforeach
+                                        @endif
+                                    @endforeach
+                                </select>
+                            </div>
+                            
                             {{ Form::checkboxField('status', 'Đăng bài') }}
                             
                             <div class="form-group">
@@ -113,7 +133,7 @@
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
-                                <label class='control-label' for='status'>Hình ảnh</label>
+                                <label class='control-label' for='status'>Hình đại diện</label>
                                 </br>
                                 <button id="btnUploadImage" type="button" class="btn btn-blue" data-id="">
                                     <i class='fa fa-upload'></i>
@@ -154,31 +174,11 @@
 
 @section('scripts')
     {{ HTML::script('plugins/ckeditor/ckeditor.js') }}
+    {{ HTML::script('plugins/ckeditor/config.js') }}
+    
     {{ HTML::script('plugins/Simple-Ajax-Uploader/SimpleAjaxUploader.min.js') }}
 
     <script type="text/javascript">
-
-        var configCKE = {
-            // codeSnippet_theme: 'Monokai',
-            // language: '',
-            height: 400,
-            // filebrowserBrowseUrl: '{{ url() }}',
-            toolbarGroups: [
-                { name: 'clipboard',   groups: [ 'clipboard', 'undo' ] },
-                { name: 'editing',     groups: [ 'find', 'selection', 'spellchecker' ] },
-                { name: 'links' },
-                { name: 'insert' },
-                { name: 'forms' },
-                { name: 'tools' },
-                { name: 'document',    groups: [ 'mode', 'document', 'doctools' ] },
-                { name: 'others' },
-                //'/',
-                { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
-                { name: 'paragraph',   groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ] },
-                { name: 'styles' },
-                { name: 'colors' }
-            ]
-        };
 
         var dataTable = $("#datatable");
         var form_ae_post = $('#form_ae_post');

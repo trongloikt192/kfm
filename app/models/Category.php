@@ -5,11 +5,11 @@ class Category extends \Eloquent {
 
 	protected $table = 'categories';
 
-	protected $fillable = ['name', 'description'];
+	protected $fillable = ['name', 'url', 'description', 'parent_id'];
 
 	public static $rules = [
-		'name' => 'required|min:3',
-		'description' => 'required|min:5'
+		'name' => 'required',
+		'parent_id' => 'required'
 	];
 
 	public static function validate($data){
@@ -20,14 +20,19 @@ class Category extends \Eloquent {
 	{
 		return $this->belongsToMany('Post');
 	}
+	
+	public function pages()
+	{
+		return $this->hasMany('Page');
+	}
 
 	public function parent()
     {
-        return $this->belongsTo('Category', 'parent_id');
+        return $this->belongsTo('category', 'parent_id');
     }
 
     public function children()
     {
-        return $this->hasMany('Category', 'parent_id');
+        return $this->hasMany('category', 'parent_id');
     }
 }

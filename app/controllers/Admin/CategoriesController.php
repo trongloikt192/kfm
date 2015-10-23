@@ -10,10 +10,10 @@ class CategoriesController extends \BaseController {
 	 */
 	public function index()
 	{
-		//
-		$categories = \Category::all();
-		$categories_list = $categories->lists('name', 'id');
-        return \View::make('admincp.b04', compact('categories', 'categories_list'));
+		$parent_id = '0';
+		$categories = \Category::select('id', 'name')->where('parent_id', $parent_id)->with('children')->get();
+        
+        return \View::make('admincp.b04', compact('categories'));
 	}
 
 
@@ -43,7 +43,7 @@ class CategoriesController extends \BaseController {
 	        {
 	            return \Response::json($validator->messages(), 500);
 	        }
-	        $category = \Category::create(['name'=>$data['name'], 'description'=>$data['description'], 'parent_id'=>$data['parent_id']]);
+	        $category = \Category::create(['name'=>$data['name'], 'url'=>$data['url'], 'parent_id'=>$data['parent_id']]);
 	        
 	        return 1;
 	    }
@@ -71,8 +71,8 @@ class CategoriesController extends \BaseController {
 	public function edit($id)
 	{
 		$id = \Input::get('id');
-        $link = \Category::find($id);
-        return \Response::json($link);
+        $category = \Category::find($id);
+        return \Response::json($category);
 	}
 
 
@@ -94,9 +94,9 @@ class CategoriesController extends \BaseController {
 	        }
 
 			$id = $data['id'];
-	        $link = \Category::findOrFail($id);
+	        $category = \Category::findOrFail($id);
 	        
-	        $link->update(['name'=>$data['name'], 'link'=>$data['link'], 'description'=>$data['description']]);
+	        $category->update(['name'=>$data['name'], 'parent_id'=>$data['parent_id'], 'url'=>$data['url']]);
 	        return 1;
 	    }
 	}
@@ -112,7 +112,8 @@ class CategoriesController extends \BaseController {
 	{
 		$id = \Input::get('id');
 		\Category::destroy($id);
-		return 1;
+		$affectRows = \Category::where('parent_id', $id)->with('children')->delete();
+		return ++$affectRows;
 	}
 
 }

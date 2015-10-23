@@ -85,7 +85,25 @@
                     {{ Form::textField('title', 'Tiêu đề', null) }}
                     {{ Form::textField('slug', 'Slug', null) }}
                     {{ Form::textareaField('content', 'Nội dung trang', null) }}
-
+                    
+                    <label class='control-label' for='category_id'>Danh mục</label>
+                        <div class="form-group">
+                            <select id="category_id" name="category_id" class="form-control">
+                                @foreach( $categories as $category )
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option> 
+                                    @if( $category->children )
+                                        @foreach( $category->children as $children )
+                                            <option value="{{ $children->id }}">-- {{ $children->name }}</option>
+                                            @if( $children->children )
+                                                @foreach( $children->children as $sub_children )
+                                                    <option value="{{ $sub_children->id }}">---- {{ $sub_children->name }}</option>
+                                                @endforeach
+                                            @endif
+                                        @endforeach
+                                    @endif
+                                @endforeach
+                            </select>
+                        </div>
                 </div>
                 <div class="modal-footer">
                     {{ Form::btnSubmit('Đồng ý') }}
@@ -104,31 +122,11 @@
 
 @section('scripts')
     {{ HTML::script('plugins/ckeditor/ckeditor.js') }}
+    {{ HTML::script('plugins/ckeditor/config.js') }}
+    
     {{ HTML::script('plugins/Simple-Ajax-Uploader/SimpleAjaxUploader.min.js') }}
 
     <script type="text/javascript">
-
-        var configCKE = {
-            // codeSnippet_theme: 'Monokai',
-            // language: '',
-            height: 400,
-            // filebrowserBrowseUrl: '{{ url() }}',
-            toolbarGroups: [
-                { name: 'clipboard',   groups: [ 'clipboard', 'undo' ] },
-                { name: 'editing',     groups: [ 'find', 'selection', 'spellchecker' ] },
-                { name: 'links' },
-                { name: 'insert' },
-                { name: 'forms' },
-                { name: 'tools' },
-                { name: 'document',    groups: [ 'mode', 'document', 'doctools' ] },
-                { name: 'others' },
-                //'/',
-                { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
-                { name: 'paragraph',   groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ] },
-                { name: 'styles' },
-                { name: 'colors' }
-            ]
-        };
 
         var dataTable = $("#datatable");
         var form_ae_page = $('#form_ae_page');

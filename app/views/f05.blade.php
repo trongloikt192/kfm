@@ -1,6 +1,6 @@
 @extends('...layouts.master-withoutsidebar')
 
-@section('title')
+@section('header-title')
     Trang Liên hệ
 @stop
 

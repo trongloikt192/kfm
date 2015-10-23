@@ -6,64 +6,53 @@
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
              <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
         </button> 
-        <a class="navbar-brand" href="{{ url() }}">KFM</a>
+        <a class="navbar-brand" href="{{ url() }}">KMF</a>
     </div>
     
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-            <li>
-                <a href="{{ url('f07/so-luoc-ve-cong-ty-kmf') }}">Giới thiệu</a>
-            </li>
-            <li>
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sản phẩm & Dịch Vụ <strong class="caret"></strong></a>
-                <ul class="dropdown-menu">
-                    <li>
-                        <a href="{{ url('f07/dich-vu-kiem-toan-bao-cao-tai-chinh') }}">Dịch vụ kiểm toán Báo cáo tài chính</a>
-                    </li>
-                    <li role="separator" class="divider"></li>
-                    <li>
-                        <a href="{{ url('f07/dich-vu-tham-dinh-kiem-toan-dau-tu-va-xay-dung-co-ban') }}">Dịch vụ Thẩm định kiểm toán đầu tư và xây dựng cơ bản</a>
-                    </li>
-                    <li role="separator" class="divider"></li>
-                    <li>
-                        <a href="{{ url('f07/dich-vu-quan-ly-du-an') }}">Dịch vụ Quản lý dự án</a>
-                    </li>
-                    <li role="separator" class="divider"></li>
-                    <li>
-                        <a href="{{ url('f07/dich-vu-tu-van') }}">Dịch vụ tư vấn</a>
-                    </li>
-                    <li role="separator" class="divider"></li>
-                    <li>
-                        <a href="{{ url('f07/dich-vu-ke-toan') }}">Dịch vụ kế toán</a>
-                    </li>
-                </ul>
-            </li>
-            
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hỗ Trợ Khách Hàng <strong class="caret"></strong></a>
-                <ul class="dropdown-menu">
-                    <li>
-                        <a href="{{ url('f10') }}">Các câu hỏi thường gặp</a>
-                    </li>
-                    <li role="separator" class="divider"></li>
-                    <li>
-                        <a href="{{ url('f08/ask-question') }}">Đặt câu hỏi</a>
-                    </li>
-                    <li role="separator" class="divider"></li>
-                    <li>
-                        <a href="{{ url('page-building') }}">Văn phòng và chi nhánh</a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="{{ url('page-building') }}">Văn Bản Pháp Quy</a>
-            </li>
-            <li>
-                <a href="{{ url('f11') }}">Tin Tức & Hoạt Động</a>
-            </li>
-            <li>
-                <a href="{{ url('page-building') }}">Tuyển Dụng</a>
-            </li>
+            @foreach ( $menu as $item )
+                <li>
+                    @if ( count($item->children) > 0 || count($item->pages) > 0 )
+                        @if ( empty($item->url) )
+                            <a href="#" onclick="return false;" class="dropdown-toggle" data-toggle="dropdown">{{ $item->name }}<strong class="caret"></strong></a>
+                        @else
+                            <a href="{{ url($item->url) }}" class="dropdown-toggle" data-toggle="dropdown">{{ $item->name }}<strong class="caret"></strong></a>
+                        @endif
+                        
+                        <ul class="dropdown-menu">
+                            @foreach ( $item->children as $children )
+                                <li role="separator" class="divider"></li>
+                                @if ( empty($children->url) )
+                                    <li>
+                                        <a href="#" onclick="return false;">{{ $children->name }}</a>
+                                    </li>
+                                @else
+                                    <li>
+                                        <a href="{{ url($children->url) }}">{{ $children->name }}</a>
+                                    </li>
+                                @endif
+                                <!--<li role="separator" class="divider"></li>-->
+                            @endforeach
+                            
+                            @foreach ( $item->pages as $page )
+                                <li role="separator" class="divider"></li>
+                                <li>
+                                    <a href="{{ url('f07/' . $page->slug) }}">{{ $page->title }}</a>
+                                </li>
+                            @endforeach
+                        </ul>
+                        
+                    @else
+                        @if ( empty($item->url) )
+                            <a href="#" onclick="return false;">{{ $item->name }}</a>
+                        @else
+                            <a href="{{ url($item->url) }}">{{ $item->name }}</a>
+                        @endif
+                    @endif
+                    
+                </li>
+            @endforeach
             
         </ul>
 

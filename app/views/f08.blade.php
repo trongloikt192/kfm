@@ -1,6 +1,6 @@
 @extends('...layouts.master')
 
-@section('content-header')
+@section('header-title')
     Đặt câu hỏi
 @stop
 

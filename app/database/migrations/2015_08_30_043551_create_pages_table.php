@@ -18,6 +18,7 @@ class CreatePagesTable extends Migration {
 			$table->string('title');
 			$table->string('slug');
 			$table->text('content');
+			$table->integer('category_id')->unsigned()->index();
 			$table->timestamps();
 		});
 	}
