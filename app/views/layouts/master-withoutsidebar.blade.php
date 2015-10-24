@@ -39,14 +39,12 @@
                         @include('layouts/sidebar')
                     </div> --}}
                 </div>
-                <br/>
-
-                <hr>
-                @include('layouts/footer')
+                
             </div>
         </div>
     </div>
-
+    @include('layouts/footer')
+    
     {{ HTML::script('//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js') }}
     {{ HTML::script('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js') }}
     {{ HTML::script('plugins/jquery.bxslider/jquery.bxslider.min.js') }}
