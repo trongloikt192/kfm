@@ -1,19 +1,27 @@
 body {
-	/*background: #FFFFFF url('../img/Abstract_blue_background.jpg');*/
+	background: #F4F4F4 url('../img/background.jpg');
 	font-size: 12px;
 }
 
 #layout_header {
 	height:160px;
+	background-image: linear-gradient(to bottom, #F4F4F4 0%, #8CBED4 100%);
 }
 
 #layout_header img.logo {
 	display: block;
 	max-height: 100px;
-	margin: 0px auto;
-	top: 30px;
-	left: 350px;
-	position: absolute;
+	/*margin: 0px auto;*/
+}
+
+#layout_header .divlogo {
+	float: left;
+	padding-top: 30px;
+}
+
+#layout_header .divimageslogan img{
+	float: right;
+	max-height: 160px;
 }
 
 #layout_header h1.slogan {
@@ -59,6 +67,8 @@ nav.navbar {
     height:30px;
     transition:height 1s;
     -webkit-transition:height 1s;
+    position: absolute;
+	right: 50px;
 }
 
 
@@ -101,21 +111,45 @@ nav.navbar {
 .panel {
 	border-radius: 0px;
 }
-
 .panel-heading {
 	border-top-right-radius: 0px;
 	border-top-left-radius: 0px;
 }
 
 
-footer {
-	padding: 10px;
+#sidebar p.hotline {
+	font-size: 17px;
+	font-weight: 600;
+	color: rgb(231, 64, 64);
 }
 
+
+footer {
+	padding: 10px;
+	background-image: linear-gradient(to bottom, #1986BF 0%, #0C598F 100%);
+	color: rgb(255, 255, 255);
+}
 footer .menu-mini {
 	text-align: right;
 }
-
 footer address {
 
 }
+footer a {
+	color: #D8D8D8;
+}
+
+.back-to-top {
+	position: fixed;
+	bottom: 2em;
+	right: 0px;
+	text-decoration: none;
+	color: #000000;
+	background-color: rgba(235, 235, 235, 0.80);
+	font-size: 12px;
+	padding: 1em;
+	display: none;
+}
+.back-to-top:hover {	
+	background-color: rgba(135, 135, 135, 0.50);
+}	

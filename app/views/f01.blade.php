@@ -77,7 +77,7 @@
                             {{ link_to('/f02/' . $news[$i]->slug, $news[$i]->title) }}
                         </h3>
                         <p>
-                            {{ $news[$i]->description }}
+                            {{ str_limit($news[$i]->description, 200, "...") }}
                         </p>
                         <p>
                             <a class="btn btn-sm btn-primary" href="{{ url('/f02/' . $news[$i]->slug) }}">Xem tin tức</a>
@@ -116,7 +116,7 @@
                             {{ link_to('/f02/' . $products[$i]->slug, $products[$i]->title) }}
                         </h3>
                         <p>
-                            {{ $products[$i]->description }}
+                            {{ str_limit($products[$i]->description, 200, "...") }}
                         </p>
                         <p>
                             <a class="btn btn-sm btn-primary" href="{{ url('/f02/' . $products[$i]->slug) }}">Xem</a>

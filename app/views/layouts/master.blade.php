@@ -44,17 +44,17 @@
                         @yield('content')
 
                     </div>
-                    <div class="col-md-4">
+                    <div id="sidebar" class="col-md-4">
                         @include('layouts/sidebar')
                     </div>
                 </div>
-                <br/>
 
-                <hr>
-                @include('layouts/footer')
             </div>
         </div>
     </div>
+    @include('layouts/footer')
+
+    <a href="#" class="back-to-top">Back To Top</a>
 
     {{ HTML::script('https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js') }}
     {{ HTML::script('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js') }}

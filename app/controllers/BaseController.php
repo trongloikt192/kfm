@@ -25,7 +25,8 @@ class BaseController extends Controller {
        	View::share ( 'top5posts', $top5posts );
        	View::share ( 'top5faqs', $top5faqs );
        	View::share ( 'layout_slides', $layout_slides );
-       	View::share ( 'menu', $menu );
+        View::share ( 'menu', $menu );
+       	View::share ( 'info', $setting );
     }
 
 	/**

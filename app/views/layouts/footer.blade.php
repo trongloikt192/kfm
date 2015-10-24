@@ -10,40 +10,46 @@
 	
 @stop
 
-<footer class="row">
-<!--
-	<div class="col-md-12">
-
-		@if ( count($logo_customers) > 0 ) 
-			<p><strong>Khách hàng</strong></p>
-			
-			<div id="logoCus_slider">
-				@foreach ( $logo_customers as $customer )
-					<div class="slide"><a href="#" taget=""><img src="{{ $customer->logo }}"></a></div>
-				@endforeach
-			  
-			</div>
-		@endif
-		
-	</div>
--->
-
-	<div class="col-md-12">
+<footer>
+	<div class="container">
 		<div class="row">
-			<address class="col-md-8">
-				<strong>KMF CONSULTANT & AUDITCO ., LTD</strong>
-				<br /> 12 Nguyễn Cảnh Chân, P.Nguyễn Cư Trinh, Quận 1, Tp. Hồ Chí Minh - <abbr title="Phone">Điện thoại:</abbr> 0862 910 097
-			</address>
-			<div class="col-md-4 menu-mini">
-				{{ link_to('', 'Trang chủ') }} | {{ link_to('f07/so-luoc-ve-cong-ty-kmf', 'Giới thiệu') }} | {{ link_to('f05', 'Liên hệ') }}
-				<br />
-				Copyright © 2015 KMF
-			</div>
+			<!--
+				<div class="col-md-12">
 
+					@if ( count($logo_customers) > 0 ) 
+						<p><strong>Khách hàng</strong></p>
+						
+						<div id="logoCus_slider">
+							@foreach ( $logo_customers as $customer )
+								<div class="slide"><a href="#" taget=""><img src="{{ $customer->logo }}"></a></div>
+							@endforeach
+						  
+						</div>
+					@endif
+					
+				</div>
+			-->
+			<div class="col-md-12">
+
+			<div class="row">
+				<address class="col-md-8">
+					<strong>{{ $info->company }}</strong>
+					<br />Địa chỉ: {{ $info->address }}
+					<br /><abbr title="Phone">Điện thoại:</abbr> {{ $info->phone_number }}
+				</address>
+				<div class="col-md-4 menu-mini">
+					{{ link_to('', 'Trang chủ') }} | {{ link_to('f07/so-luoc-ve-cong-ty-kmf', 'Giới thiệu') }} | {{ link_to('f05', 'Liên hệ') }}
+					<br />
+					Copyright © 2015 KMF
+				</div>
+
+			</div>
+			
+			
 		</div>
-		
-		
+		</div>
 	</div>
+
 </footer>
 
 

@@ -34,9 +34,12 @@ Form::macro('passwordField', function($name, $label, $placeholder)
 });
 
 
-Form::macro('emailField', function($name, $label, $placeholder = '')
+Form::macro('emailField', function($name, $label, $placeholder = '', $value = null)
 {
-    $value = Form::getValueAttribute($name); // Get old form input type field (Does not work on textarea, select)
+    if($value == null) {
+        // Get old form input type field (Does not work on textarea, select)
+        $value = Form::getValueAttribute($name);
+    }
     return "<div class='form-group " . errorClass($name) ."'>
             <label class='control-label' for='{$name}'>{$label}</label>
             <input type='email' name='{$name}' class='form-control' id='{$name}' value='{$value}' placeholder='{$placeholder}'>"
@@ -45,9 +48,12 @@ Form::macro('emailField', function($name, $label, $placeholder = '')
 });
 
 
-Form::macro('textareaField', function($name, $label, $placeholder, $size='100%x10')
+Form::macro('textareaField', function($name, $label, $placeholder, $size='100%x10', $value = null)
 {
-    $value = Form::getValueAttribute($name);
+    if($value == null) {
+        // Get old form input type field (Does not work on textarea, select)
+        $value = Form::getValueAttribute($name);
+    }
     $element = Form::textarea($name, $value, ['placeholder'=> $placeholder, 'class'=>'form-control', 'id'=>$name, 'size'=>$size]);
     return "<div class='form-group " . errorClass($name) ."'>
             <label class='control-label' for='{$name}'>{$label}</label>

@@ -38,6 +38,7 @@
 </div>
 -->
 
+
 <div class="panel panel-primary">
 	<div class="panel-heading">
 		<h3 class="panel-title">
@@ -54,7 +55,7 @@
 			  	</div>
 			  	<div class="media-body">
 			    	<h4 class="media-heading">{{ link_to( 'f02/' . $post->slug, $post->title ) }}</h4>
-			    	{{ $post->description }}
+			    	{{ str_limit($post->description, 200, "...") }}
 			  	</div>
 			</div>
 			<hr>
@@ -71,11 +72,30 @@
 		</h3>
 	</div>
 	<div class="panel-body">
-		
-		
+		<div class="media">
+		  	<div class="media-left">
+		    	<img src="{{ asset('img/phone-icon.png') }}" align="middle">
+		  	</div>
+		  	<div class="media-body">
+		    	<p class="hotline">
+					Hotline: 
+					<br/>{{ $info->phone_number }}
+				</p>
+		  	</div>
+		</div>
+		<div class="media">
+		  	<div class="media-left">
+		    	<img src="{{ asset('img/email-2-icon.png') }}" align="middle">
+		  	</div>
+		  	<div class="media-body">
+		    	<p class="hotline">
+					Email: 
+					<br/>{{ $info->email }}
+				</p>
+		  	</div>
+		</div>
 	</div>
 </div>
-
 
 <div class="panel panel-primary">
 	<div class="panel-heading">
@@ -91,7 +111,7 @@
 			  	</div>
 			  	<div class="media-body">
 			    	<h4 class="media-heading">{{ link_to( 'f09/' . $faq->id, $faq->title ) }}</h4>
-			    	{{ $faq->title }}
+			    	{{ str_limit($faq->content, 100, "...") }}
 			  	</div>
 			</div>
 			<hr>

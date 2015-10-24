@@ -23,12 +23,12 @@
 				<div class="row">
 					<div class="col-md-6">
 						{{ Form::hidden('id')}}
-                		{{ Form::textField('logo', 'Hình Logo', null) }}
-                		{{ Form::textField('company', 'Tên công ty', null) }}
-	                    {{ Form::textField('sologan', 'Sologan', null) }}
-	                    {{ Form::emailField('email', 'Email', null) }}
-	                    {{ Form::textField('phone_number', 'Số điện thoại', null) }}
-	                    {{ Form::textareaField('address', 'Địa chỉ', null) }}
+                		{{ Form::textField('logo', 'Hình Logo', null, $setting->logo) }}
+                		{{ Form::textField('company', 'Tên công ty', null, $setting->company) }}
+	                    {{ Form::textField('sologan', 'Sologan', null, $setting->sologan) }}
+	                    {{ Form::emailField('email', 'Email', null, $setting->email) }}
+	                    {{ Form::textField('phone_number', 'Số điện thoại', null, $setting->phone_number) }}
+	                    {{ Form::textareaField('address', 'Địa chỉ', null, null, $setting->address) }}
 	                    
                 	</div>
                 	<div class="col-md-6">
