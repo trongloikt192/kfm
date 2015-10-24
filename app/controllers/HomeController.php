@@ -6,7 +6,7 @@ class HomeController extends \BaseController {
     public function index()
     {
     	// Tin tuc & hoat dong moi nhat
-    	$news_catID = '';
+    	$news_catID = '2';
         $news = Post::where('category_id', $news_catID)->orderBy('updated_at', 'desc')->limit(10)->get();
         $news_len = count($news);
 

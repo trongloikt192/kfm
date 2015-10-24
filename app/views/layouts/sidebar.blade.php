@@ -1,7 +1,9 @@
+
+<!--
 <div class="panel panel-primary">
 	<div class="panel-heading">
 		<h3 class="panel-title">
-			Đăng nhập
+			<strong>Đăng nhập</strong>
 		</h3>
 	</div>
 	<div class="panel-body">
@@ -34,10 +36,12 @@
 		
 	</div>
 </div>
+-->
+
 <div class="panel panel-primary">
 	<div class="panel-heading">
 		<h3 class="panel-title">
-			Tin mới cập nhật
+			<strong>Tin mới cập nhật</strong>
 		</h3>
 	</div>
 	<div class="panel-body">
@@ -58,20 +62,33 @@
 		
 	</div>
 </div>
+
+
 <div class="panel panel-primary">
 	<div class="panel-heading">
 		<h3 class="panel-title">
-			Các câu hỏi thường gặp
+			<strong>Liên hệ</strong>
+		</h3>
+	</div>
+	<div class="panel-body">
+		
+		
+	</div>
+</div>
+
+
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		<h3 class="panel-title">
+			<strong>Các câu hỏi thường gặp</strong>
 		</h3>
 	</div>
 	<div class="panel-body">
 		@foreach ($top5faqs as $faq)
 			<div class="media">
-			  	{{-- <div class="media-left">
-			    	<a href="{{ url('f02/' . $faq->id ) }}">
-			      		<img class="media-object" src="http://lorempixel.com/90/70/" alt="{{ $faq->title }}">
-			    	</a>
-			  	</div> --}}
+			  	<div class="media-left">
+			    	<i class="fa fa-4x fa-question-circle text-primary"></i>
+			  	</div>
 			  	<div class="media-body">
 			    	<h4 class="media-heading">{{ link_to( 'f09/' . $faq->id, $faq->title ) }}</h4>
 			    	{{ $faq->title }}

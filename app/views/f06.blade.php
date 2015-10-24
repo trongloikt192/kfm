@@ -17,9 +17,6 @@
 				<div class="panel-body">
 					<h3>Kết quả tìm kiếm</h3>
 					<hr>
-
-					<br/>
-
 					{{ Form::open(['id'=>'search_form', 'class'=>'form-inline'])}}
 						<h4>Nhập từ khóa</h4>
 						<div class="form-group">

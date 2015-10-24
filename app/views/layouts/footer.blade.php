@@ -10,10 +10,10 @@
 	
 @stop
 
-<div class="row" style="padding: 10px;">
-	<div class="col-md-9">
-		
-		
+<footer class="row">
+<!--
+	<div class="col-md-12">
+
 		@if ( count($logo_customers) > 0 ) 
 			<p><strong>Khách hàng</strong></p>
 			
@@ -26,17 +26,25 @@
 		@endif
 		
 	</div>
+-->
 
-	<div class="col-md-3">
-		<div>
-			{{ link_to('', 'Trang chủ') }} | {{ link_to('f07/so-luoc-ve-cong-ty-kmf', 'Giới thiệu') }} | {{ link_to('f05', 'Liên hệ') }}
+	<div class="col-md-12">
+		<div class="row">
+			<address class="col-md-8">
+				<strong>KMF CONSULTANT & AUDITCO ., LTD</strong>
+				<br /> 12 Nguyễn Cảnh Chân, P.Nguyễn Cư Trinh, Quận 1, Tp. Hồ Chí Minh - <abbr title="Phone">Điện thoại:</abbr> 0862 910 097
+			</address>
+			<div class="col-md-4 menu-mini">
+				{{ link_to('', 'Trang chủ') }} | {{ link_to('f07/so-luoc-ve-cong-ty-kmf', 'Giới thiệu') }} | {{ link_to('f05', 'Liên hệ') }}
+				<br />
+				Copyright © 2015 KMF
+			</div>
+
 		</div>
-		<address>
-			 <strong>Kmf, Ltd</strong><br /> 12 Nguyễn Cảnh Chân, P.Nguyễn Cư Trinh<br /> Quận 1, Tp. HCM<br /> <abbr title="Phone">P:</abbr> 0972 331 505
-		</address>
-		Copyright © 2015 KMF
+		
+		
 	</div>
-</div>
+</footer>
 
 
 @section('scripts')
@@ -47,7 +55,7 @@
 		    slideWidth: 300,
 		    minSlides: 5,
 		    maxSlides: 10,
-		    slideMargin: 10,
+		    slideMargin: 30,
 		    auto: true,
 		    autoHover: true,
 		    speed: 1000,

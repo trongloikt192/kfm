@@ -4,7 +4,7 @@ class ContactController extends \BaseController {
     
     public function index()
     {
-    	$staticmap_src = "https://maps.googleapis.com/maps/api/staticmap?sensor=false&zoom=15&size=520x500&maptype=roadmap&markers=color:red%7Clabel:KFM%7C:user_lat%2C:user_long";
+    	$staticmap_src = "https://maps.googleapis.com/maps/api/staticmap?sensor=false&zoom=15&size=504x500&maptype=roadmap&markers=color:red%7Clabel:KFM%7C:user_lat%2C:user_long";
 
     	$setting = Setting::first();
 

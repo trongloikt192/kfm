@@ -6,7 +6,7 @@
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
              <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
         </button> 
-        <a class="navbar-brand" href="{{ url() }}">KMF</a>
+        {{-- <a class="navbar-brand" href="{{ url() }}">KMF</a> --}}
     </div>
     
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -58,15 +58,13 @@
 
         <ul class="nav navbar-right">
             <li style="padding-right: 10px;">
-                <i class="fa fa-3x fa-search btn_search"></i>
+                <i id="btn_search" class="fa fa-3x fa-search"></i>
             </li>
         </ul>
 
-        {{-- <form class="navbar-form navbar-right" role="search">
-            <div class="form-group">
-                <input class="form-control input-sm" type="text" placeHolder="Tìm kiếm" />
-            </div>
-        </form> --}}
+        {{ Form::open(['route'=>'f06.search', 'class'=>'navbar-form navbar-right', 'role'=>'search'])}}
+            <input id="textbox-search" name="key_search" class="input-sm" type="text" placeHolder="Tìm kiếm" />   
+        {{ Form::close() }}
     </div>
     
 </nav>

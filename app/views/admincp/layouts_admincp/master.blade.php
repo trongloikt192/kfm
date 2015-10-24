@@ -159,7 +159,7 @@
    
     <script type="text/javascript">
         $(window).load(function(){
-            $('#loading').fadeOut(1000);
+            $('#loading').fadeOut(10);
 
             toastr.options = {
               "closeButton": true,

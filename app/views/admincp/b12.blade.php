@@ -69,7 +69,7 @@
 
 
 @section('modal')
-    <div class="modal fade" id="modal_ae_page">
+    <div class="modal" id="modal_ae_page">
         <div class="modal-dialog" style="width: 1024px;">
             <div class="modal-content">
                 <div class="modal-header">
