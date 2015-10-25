@@ -42,18 +42,7 @@ class SettingsController extends \BaseController {
 	 */
 	public function store()
 	{
-		$data = \Input::all();
 
-		if(\Request::ajax()) {
-	        $validator = \Validator::make($data, \Setting::$rules);
-	        if ($validator->fails())
-	        {
-	            return \Response::json($validator->messages(), 500);
-	        }
-	        $link = \Setting::create(['name'=>$data['name'], 'link'=>$data['link'], 'description'=>$data['description']]);
-	        
-	        return 1;
-	    }
 	}
 
 
@@ -77,9 +66,7 @@ class SettingsController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		$id = \Input::get('id');
-        $link = \Setting::find($id);
-        return \Response::json($link);
+
 	}
 
 
@@ -102,9 +89,14 @@ class SettingsController extends \BaseController {
 	        	'company'=>$data['company']
 	        	, 'map_position'=>$map_position
 	        	, 'sologan'=>$data['sologan']
-	        	, 'email'=>$data['email']
+	        	, 'email_1'=>$data['email_1']
+	        	, 'email_2'=>$data['email_2']
 	        	, 'address'=>$data['address']
-	        	, 'phone_number'=>$data['phone_number']
+	        	, 'phone_number_1'=>$data['phone_number_1']
+	        	, 'phone_number_2'=>$data['phone_number_2']
+	        	, 'hotline_1'=>$data['hotline_1']
+	        	, 'hotline_2'=>$data['hotline_2']
+	        	, 'description'=>$data['description']
 	        ]);
 
 	        return 1;
@@ -120,9 +112,7 @@ class SettingsController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		$id = \Input::get('id');
-		\Setting::destroy($id);
-		return 1;
+		
 	}
 
 

@@ -19,10 +19,15 @@ class CreateSettingsTable extends Migration {
             $table->string('logo');
             $table->string('sologan');
             $table->text('silde_images');
+            $table->text('description');
             $table->string('map_position');
-            $table->string('email', 50);
+            $table->string('email_1', 50);
+            $table->string('email_2', 50);
             $table->string('address', 100);
-            $table->string('phone_number', 20);
+            $table->string('phone_number_1', 20);
+            $table->string('phone_number_2', 20);
+            $table->string('hotline_1', 20);
+            $table->string('hotline_2', 20);
 			$table->timestamps();
 		});
 	}

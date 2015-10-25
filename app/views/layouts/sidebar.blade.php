@@ -79,7 +79,11 @@
 		  	<div class="media-body">
 		    	<p class="hotline">
 					Hotline: 
-					<br/>{{ $info->phone_number }}
+					<br/>{{ $info->hotline_1 }}
+
+					@if($info->hotline_2)
+					<br/>{{ $info->hotline_2 }}
+					@endif
 				</p>
 		  	</div>
 		</div>
@@ -90,7 +94,7 @@
 		  	<div class="media-body">
 		    	<p class="hotline">
 					Email: 
-					<br/>{{ $info->email }}
+					<br/>{{ $info->email_2 }}
 				</p>
 		  	</div>
 		</div>

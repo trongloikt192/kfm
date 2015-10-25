@@ -19,9 +19,13 @@ class SettingsTableSeeder extends Seeder {
 				'sologan' => $faker->sentence(10),
 				'silde_images' => '{"slide_1":"db_kfm.png","slide_2":"-73.998284","slide_3":"-73.998284"}',
 				'map_position' => '{"latitude": "'. $faker->latitude .'", "longitude": "'. $faker->longitude .'"}',
-				'email' => $faker->freeEmail,
+				'email_1' => $faker->freeEmail,
+				'email_2' => $faker->freeEmail,
 				'address' => $faker->address,
-				'phone_number' => $faker->phoneNumber
+				'phone_number_1' => $faker->phoneNumber
+				'phone_number_2' => $faker->phoneNumber
+				'hotline_1' => $faker->phoneNumber
+				'hotline_2' => $faker->phoneNumber
 			]);
 		}
 	}

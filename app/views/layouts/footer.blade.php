@@ -35,7 +35,15 @@
 				<address class="col-md-8">
 					<strong>{{ $info->company }}</strong>
 					<br />Địa chỉ: {{ $info->address }}
-					<br /><abbr title="Phone">Điện thoại:</abbr> {{ $info->phone_number }}
+					<br /><abbr title="Phone">Điện thoại:</abbr> <strong>{{ $info->phone_number_1 }}</strong>
+					@if($info->phone_number_2)
+						hoặc <strong>{{ $info->phone_number_2 }}</strong>
+					@endif
+					@if($info->email_1)
+						<br />
+						Email: <a href="mailto:{{ $info->email_1 }}">{{ $info->email_1 }}</a>
+					@endif
+
 				</address>
 				<div class="col-md-4 menu-mini">
 					{{ link_to('', 'Trang chủ') }} | {{ link_to('f07/so-luoc-ve-cong-ty-kmf', 'Giới thiệu') }} | {{ link_to('f05', 'Liên hệ') }}

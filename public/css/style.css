@@ -50,7 +50,7 @@ nav.navbar {
 }
 nav.navbar .dropdown-menu {
 	border-radius: 0px;
-	background-color: #50B2D2;
+	/*background-color: #50B2D2;*/
 }
 #btn_search {
 	color: #FFF;

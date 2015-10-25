@@ -22,7 +22,7 @@
                         
                         <ul class="dropdown-menu">
                             @foreach ( $item->children as $children )
-                                <li role="separator" class="divider"></li>
+                                {{-- <li role="separator" class="divider"></li> --}}
                                 @if ( empty($children->url) )
                                     <li>
                                         <a href="#" onclick="return false;">{{ $children->name }}</a>
@@ -36,7 +36,7 @@
                             @endforeach
                             
                             @foreach ( $item->pages as $page )
-                                <li role="separator" class="divider"></li>
+                                {{-- <li role="separator" class="divider"></li> --}}
                                 <li>
                                     <a href="{{ url('f07/' . $page->slug) }}">{{ $page->title }}</a>
                                 </li>

@@ -26,9 +26,13 @@
                 		{{ Form::textField('logo', 'Hình Logo', null, $setting->logo) }}
                 		{{ Form::textField('company', 'Tên công ty', null, $setting->company) }}
 	                    {{ Form::textField('sologan', 'Sologan', null, $setting->sologan) }}
-	                    {{ Form::emailField('email', 'Email', null, $setting->email) }}
-	                    {{ Form::textField('phone_number', 'Số điện thoại', null, $setting->phone_number) }}
-	                    {{ Form::textareaField('address', 'Địa chỉ', null, null, $setting->address) }}
+                        {{ Form::emailField('email_1', 'Email công ty', null, $setting->email_1) }}
+	                    {{ Form::emailField('email_2', 'Email hotline', null, $setting->email_2) }}
+                        {{ Form::textField('phone_number_1', 'Số điện thoại 1', null, $setting->phone_number_1) }}
+	                    {{ Form::textField('phone_number_2', 'Số điện thoại 2', null, $setting->phone_number_2) }}
+                        {{ Form::textField('hotline_1', 'Hotline 1', null, $setting->hotline_1) }}
+	                    {{ Form::textField('hotline_2', 'Hotline 2', null, $setting->hotline_2) }}
+                        {{ Form::textareaField('address', 'Địa chỉ', null, null, $setting->address) }}
 	                    
                 	</div>
                 	<div class="col-md-6">
@@ -41,6 +45,8 @@
 	                		</div>
 	                		{{ Form::button('<i class="fa fa-pencil"></i> Sửa vị trí', ['id'=>'btnEdit_map']) }}
 	                	</div>
+
+                        {{ Form::textareaField('description', 'Mô tả công ty', null, null, $setting->description) }}
                 	</div>
                 	<div class="col-md-12" align="center">
                 		<button class="btn btn-blue" type="submit">Cập nhật</button>
