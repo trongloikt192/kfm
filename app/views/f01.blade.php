@@ -110,7 +110,7 @@
         @for ($i = 0; $i < ( $products_len > 3 ? 3 : $products_len ); $i++)
             <div class="col-md-4">
                 <div class="thumbnail">
-                    {{-- <img alt="{{$products[$i]->title}}" src="{{ image_url('post', $products[$i]->image) }}" /> --}}
+                    <img alt="{{$products[$i]->title}}" src="{{ image_url('post', $products[$i]->image) }}" />
                     <div class="caption">
                         <h3>
                             {{ link_to('/f02/' . $products[$i]->slug, $products[$i]->title) }}

@@ -48,6 +48,10 @@ nav.navbar {
 .navbar-inverse .navbar-nav > li > a {
 	color: #FFFFFF;
 }
+nav.navbar .dropdown-menu {
+	border-radius: 0px;
+	background-color: #50B2D2;
+}
 #btn_search {
 	color: #FFF;
 	cursor: pointer;
