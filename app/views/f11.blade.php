@@ -15,12 +15,19 @@
 
 			<div class="panel panel-default">
 				<div class="panel-body">
-					<h3>Tin tức & hoạt động</h3>
+					<h3>
+						@if($cat_title)
+							{{ $cat_title }}
+						@else
+							Bài viết
+						@endif
+					</h3>
 					<hr>
+					
 					@foreach($posts as $post)
 						<div class="media well">
 							<div class="media-left">
-								<a href="{{ url('f02/'.$post->slug) }}">
+								<a href="{{ url('post/'.$post->slug) }}">
 								<img class="media-object img-thumbnail img-responsive" src="{{ image_url('post', $post->image )}}" alt="{{ $post->title }}" style="width: 200px; max-width: 200px; max-height: 200px;">
 								</a>
 							</div>
@@ -30,7 +37,7 @@
 							</div>
 							<div>
 								<p>
-								<a type="button" class="btn btn-sm btn-primary pull-right" href="{{ url('f02/'.$post->slug) }}">Xem chi tiết</a>
+								<a type="button" class="btn btn-sm btn-primary pull-right" href="{{ url('post/'.$post->slug) }}">Xem chi tiết</a>
 								</p>
 							</div>
 						</div>

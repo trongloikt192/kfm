@@ -74,7 +74,7 @@
                     <img alt="{{$news[$i]->title}}" src="{{ image_url('post', $news[$i]->image) }}" />
                     <div class="caption">
                         <h3>
-                            {{ link_to('/f02/' . $news[$i]->slug, $news[$i]->title) }}
+                            {{ link_to('post/' . $news[$i]->slug, $news[$i]->title) }}
                         </h3>
                         <p>
                             {{ str_limit($news[$i]->description, 200, "...") }}
@@ -93,7 +93,7 @@
                 <div id="div-login-msg">
                     <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
                     <span id="text-login-msg">
-                        {{ link_to('/f02/' . $news[$i]->slug, $news[$i]->title) }} - {{ $news[$i]->created_at->format('d/m/Y - g:ia') }}
+                        {{ link_to('post/' . $news[$i]->slug, $news[$i]->title) }} - {{ $news[$i]->created_at->format('d/m/Y - g:ia') }}
                     </span>
                 </div>
             @endfor
@@ -113,7 +113,7 @@
                     <img alt="{{$products[$i]->title}}" src="{{ image_url('post', $products[$i]->image) }}" />
                     <div class="caption">
                         <h3>
-                            {{ link_to('/f02/' . $products[$i]->slug, $products[$i]->title) }}
+                            {{ link_to('post/' . $products[$i]->slug, $products[$i]->title) }}
                         </h3>
                         <p>
                             {{ str_limit($products[$i]->description, 200, "...") }}
@@ -131,7 +131,7 @@
                 <div id="div-login-msg">
                     <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
                     <span id="text-login-msg">
-                        {{ link_to('/f02/' . $products[$i]->slug, $products[$i]->title) }} - {{ $products[$i]->created_at->format('d/m/Y - g:ia') }}
+                        {{ link_to('post/' . $products[$i]->slug, $products[$i]->title) }} - {{ $products[$i]->created_at->format('d/m/Y - g:ia') }}
                     </span>
                 </div>
             @endfor

@@ -49,12 +49,12 @@
 		@foreach ($top5posts as $post)
 			<div class="media">
 			  	<div class="media-left">
-			    	<a href="{{ url('f02/' . $post->slug ) }}">
+			    	<a href="{{ url('post/' . $post->slug ) }}">
 			      		<img class="media-object" src="{{ image_url('post', $post->image) }}" alt="{{ $post->title }}" style="max-width: 100px; max-height: 100px;">
 			    	</a>
 			  	</div>
 			  	<div class="media-body">
-			    	<h4 class="media-heading">{{ link_to( 'f02/' . $post->slug, $post->title ) }}</h4>
+			    	<h4 class="media-heading">{{ link_to('post/' . $post->slug, $post->title) }}</h4>
 			    	{{ str_limit($post->description, 200, "...") }}
 			  	</div>
 			</div>
@@ -114,7 +114,7 @@
 			    	<i class="fa fa-4x fa-question-circle text-primary"></i>
 			  	</div>
 			  	<div class="media-body">
-			    	<h4 class="media-heading">{{ link_to( 'f09/' . $faq->id, $faq->title ) }}</h4>
+			    	<h4 class="media-heading">{{ link_to('f09/' . $faq->id, $faq->title) }}</h4>
 			    	{{ str_limit($faq->content, 100, "...") }}
 			  	</div>
 			</div>

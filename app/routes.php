@@ -57,7 +57,6 @@ Route::get('page-building',     'PagesController@pageBuilding');
 
 Route::get('/',                 'HomeController@index');
 Route::get('f01',               'HomeController@index');
-Route::get('f02/{slug}',        'PostsController@show');
 Route::get('f03',               'RemindersController@getRemind');
 Route::get('f04',               'AuthController@getLogin');
 Route::resource('f05',          'ContactController');
@@ -69,7 +68,11 @@ Route::get('f08/ask-question',  'FaqController@askQuestion');
 Route::post('f08',              ['as' => 'f08.sendQuestion', 'uses' => 'FaqController@sendQuestion']);
 Route::get('f09/{id}',          'FaqController@show');
 Route::get('f10',               'FaqController@index');
-Route::get('f11',               'PostsController@index');
+// f02
+Route::get('post/{slug}',        'PostsController@show');
+// f11
+Route::get('posts',         'PostsController@index');
+Route::get('posts/category/{id}',          'PostsController@postsForCategory');
 
 
 // Developer Routes

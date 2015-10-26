@@ -33,7 +33,7 @@
 							<div id="div-login-msg">
 				                <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
 				                <span id="text-login-msg">
-				                    {{ link_to('f02/' . $post->slug, $post->title) }} - {{ $post->created_at->format('d/m/Y | G:i A') }}
+				                    {{ link_to('post/' . $post->slug, $post->title) }} - {{ $post->created_at->format('d/m/Y | G:i A') }}
 				                </span>
 				            </div>
 						@endforeach
