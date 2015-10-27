@@ -28,16 +28,16 @@
 						<div class="media well">
 							<div class="media-left">
 								<a href="{{ url('post/'.$post->slug) }}">
-								<img class="media-object img-thumbnail img-responsive" src="{{ image_url('post', $post->image )}}" alt="{{ $post->title }}" style="width: 200px; max-width: 200px; max-height: 200px;">
+									<img class="media-object img-thumbnail img-responsive" src="{{ image_url('post', $post->image )}}" alt="{{ $post->title }}" style="width: 200px; max-width: 200px; max-height: 200px;">
 								</a>
 							</div>
 							<div class="media-body">
-								<h4 class="media-heading">{{ $post->title }}</h4>
+								<h4 class="media-heading">{{ link_to('post/' . $post->slug, $post->title) }}</h4>
 								{{ $post->description }}
 							</div>
 							<div>
 								<p>
-								<a type="button" class="btn btn-sm btn-primary pull-right" href="{{ url('post/'.$post->slug) }}">Xem chi tiết</a>
+									<a type="button" class="btn btn-sm btn-primary pull-right" href="{{ url('post/'.$post->slug) }}">Xem chi tiết</a>
 								</p>
 							</div>
 						</div>

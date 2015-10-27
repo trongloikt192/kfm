@@ -16,7 +16,7 @@
 
 @section('content')
 
-    <div class="carousel slide" id="carousel-304998">
+    <div class="carousel slide" id="carousel-304998" data-ride="carousel">
         <ol class="carousel-indicators">
             <li class="active" data-slide-to="0" data-target="#carousel-304998">
             </li>
@@ -25,7 +25,7 @@
             <li data-slide-to="2" data-target="#carousel-304998">
             </li>
         </ol>
-        <div class="carousel-inner">
+        <div class="carousel-inner" role="listbox">
             <div class="item active">
                 <img alt="" src="{{ image_url('setting', $layout_slides->slide_1) }}" />
                 <div class="carousel-caption">
@@ -59,7 +59,13 @@
                     </p>
                 </div>
             </div>
-        </div> <a class="left carousel-control" href="#carousel-304998" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a> <a class="right carousel-control" href="#carousel-304998" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+        </div> 
+        <a class="left carousel-control" href="#carousel-304998" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+        </a> 
+        <a class="right carousel-control" href="#carousel-304998" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
     </div>
     
 	<div class="page-header">
@@ -137,4 +143,8 @@
             @endfor
         </div>
     </div>  
+@stop
+
+@section('scripts')
+    $('#carousel-304998').carousel()
 @stop
