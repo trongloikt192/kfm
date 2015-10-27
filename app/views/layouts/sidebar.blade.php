@@ -119,6 +119,8 @@
 			</div>
 			<hr>
 		@endforeach
-		<a class="pull-right" href="{{ url('posts') }}">Xem tất cả</a>
+		@if ( count($top5faqs) > 0 )
+			<a class="pull-right" href="{{ url('posts') }}">Xem tất cả</a>
+		@endif
 	</div>
 </div>

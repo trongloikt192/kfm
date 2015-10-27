@@ -52,7 +52,7 @@ App::error(function(Exception $exception, $code)
 
     // LaraBase - Show error page only when App Debug = False
     if (Config::get('app.debug') == false) {
-        return Response::view('pages.error', array('code' => $code), $code);
+        return Response::view('errors.error', array('code' => $code), $code);
      //    switch ($code)
 	    // {
 	    //     case 403:
