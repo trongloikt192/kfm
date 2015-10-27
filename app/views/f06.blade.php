@@ -88,7 +88,7 @@
                     		var post = json.data[i];
                     		var item = '<li class="search-result">';
 	                    	item += '<h5 class="title">';
-							item += '	<a href="{{url()}}/f02/'+post.slug+'">'+post.title+'</a> - '+post.created_at;
+							item += '	<a href="{{url()}}/post/'+post.slug+'">'+post.title+'</a> - '+post.created_at;
 							item += '</h5>';
 							item += '<div class="search-snippet-info">';
 							item += '	<p class="search-snippet">'+post.description+'</p>';

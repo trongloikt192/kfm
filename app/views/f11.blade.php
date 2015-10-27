@@ -33,7 +33,7 @@
 							</div>
 							<div class="media-body">
 								<h4 class="media-heading">{{ link_to('post/' . $post->slug, $post->title) }}</h4>
-								{{ $post->description }}
+								{{ str_limit($post->description, 290, "...") }}
 							</div>
 							<div>
 								<p>

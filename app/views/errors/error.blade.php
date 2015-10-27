@@ -13,7 +13,7 @@
     {{ HTML::style('css/simplex_cus.min.css') }}
     {{ HTML::style('//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css') }}
   </head>
-<body>
+<body style="background-color: #f4f4f4;">
     <div class="jumbotron" style="margin-top: 20px" align="center">
         <div class="row">
             <div class="col-md-6 text-center">
