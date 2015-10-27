@@ -86,7 +86,7 @@
                             {{ str_limit($news[$i]->description, 200, "...") }}
                         </p>
                         <p>
-                            <a class="btn btn-sm btn-primary" href="{{ url('/f02/' . $news[$i]->slug) }}">Xem tin tức</a>
+                            <a class="btn btn-sm btn-primary" href="{{ url('post/' . $news[$i]->slug) }}">Xem tin tức</a>
                         </p>
                     </div>
                 </div>
@@ -125,7 +125,7 @@
                             {{ str_limit($products[$i]->description, 200, "...") }}
                         </p>
                         <p>
-                            <a class="btn btn-sm btn-primary" href="{{ url('/f02/' . $products[$i]->slug) }}">Xem</a>
+                            <a class="btn btn-sm btn-primary" href="{{ url('post/' . $products[$i]->slug) }}">Xem</a>
                         </p>
                     </div>
                 </div>
@@ -143,8 +143,4 @@
             @endfor
         </div>
     </div>  
-@stop
-
-@section('scripts')
-    $('#carousel-304998').carousel()
 @stop
