@@ -55,23 +55,29 @@ Route::get('about',             'PagesController@about');
 Route::get('page-building',     'PagesController@pageBuilding');
 
 
+// f01
 Route::get('/',                 'HomeController@index');
-Route::get('f01',               'HomeController@index');
+Route::get('home',              'HomeController@index');
+
 Route::get('f03',               'RemindersController@getRemind');
 Route::get('f04',               'AuthController@getLogin');
-Route::resource('f05',          'ContactController');
+// f05
+Route::resource('contact',      'ContactController');
+
 Route::get('f06',               'SearchController@index');
 Route::post('f06/search',       ['as' => 'f06.search', 'uses' => 'SearchController@search']);
 Route::post('f06/searchAjax',   ['as' => 'f06.searchAjax', 'uses' => 'SearchController@searchAjax']);
-Route::get('f07/{slug}',        'PagesController@show');
-Route::get('f08/ask-question',  'FaqController@askQuestion');
+// f07
+Route::get('page/{slug}',       'PagesController@show');
+// f08, f09, f10
+Route::get('hoi-dap/ask-question',  'FaqController@askQuestion');
 Route::post('f08',              ['as' => 'f08.sendQuestion', 'uses' => 'FaqController@sendQuestion']);
-Route::get('f09/{id}',          'FaqController@show');
-Route::get('f10',               'FaqController@index');
+Route::get('hoi-dap/{id}',      'FaqController@show');
+Route::get('hoi-dap',           'FaqController@index');
 // f02
-Route::get('post/{slug}',        'PostsController@show');
+Route::get('post/{slug}',       'PostsController@show');
 // f11
-Route::get('posts',         'PostsController@index');
+Route::get('posts',             'PostsController@index');
 Route::get('posts/category/{id}',          'PostsController@postsForCategory');
 
 

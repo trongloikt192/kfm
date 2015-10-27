@@ -164,7 +164,7 @@
 		}
 
 		$(document).ready(function() {
-			xhrInsert_item( contact_form, "{{ route('f05.store') }}" );
+			xhrInsert_item( contact_form, "{{ route('contact.store') }}" );
 		});
 	</script>
 @stop

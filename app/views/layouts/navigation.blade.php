@@ -38,7 +38,7 @@
                             @foreach ( $item->pages as $page )
                                 <li role="separator" class="divider"></li>
                                 <li>
-                                    <a href="{{ url('f07/' . $page->slug) }}">{{ $page->title }}</a>
+                                    <a href="{{ url('page/' . $page->slug) }}">{{ $page->title }}</a>
                                 </li>
                             @endforeach
                         </ul>

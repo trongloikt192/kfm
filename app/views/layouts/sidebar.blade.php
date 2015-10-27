@@ -55,12 +55,11 @@
 			  	</div>
 			  	<div class="media-body">
 			    	<h4 class="media-heading">{{ link_to('post/' . $post->slug, $post->title) }}</h4>
-			    	{{ str_limit($post->description, 200, "...") }}
 			  	</div>
 			</div>
 			<hr>
 		@endforeach
-		
+		<a class="pull-right" href="{{ url('posts') }}">Xem tất cả</a>
 	</div>
 </div>
 
@@ -120,5 +119,6 @@
 			</div>
 			<hr>
 		@endforeach
+		<a class="pull-right" href="{{ url('posts') }}">Xem tất cả</a>
 	</div>
 </div>

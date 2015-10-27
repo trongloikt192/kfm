@@ -46,7 +46,7 @@
 
 				</address>
 				<div class="col-md-4 menu-mini">
-					{{ link_to('', 'Trang chủ') }} | {{ link_to('f07/so-luoc-ve-cong-ty-kmf', 'Giới thiệu') }} | {{ link_to('f05', 'Liên hệ') }}
+					{{ link_to('', 'Trang chủ') }} | {{ link_to('page/so-luoc-ve-cong-ty-kmf', 'Giới thiệu') }} | {{ link_to('contact', 'Liên hệ') }}
 					<br />
 					Copyright © 2015 KMF
 				</div>
