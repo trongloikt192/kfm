@@ -14,7 +14,7 @@ class SettingsController extends \BaseController {
 		$setting = \Setting::first();
 		$map = json_decode($setting->map_position);
 
-		$staticmap_str = "https://maps.googleapis.com/maps/api/staticmap?sensor=false&zoom=15&size=450x410&maptype=roadmap&markers=color:red%7Clabel:KFM%7C:user_lat%2C:user_long";
+		$staticmap_str = "https://maps.googleapis.com/maps/api/staticmap?sensor=false&zoom=17&size=450x410&maptype=roadmap&markers=color:red%7Clabel:KFM%7C:user_lat%2C:user_long";
     	$staticmap_src = str_replace(':user_lat', $map->latitude, $staticmap_str);
     	$staticmap_src = str_replace(':user_long', $map->longitude, $staticmap_src);
 
