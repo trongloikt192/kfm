@@ -122,6 +122,7 @@ return array(
         'Illuminate\View\ViewServiceProvider',
         'Illuminate\Workbench\WorkbenchServiceProvider',
         // LaraBase
+        'Ipunkt\LaravelAnalytics\AnalyticsServiceProvider',
 
 	),
 
@@ -190,7 +191,7 @@ return array(
         'Validator'         => 'Illuminate\Support\Facades\Validator',
         'View'              => 'Illuminate\Support\Facades\View',
         // LaraBase
-
+	    'Analytics' => 'Ipunkt\LaravelAnalytics\AnalyticsFacade',
 	),
 
 );

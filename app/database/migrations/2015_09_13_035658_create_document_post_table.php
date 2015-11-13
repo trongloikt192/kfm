@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePostDocumentTable extends Migration {
+class CreateDocumentPostTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,7 +12,7 @@ class CreatePostDocumentTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('post_document', function(Blueprint $table)
+		Schema::create('document_post', function(Blueprint $table)
 		{
 			$table->increments('id');
 			$table->integer('post_id')->unsigned()->index();

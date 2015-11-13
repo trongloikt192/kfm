@@ -113,14 +113,14 @@
 			    	<i class="fa fa-4x fa-question-circle text-primary"></i>
 			  	</div>
 			  	<div class="media-body">
-			    	<h4 class="media-heading">{{ link_to('f09/' . $faq->id, $faq->title) }}</h4>
+			    	<h4 class="media-heading">{{ link_to('hoi-dap/' . $faq->id, $faq->title) }}</h4>
 			    	{{ str_limit($faq->content, 100, "...") }}
 			  	</div>
 			</div>
 			<hr>
 		@endforeach
 		@if ( count($top5faqs) > 0 )
-			<a class="pull-right" href="{{ url('posts') }}">Xem tất cả</a>
+			<a class="pull-right" href="{{ url('hoi-dap') }}">Xem tất cả</a>
 		@endif
 	</div>
 </div>

@@ -10,79 +10,50 @@ class AuthController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function login()
 	{
 		return \View::make('admincp.b01');
 	}
 
-	/**
-	 * Show the form for creating a new resource.
-	 * GET /admin/auth/create
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
-	}
+	// Attempt to Login user
 
-	/**
-	 * Store a newly created resource in storage.
-	 * POST /admin/auth
-	 *
-	 * @return Response
-	 */
-	public function store()
+	public function processLogin()
 	{
-		//
+		$validator = \User::validate_login($data = \Input::all());
+		if ($validator->fails()) {
+			return \Redirect::back()->withErrors($validator)->withInput(\Input::except('password'));
+		}
+		else {
+			$user = \User::where('email', '=', $data['email_or_username'])->orWhere('username', $data['email_or_username'])->first();
+  				
+			// Check if user found in DB
+			if ($user) {
+				
+				// Attempt to authenticate the User
+				$attempt = \Auth::attempt(['email' => $user->email, 'password' => $data['password']], \Input::get('remember'));
+				
+				if($attempt) {
+					return \Redirect::intended('admincp/dashboard')->withSuccess('Đăng nhập thành công');
+				}
+				
+			}
+			
+			\Log::useFiles(storage_path() . '/logs/custom/' . "user_login.log", 'info');
+  			\Log::info([
+  				'email / username' => $data['email_or_username'],
+  				'ip' => '',
+  				'success' => false
+  			]);
+	  			
+			return \Redirect::back()->withInput(\Input::except('password'))->withError(\Lang::get('larabase.invalid_credentials'));
+		}
 	}
+	
+	// Logout the user
 
-	/**
-	 * Display the specified resource.
-	 * GET /admin/auth/{id}
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
+	public function logout()
 	{
-		//
+		\Auth::logout();
+		return \Redirect::to('admincp')->withInfo(\Lang::get('larabase.logout'));
 	}
-
-	/**
-	 * Show the form for editing the specified resource.
-	 * GET /admin/auth/{id}/edit
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
-
-	/**
-	 * Update the specified resource in storage.
-	 * PUT /admin/auth/{id}
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 * DELETE /admin/auth/{id}
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
-	}
-
 }

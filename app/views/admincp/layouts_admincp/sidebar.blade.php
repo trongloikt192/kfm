@@ -5,7 +5,7 @@
     </div>
     <ul class="main-nav">
         <li>
-            <a href="b02"><i class="fa fa-home"></i> Dashboard</a>
+            <a href="dashboard"><i class="fa fa-home"></i> Dashboard</a>
         </li>
         {{-- <li class="collapsible">
             <a href="#" onclick="return false;"><i class="fa fa-list"></i> User</a>

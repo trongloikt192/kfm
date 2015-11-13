@@ -108,7 +108,12 @@ hr { border-top-color: #edeaee; border-bottom: 1px solid #ffffff; margin:12px 0;
 	position: relative;
 }
 
-.main-logo { float: left; }
+.main-logo { 
+	float: left;     
+	font-size: 25px;
+    font-weight: bold;
+    color: rgb(230, 230, 230);
+}
 
 .profile-nav { float: right; }
 .profile-nav ul { 
@@ -2173,9 +2178,12 @@ line-height: 30px;
 	padding: 10px 0px 10px 0px;
 	height: 100%;
 	overflow: visible;
+	font-size: 25px;
+	font-weight: bold;
+	color: rgb(230, 230, 230);
+	padding-top: 15px;
 }
 .c-login .header a { width: 186px; display: block; margin: 0px auto;}
-
 
 .footerror h1 {
 	font-family: Arial, helvetica, 'sans';

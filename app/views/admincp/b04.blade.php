@@ -122,6 +122,7 @@
 
                     {{ Form::errorField() }}
                     {{ Form::hidden('id') }}
+                   	{{ Form::textField('id', 'Mã ID', null) }}
                    	{{ Form::textField('name', 'Tên danh mục', null) }}
                    	
                    	<label class='control-label' for='url'>Đường dẫn</label>

@@ -3,10 +3,10 @@
 class Document extends \Eloquent {
 	protected $table = 'documents';
 
-	protected $fillable = ['name'];
+	protected $fillable = ['name', 'link'];
 
 	public static $rules = [
-		'name' => 'required|min:3'
+		'name' => 'required'
 	];
 
 	public function posts()

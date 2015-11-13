@@ -37,12 +37,7 @@ function image_url($type, $filename = "")
 			break;
 		
 		case 'setting':
-			if( $filename == "" ) {
-				$url = asset('/uploads/images/setting/');
-			} else {
-				$url = asset('/uploads/images/setting/'. $filename);
-			}
-			
+			$url = asset('/uploads/images/setting/'. $filename);
 			break;
 
 		default:

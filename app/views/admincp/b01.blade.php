@@ -13,7 +13,7 @@
 
 	{{ HTML::style('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css') }}
     {{-- {{ HTML::style('https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.css') }} --}}
-    {{-- {{ HTML::style('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css') }} --}}
+    {{ HTML::style('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css') }}
     {{ HTML::style('css/admincp/style.css') }}
 </head>
 <body>
@@ -30,7 +30,8 @@
 		<div id="layout_content" class="c-login clearfix">
 
 			<div class="header">
-					<a href="index.html"><img src="{{asset('img/KMF_Logo_Blue.png')}}"></a>
+				<img src="{{asset('img/KMF_Logo_Blue.png')}}">
+				CONTROL PANEL
 			</div> <!-- /header -->
 
 			<div class="breadcrumbs">
@@ -39,9 +40,11 @@
 
 			
 			<div class="widget-content">
-				<input type="text" placeholder="Email / username">
-				<input type="password" placeholder="Password">
-				<a href="b02" class="btn btn-blue pull-right" type="submit">Login</a>
+				{{ Form::open(['route'=>'admincp.login']) }}
+				<input type="text" name="email_or_username" placeholder="Email / username">
+				<input type="password" name="password" placeholder="Password">
+				<button class="btn btn-blue pull-right" type="submit">Login</button>
+				{{ Form::close() }}
 			</div>
 			
 

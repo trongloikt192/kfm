@@ -46,7 +46,8 @@ App::after(function($request, $response)
 | integrates HTTP Basic authentication for quick, simple checking.
 |
 */
-
+// Đã đăng nhập ?
+// nếu chưa thì Redirect đến màn hình login
 Route::filter('auth', function()
 {
     if (Auth::guest())
@@ -60,6 +61,14 @@ Route::filter('auth.basic', function()
 	return Auth::basic();
 });
 
+Route::filter('authAdmin', function()
+{
+    if (Auth::guest())
+    {
+        return Redirect::to('admincp')->withInfo(Lang::get('larabase.only_auth'));
+    }
+});
+
 /*
 |--------------------------------------------------------------------------
 | Guest Filter
@@ -70,11 +79,21 @@ Route::filter('auth.basic', function()
 | response will be issued if they are, which you may freely change.
 |
 */
-
+// Có phải là guest ko?
+// nếu đăng nhập rồi thì Redirect tới trang dashboard
+// Có 2 dashboard: USER và ADMIN
 Route::filter('guest', function()
 {
-	if (Auth::check())
+	if (Auth::check()) {
         return Redirect::to('dashboard')->withInfo(Lang::get('larabase.only_guest'));
+	}
+});
+
+Route::filter('guestAdmin', function()
+{
+	if (Auth::check()) {
+        return Redirect::to('admincp/dashboard')->withInfo(Lang::get('larabase.only_guest'));
+	}
 });
 
 /*
@@ -109,7 +128,7 @@ Route::filter('role', function($route, $request, $role)
     $user = Auth::user();
     if(!$user->hasRole($role))
     {
-        return Redirect::to('dashboard')->withWarning(Lang::get('larabase.not_authorized'));
+        return Redirect::to('admincp/dashboard')->withWarning(Lang::get('larabase.not_authorized'));
     }
 });
 
@@ -126,4 +145,6 @@ Route::filter('resource_owner', function()
         return Redirect::to('dashboard')->withWarning(Lang::get('larabase.only_owner', ['resource_singular'=> $resource_singular]));
     }
 });
+
+
 

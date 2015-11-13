@@ -33,6 +33,6 @@ class Post extends \Eloquent {
 
     public function documents()
     {
-        return $this->belongsToMany('Document')->withTimestamps();
+        return $this->belongsToMany('Document');
     }
 }

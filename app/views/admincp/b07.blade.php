@@ -28,10 +28,7 @@
                             <th>Họ và tên</th>
                             <th>Câu hỏi</th>
                             <th>Công ty</th>
-                            <th>Chức vụ</th>
-                            <th>Email</th>
-                            <th>Số điện thoại</th>
-                            <th>Public</th>
+                            <th>Xác thực</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -41,10 +38,7 @@
                                 <td>{{ $faq->full_name }}</td>
                                 <td>{{ $faq->title }}</td>
                                 <td>{{ $faq->company }}</td>
-                                <td>{{ $faq->competence }}</td>
-                                <td>{{ $faq->email }}</td>
-                                <td>{{ $faq->phone_number }}</td>
-                                <td>{{ $faq->status == 1 ? '<span class="label label-success">reply</span>' : '<span class="label label-danger">pending</span>' }}</td>
+                                <td>{{ $faq->status == 1 ? '<span class="label label-success">confirmed</span>' : '<span class="label label-danger">pending</span>' }}</td>
                                 <td class="center">
                                     {{ Form::btnActionEditRecord($faq->id, "Phản hồi") }}
                                     | 
@@ -58,10 +52,7 @@
                             <th>Họ và tên</th>
                             <th>Câu hỏi</th>
                             <th>Công ty</th>
-                            <th>Chức vụ</th>
-                            <th>Email</th>
-                            <th>Số điện thoại</th>
-                            <th>Public</th>
+                            <th>Xác thực</th>
                             <th>Actions</th>
                         </tr>
                     </tfoot>
@@ -140,7 +131,7 @@
 
 
         $(document).ready(function() {
-            installTable( dataTable, {order : [[ 6, "asc" ]]} );
+            installTable( dataTable, {order : [[ 3, "asc" ]]} );
             beforeGetOM();
             afterCloseOM();
             xhrGetOM_detail_item( btnEdit_item, "{{ route('admincp.b07.edit') }}", modal_e_item);

@@ -22,9 +22,9 @@ class SettingsTableSeeder extends Seeder {
 				'email_1' => $faker->freeEmail,
 				'email_2' => $faker->freeEmail,
 				'address' => $faker->address,
-				'phone_number_1' => $faker->phoneNumber
-				'phone_number_2' => $faker->phoneNumber
-				'hotline_1' => $faker->phoneNumber
+				'phone_number_1' => $faker->phoneNumber,
+				'phone_number_2' => $faker->phoneNumber,
+				'hotline_1' => $faker->phoneNumber,
 				'hotline_2' => $faker->phoneNumber
 			]);
 		}

@@ -6,7 +6,7 @@ class PostsController extends \BaseController {
     public function index()
     {
         $cat_title = 'Bài viết';
-        $posts = Post::orderBy('updated_at', 'desc')->paginate(10);
+        $posts = Post::where('status', '1')->orderBy('updated_at', 'desc')->paginate(10);
 
         return View::make('f11', compact('posts', 'cat_title'));
     }
@@ -42,7 +42,9 @@ class PostsController extends \BaseController {
     public function postsForCategory($id) 
     {
         $cat_title = Category::find($id)->name;
-        $posts = Post::where('category_id', $id)->orderBy('updated_at', 'desc')->paginate(10);
+        $posts = Post::where(['category_id' => $id, 'status'=>'1'])
+                ->orderBy('updated_at', 'desc')
+                ->paginate(10);
 
         return View::make('f11', compact('posts', 'cat_title'));
     }

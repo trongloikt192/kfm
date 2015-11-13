@@ -24,7 +24,7 @@
 							<div style="padding-left: 50px;">
 								<p>{{ $faq->content }}</p>
 								<div>
-									<i class="fa fa-comments"></i> {{ link_to('f09/' . $faq->id, 'Trả lời') }}
+									<i class="fa fa-comments"></i> {{ link_to('hoi-dap/' . $faq->id, 'Trả lời') }}
 								</div>
 							</div>
 						</div>

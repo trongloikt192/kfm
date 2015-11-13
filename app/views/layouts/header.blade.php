@@ -2,7 +2,7 @@
     <div class="col-md-12">
         <div id="layout_header">
         	<div class="divlogo">
-	            <a href="{{ url() }}">
+	            <a href="{{ url('/') }}">
 	            	<img src="{{ asset('img/KMF_Logo_Horizontal.png') }}" class="logo img-responsive" alt="logo kmf">
 	            </a>
             </div>

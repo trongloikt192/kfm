@@ -89,7 +89,7 @@ class PostsController extends \BaseController {
 	public function edit($id)
 	{
 		$id = \Input::get('id');
-        $post = \Post::find($id);
+        $post = \Post::where('id', $id)->with('documents')->get();
         return \Response::json($post);
 	}
 
@@ -162,10 +162,7 @@ class PostsController extends \BaseController {
         	// Directory where we're storing uploaded images
 			// Remember to set correct permissions or it won't work
 			$upload_dir = public_path('uploads/images/post/');
-			
 			$uploader = new \FileUpload('image');
-			
-			// Handle the upload
 			$result = $uploader->handleUpload($upload_dir);
 			
 			if (!$result) {
@@ -182,6 +179,7 @@ class PostsController extends \BaseController {
 			$post->image = $uploader->getFileName();
             $post->save();
 			
+			// 3. RESULT SUCCESS
 			return \Response::json(array('success' => true, 'source' => $uploader->getFileName()));
 			
 		} catch (Exception $ex) {
@@ -195,31 +193,50 @@ class PostsController extends \BaseController {
 			// 1. UPLOAD FILE
         	// Directory where we're storing uploaded images
 			// Remember to set correct permissions or it won't work
-			$upload_dir = public_path('uploads/files/post/');
-			
+			$upload_dir = public_path('/uploads/files/post/');
 			$uploader = new \FileUpload('fileAttachs');
-			
-			// Handle the upload
 			$result = $uploader->handleUpload($upload_dir);
+			$fileName = $uploader->getFileName();
 			
 			if (!$result) {
 			  exit(\Response::json(array('success' => false, 'msg' => $uploader->getErrorMsg())));  
 			}
+			// print_r($upload_dir + $fileName); exit();
+			// 2. UPDATE DATABASE
+			$document = new \Document([
+				'name'=>$fileName,
+				'link'=>$fileName
+			]);
 			
-			// // 2. REMOVE OLD FILE & UPDATE DATABASE
-			// $id = \Input::get('id');
-   //     	$post = \Post::findOrFail($id);
-			// if($post->image) {
-   //             $oldFile = $upload_dir . $post->image;
-   //             \File::delete($oldFile);
-   //         }
-			// $post->image = $uploader->getFileName();
-   //         $post->save();
+			$id = \Input::get('id');
+        	$post = \Post::find($id)->documents()->save($document);
 			
-			return \Response::json(array('success' => true, 'source' => $uploader->getFileName()));
+			// 3. RESULT SUCCESS
+			return \Response::json(array('success' => true, 'source' => $fileName, 'post_id'=>$id, 'document_id' => $document->id));
 			
 		} catch (Exception $ex) {
 			exit(\Response::json(array('success' => false, 'msg' => $ex->getMessage())));  
 		}
+	}
+	
+	
+	public function deleteDocument() {
+		try {
+			$document_id = \Input::get('document_id');
+			$post_id = \Input::get('post_id');
+			
+			// DELETE FILE
+			$document = \Document::find($document_id);
+			if( $document->link ) {
+                \File::delete(public_path($document->link));
+			}
+			
+			// UPDATE DATABASE
+			\Post::find($post_id)->documents()->detach($document_id);
+			
+			return \Response::json(array('success' => true));
+		} catch (Exception $ex) {
+			exit(\Response::json(array('success' => false, 'msg' => $ex->getMessage())));  
+		}	
 	}
 }

@@ -22,7 +22,7 @@
 
 					<form class="form-horizontal">
 						<p>
-							Xin quý khách vui lòng nhập vào tên đăng nhập và địa chỉ email để lấy lại mật khẩu.
+							Nhập email của bạn để lấy lại mật khẩu.
 						</p>
 						<div class="form-group">
 							<label for="inputEmail3" class="col-sm-2 control-label">Email*</label>

@@ -32,7 +32,7 @@
                     <thead>
                         <tr>
                             <th>Tiêu đề</th>
-                            <th>Mô tả</th>
+                            <th>Ngày tạo</th>
                             <th>Trạng thái</th>
                             <th>Actions</th>
                         </tr>
@@ -41,7 +41,7 @@
                         @foreach($posts as $post)
                             <tr>
                                 <td>{{ $post->title }}</td>
-                                <td>{{ $post->description }}</td>
+                                <td>{{ $post->created_at->format('d/m/Y') }}</td>
                                 <td>{{ $post->status == 1 ? '<span class="label label-success">Public</span>' : '<span class="label label-danger">Unpublic</span>' }}</td>
                                 <td class="center">
                                     {{ Form::btnActionEditRecord($post->id, "Sửa", "btnEdit_item", "modal_ae_post") }}
@@ -125,7 +125,7 @@
                                 </button>
                                 <p id="msgBoxFile" class="help-block"></p>
                                 <div id="pic-progress-wrap" class="progress-wrap" style="margin-top:10px;margin-bottom:10px;"></div>
-                                <ul id="listFile">
+                                <ul id="documents">
                                     
                                 </ul>
                             </div>
@@ -186,6 +186,7 @@
         var btnDel_item = $('.btnDel_item');
         var modal_ae_post = $('#modal_ae_post');
         var image_dir = '{{ image_url("post"); }}';
+        var listDocuments = $("#documents");
 
         // Override
         function xhrGetOM_detail_item( _btnOM, _url, _modal ) {
@@ -213,30 +214,37 @@
                         $(this).prop('disabled', true);
                     },
                     success: function( json ) {
+                        var data = json[0];
+                        
                         var INPUT_SELECTOR = form_modal.find("input,select,textarea");
                         var IMG_SELECTOR = form_modal.find("img");
 
-                        $.each(json, function(key, value) {
+                        $.each(data, function(key, value) {
                             INPUT_SELECTOR.filter('[name='+ key +']:not([type=checkbox]):not([type=file])').val(value);
                             // Trường hợp image phải dùng thuộc tính SRC
                             IMG_SELECTOR.filter('[name='+ key +']').prop("src", image_dir + '/' + value);
                         });
+                        
+                        listDocuments.html('');
+                        $.each(data['documents'], function(key, document) { 
+                            listDocuments.append('<li>' + document['name'] + ' - <a href="javascript:void(0)" onClick="xhrDelete_document(this, '+ data['id'] +', '+ document['id'] +')">Xóa</a></li>');
+                        });
 
-                        CKEDITOR.instances.content_vi.setData( json["content_vi"], function() {
+                        CKEDITOR.instances.content_vi.setData( data["content_vi"], function() {
                             this.checkDirty();  // true
                         });
-                        CKEDITOR.instances.content_en.setData( json["content_en"], function() {
+                        CKEDITOR.instances.content_en.setData( data["content_en"], function() {
                             this.checkDirty();  // true
                         });
                         
-                        if( json["status"] == "1" ) {
+                        if( data["status"] == "1" ) {
                             $("#status").prop('checked', true);
                         } else {
                             $("#status").prop('checked', false);
                         }
                         
-                        $("#btnUploadImage").attr('data-id', json['id']);
-                        $("#btnUploadFiles").attr('data-id', json['id']);
+                        $("#btnUploadImage").attr('data-id', data['id']);
+                        $("#btnUploadFiles").attr('data-id', data['id']);
                         
                         isSuccess = true;
                     },
@@ -582,7 +590,7 @@
                 msgBox = document.getElementById('msgBoxFile'),
                 drgbox = document.getElementById('btnUploadFiles');
                 
-            var listFile = $("#listFile");
+            
             
             
             var uploader = new ss.SimpleUpload({
@@ -641,7 +649,7 @@
             
                     if (response.success === true) {
                         // msgBox.innerHTML = '<strong>' + filename + '</strong>' + ' thay đổi thành công.';
-                        listFile.append('<li>' + filename + '</li>');
+                        listDocuments.append('<li>' + response['source'] + ' - <a href="javascript:void(0)" onClick="xhrDelete_document(this, '+ response['post_id'] +', '+ response['document_id'] +')">Xóa</a></li>');
                     }
                     else {
                         if (response.msg) {
@@ -657,9 +665,51 @@
                 }
             });
         }
+        
+        
+        var xhrDelete_document = function(self, post_id, document_id) {
+
+            var _token = '{{ csrf_token() }}';
+            var _url = '{{ route("admincp.b05.deleteDocument") }}';
+            var _data = {
+                '_token': _token, 
+                'post_id': post_id,
+                'document_id': document_id
+            };
+            var isSuccess = false;
+            
+            $.confirm({
+                title: '',
+                content: 'Bạn đồng ý <b>xóa</b> tệp tin này không ?',
+                keyboardEnabled: true,
+                columnClass: 'col-md-4 col-md-offset-4',
+                animationSpeed: 200, // 0.2 seconds
+                confirm: function(){
+                    $.ajax({
+                        url : _url,
+                        type: 'POST',
+                        data: _data,
+                        dataType: 'json',
+                        success: function( json ) {
+    
+                            isSuccess = true;
+                            
+                        },
+                        complete: function() {
+                            if(isSuccess) {
+                                $(self).parent().remove();
+                                toastr.success( "Success" , "Notifications" );
+                            } else {
+                                toastr.error( "Error" , "Notifications" );
+                            }
+                        }
+                    }); 
+                }
+            });
+        }
 
         $(document).ready(function() {
-            installTable( dataTable );
+            installTable( dataTable, {order : [[ 1, "desc" ]]} );
             beforeGetOM();
             afterCloseOM();
 

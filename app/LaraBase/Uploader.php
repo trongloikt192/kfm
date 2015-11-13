@@ -65,13 +65,15 @@ class FileUpload {
                 $this->fileExtension = strtolower($pathinfo['extension']);
                 $this->fileNameWithoutExt = $pathinfo['filename'];
             }
-
+            
             $this->fileName = str_replace(array('/','\\'),'_',$this->fileName);
+            
             
             /* UPDATE by Le Trong Loi
              * Xóa khoảng trắng và ký tự đặc biệt của filename
              * ngày 07.10.2015
              */
+            $this->fileName = $this->fileNameWithoutExt .'_'.time().'.' . $this->fileExtension;
             $this->fileName = preg_replace( '([^a-zA-Z0-9_.-])', '_', $this->fileName );
         }
     }

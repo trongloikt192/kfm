@@ -7,13 +7,15 @@ class BaseController extends Controller {
        	$logo_customers = Customer::select(['logo'])->get();
 
        	$top5posts = Post::select(['id', 'title', 'slug', 'description', 'image'])
+       				->where('status','1')
        				->orderBy('updated_at', 'desc')
-       				->limit(3)
+       				->limit(5)
        				->get();
 
 		$top5faqs = Faq::select(['id', 'title', 'content'])
+					->where('status','1')
        				->orderBy('updated_at', 'desc')
-       				->limit(3)
+       				->limit(5)
        				->get();
 
        	$setting = Setting::first();

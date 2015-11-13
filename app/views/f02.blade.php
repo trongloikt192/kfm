@@ -20,6 +20,19 @@
 				        {{ $post->created_at->format('G:i A | d/m/Y') }}
 				    </p>
 				    {{ $post->content_vi }}
+				    
+				    @if( count($post->documents) > 0 )
+				    	<p>
+					    	<strong>Tài liệu đính kèm: </strong>
+					    </p>
+					    <ul>
+				    	@foreach( $post->documents as $document )
+						    <li>{{ link_to(file_url('post', $document->link), $document->name) }}</li>
+				    	@endforeach
+				    	</ul>
+				    @endif
+				    
+				    
 				</div>
 
 				@if(count($ref_posts) > 0)

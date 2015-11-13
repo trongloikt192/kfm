@@ -4,7 +4,7 @@ class FaqController extends \BaseController {
     
     public function index()
     {
-        $faqs = Faq::all();
+        $faqs = Faq::where('status', '1')->get();
 
         return View::make('f10', compact('faqs'));
     }

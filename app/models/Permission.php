@@ -1,9 +1,20 @@
 <?php
 
-use Zizaco\Entrust\EntrustPermission;
+class Permission extends \Eloquent {
 
-class Permission extends EntrustPermission {
 
 	protected $table = 'permissions';
+
+	protected $fillable = ['name', 'description'];
+
+	public function roles()
+	{
+		return $this->belongsToMany('Role')->withTimestamps();
+	}
+
+	public function getKey()
+	{
+		return $this->attributes['id'];
+	}
 
 }
