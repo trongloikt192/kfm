@@ -1,5 +1,7 @@
 /bootstrap/compiled.php
 /vendor
+app/database/migrations
+app/database/seeds
 composer.phar
 composer.lock
 .env.*.php
